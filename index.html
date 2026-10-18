@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aya Suliman – UI/UX Designer</title>
+<meta name="description" content="Aya Suliman is a UI/UX designer in Cairo designing websites, mobile apps and SaaS dashboards for clients in Saudi Arabia and the UAE.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F6F5FB; --surface:#FFFFFF; --ink:#1E1A3C; --muted:#5A5678; --line:#DAD7EC;
+  --violet:#5B4BDB; --mint:#BFEBD8; --sun:#FFD66B; --rose:#FFB8C9;
+  --display:"Bricolage Grotesque","Trebuchet MS",sans-serif;
+  --body:"Figtree","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#15122B;--surface:#1F1B3D;--ink:#F1EFFC;--muted:#B3AFD2;--line:#363160;--violet:#9A8DFF}
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:400 1.0625rem/1.65 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--violet);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--display);line-height:1.1;letter-spacing:-.02em}
+
+/* header */
+header{display:flex;justify-content:space-between;align-items:center;padding:22px 0}
+.logo{font:800 1.25rem var(--display);text-decoration:none}
+nav{display:flex;gap:22px;font-weight:500}
+nav a{text-decoration:none;color:var(--muted)}
+nav a:hover{color:var(--violet)}
+
+/* hero: a design-canvas frame */
+.hero{padding:40px 0 72px}
+.canvas{position:relative;margin-top:8px;padding:56px 40px 48px;border:2px dashed var(--line);border-radius:6px}
+.frame-label{position:absolute;top:-14px;left:16px;background:var(--bg);padding:0 8px;font-size:.85rem;color:var(--violet);font-weight:600}
+.frame-size{position:absolute;bottom:-14px;right:16px;background:var(--bg);padding:0 8px;font-size:.85rem;color:var(--muted)}
+.hero h1{font-size:clamp(2.6rem,7.5vw,5.6rem);font-weight:800;max-width:13ch}
+.hero p{max-width:52ch;margin-top:24px;color:var(--muted);font-size:1.15rem}
+.cursor{position:absolute;right:9%;top:30%;display:flex;align-items:flex-start;gap:2px;animation:drift 1.6s .4s ease-out both}
+.cursor svg{width:26px;fill:var(--violet)}
+.cursor span{background:var(--violet);color:#fff;font:600 .85rem var(--body);padding:3px 10px;border-radius:0 12px 12px 12px;margin-top:18px}
+@keyframes drift{from{transform:translate(120px,120px);opacity:0}to{transform:none;opacity:1}}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.btn{display:inline-block;padding:13px 24px;border-radius:999px;font-weight:600;text-decoration:none;border:2px solid var(--ink)}
+.btn.primary{background:var(--violet);border-color:var(--violet);color:#fff}
+.btn:hover{transform:translateY(-2px)}
+.facts{display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:22px;color:var(--muted);font-size:.95rem}
+
+/* sections */
+section{padding:64px 0}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:36px;flex-wrap:wrap}
+h2{font-size:clamp(1.9rem,4vw,2.8rem);font-weight:700}
+.sec-head p{color:var(--muted);max-width:44ch}
+
+/* projects */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:24px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+.thumb{aspect-ratio:16/10;display:grid;place-items:center;font:700 1.1rem var(--display);color:#1E1A3C}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.t1{background:var(--mint)} .t2{background:var(--sun)} .t3{background:var(--rose)} .t4{background:#C9C2FF} .t5{background:#A9DDF2} .t6{background:#FFD0A6}
+.card .body{padding:22px 24px 26px;display:flex;flex-direction:column;gap:10px;flex:1}
+.card h3{font-size:1.35rem}
+.meta{color:var(--violet);font-weight:600;font-size:.92rem}
+.card p{color:var(--muted);font-size:1rem}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:8px;list-style:none;padding-left:0}
+.tags li{font-size:.85rem;border:1px solid var(--line);border-radius:999px;padding:2px 12px}
+.card .link{margin-top:8px;font-weight:600;color:var(--violet)}
+
+/* experience */
+.job{display:grid;grid-template-columns:150px 1fr;gap:12px 32px;padding:28px 0;border-top:1px solid var(--line)}
+.job:last-child{border-bottom:1px solid var(--line)}
+.job .when{color:var(--muted);font-weight:500}
+.job h3{font-size:1.4rem;margin-bottom:4px}
+.job .co{color:var(--violet);font-weight:600;margin-bottom:10px}
+.job ul{padding-left:20px;color:var(--muted);max-width:68ch}
+.job li{margin-bottom:6px}
+.job li strong{color:var(--ink);font-weight:600}
+
+/* skills */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0}
+.chips li{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:6px 14px;font-weight:500}
+.two h3{font-size:1.3rem;margin-bottom:16px}
+.list{list-style:none;padding:0;display:grid;gap:12px;color:var(--muted)}
+.list strong{color:var(--ink);font-weight:600;display:block}
+
+/* contact */
+.contact{background:var(--violet);color:#fff;border-radius:28px;padding:56px 40px;text-align:left}
+.contact h2{font-size:clamp(2rem,5vw,3.6rem);max-width:16ch}
+.contact p{margin:16px 0 28px;max-width:46ch;opacity:.92}
+.contact .links{display:flex;flex-wrap:wrap;gap:12px}
+.contact .btn{border-color:#fff;color:#fff}
+.contact .btn.solid{background:#fff;color:#1E1A3C}
+footer{padding:36px 0 48px;color:var(--muted);font-size:.92rem}
+
+@media (max-width:720px){
+  nav{gap:14px;font-size:.95rem}
+  .canvas{padding:44px 20px 40px}
+  .cursor{display:none}
+  .job{grid-template-columns:1fr}
+  .two{grid-template-columns:1fr;gap:36px}
+  .contact{padding:40px 24px}
+}
+@media (prefers-reduced-motion:reduce){.cursor{animation:none}html{scroll-behavior:auto}.btn:hover{transform:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="logo" href="#top">Aya Suliman</a>
+    <nav aria-label="Main">
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <div class="canvas">
+        <span class="frame-label">Hero / Desktop</span>
+        <h1>Hi, I’m Aya. I design clear, friendly interfaces.</h1>
+        <p>UI/UX designer in Cairo with 5+ years designing websites, mobile apps and SaaS dashboards for clients in Saudi Arabia and the UAE, from first wireframe to developer hand-off.</p>
+        <div class="cta">
+          <a class="btn primary" href="#work">See my work</a>
+          <a class="btn" href="https://behance.net/ayasuliman">Open Behance</a>
+        </div>
+        <div class="facts"><span>Cairo, Egypt</span><span>Google UX Design certified</span><span>B.Sc. Computer Science</span></div>
+        <div class="cursor" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M3 2l17 9-7 2-3 7z"/></svg><span>Aya</span>
+        </div>
+        <span class="frame-size">1440 × 900</span>
+      </div>
+    </div>
+
+    <section id="work" aria-labelledby="work-h">
+      <div class="sec-head">
+        <h2 id="work-h">Selected work</h2>
+        <p>Case studies with full process on Behance. Replace each colored block below with a project screenshot.</p>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="thumb t1">Film Criticism Conference</div>
+          <div class="body">
+            <h3>Film Criticism Conference website</h3>
+            <div class="meta">Film Commission, Saudi Arabia</div>
+            <p>A high-fidelity, responsive website designed through moodboarding, UI design and final hand-off.</p>
+            <ul class="tags"><li>Website</li><li>Responsive UI</li><li>Moodboard</li></ul>
+            <a class="link" href="https://behance.net/ayasuliman">View case study</a>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb t2">Schools System Portal</div>
+          <div class="body">
+            <h3>Schools system portal</h3>
+            <div class="meta">UAE</div>
+            <p>User flows and information architecture that simplify complex administrative tasks for students and staff, taken from wireframes to final UI.</p>
+            <ul class="tags"><li>UX strategy</li><li>Information architecture</li><li>Wireframes</li></ul>
+            <a class="link" href="https://behance.net/ayasuliman">View case study</a>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb t3">Platone</div>
+          <div class="body">
+            <h3>Platone recruitment website and app</h3>
+            <div class="meta">Prime Point, Saudi Arabia</div>
+            <p>A UX audit of the website to smooth the recruitment funnel, plus a mobile app redesign that fixes navigation issues and where users get stuck.</p>
+            <ul class="tags"><li>UX audit</li><li>Mobile app</li><li>Redesign</li></ul>
+            <a class="link" href="https://behance.net/ayasuliman">View case study</a>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb t4">TT Mobile App</div>
+          <div class="body">
+            <h3>TT mobile application</h3>
+            <div class="meta">Twentytoo</div>
+            <p>Responsible for the app’s UI: a reusable component library, interactive prototypes and the brand identity applied across every screen.</p>
+            <ul class="tags"><li>Mobile UI</li><li>Components</li><li>Prototype</li></ul>
+            <a class="link" href="https://behance.net/ayasuliman">View case study</a>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb t5">SaaS Demo</div>
+          <div class="body">
+            <h3>SaaS demo dashboards</h3>
+            <div class="meta">Twentytoo</div>
+            <p>Clean, data-driven dashboards that turn complex data sets into simple visual components, with interactive prototypes built for stakeholder demos.</p>
+            <ul class="tags"><li>Dashboard</li><li>Data visualization</li><li>Prototype</li></ul>
+            <a class="link" href="https://behance.net/ayasuliman">View case study</a>
+          </div>
+        </article>
+        <article class="card">
+          <div class="thumb t6">Hwadi Projects</div>
+          <div class="body">
+            <h3>Hwadi projects website</h3>
+            <div class="meta">Hwadi Company, Saudi Arabia</div>
+            <p>Company website design. Add a sentence here about your role and the result.</p>
+            <ul class="tags"><li>Website</li><li>UI design</li></ul>
+            <a class="link" href="https://behance.net/ayasuliman">View case study</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="experience" aria-labelledby="exp-h">
+      <div class="sec-head"><h2 id="exp-h">Experience</h2></div>
+      <div>
+        <div class="job">
+          <div class="when">2024</div>
+          <div>
+            <h3>UI/UX Designer</h3><div class="co">Prime Point</div>
+            <ul>
+              <li><strong>End-to-end design</strong> of a Saudi recruitment desktop platform, from concept and wireframes to high-fidelity web design.</li>
+              <li><strong>UX audit</strong> of the Platone recruitment website to find friction and optimize the recruitment funnel.</li>
+              <li><strong>Mobile app redesign</strong> for Platone, based on analysis of user pain points and navigation issues.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="job">
+          <div class="when">2023</div>
+          <div>
+            <h3>UI/UX Designer</h3><div class="co">Twentytoo</div>
+            <ul>
+              <li>Built a <strong>component library</strong> and interactive prototypes for the TT mobile application.</li>
+              <li>Designed <strong>SaaS dashboards</strong> and prototypes for a stakeholder demo, plus a website UI.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="job">
+          <div class="when">2020</div>
+          <div>
+            <h3>UI/UX Designer</h3><div class="co">Prime Point</div>
+            <ul>
+              <li>Designed the <strong>Platone</strong> employment website, its mobile application and its remote-work website for the Saudi market.</li>
+              <li>Delivered responsive website UI design.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="job">
+          <div class="when">Freelance</div>
+          <div>
+            <h3>UI Designer</h3><div class="co">Independent</div>
+            <ul>
+              <li>Wireframing, prototyping and user testing to iterate on and refine product designs.</li>
+              <li>Projects: school system portal, mobile app (UAE), Honey Tracker website, Triple Mark website, BBQ app, math game.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" aria-labelledby="skills-h">
+      <div class="sec-head"><h2 id="skills-h">Skills and learning</h2></div>
+      <div class="two">
+        <div>
+          <h3>What I do</h3>
+          <ul class="chips">
+            <li>Product design</li><li>User interface</li><li>Visual design</li><li>Design systems</li>
+            <li>Wireframes</li><li>Prototyping</li><li>User research</li><li>Usability testing</li>
+            <li>Information architecture</li><li>Typography</li><li>Iconography</li><li>Layout</li>
+            <li>Project management</li><li>Business understanding</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Education and certificates</h3>
+          <ul class="list">
+            <li><strong>B.Sc. Computer Science, 2019</strong>Faculty of Computers and Artificial Intelligence, Benha University</li>
+            <li><strong>Google UX Design Professional Certificate</strong>Coursera: five courses, from UX foundations to research and low-fidelity prototypes</li>
+            <li><strong>Product design</strong>Udacity</li>
+            <li><strong>UI/UX product design with AI tools diploma</strong>Xperience</li>
+            <li><strong>UI/UX diploma</strong>simpleia</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" aria-labelledby="contact-h">
+      <div class="contact">
+        <h2 id="contact-h">Let’s design something together</h2>
+        <p>Available for UI/UX projects and full-time roles. Email is the quickest way to reach me.</p>
+        <div class="links">
+          <a class="btn solid" href="mailto:ayasuliman201020@gmail.com">ayasuliman201020@gmail.com</a>
+          <a class="btn" href="https://behance.net/ayasuliman">Behance</a>
+          <a class="btn" href="https://linkedin.com/in/aya-suliman">LinkedIn</a>
+          <a class="btn" href="tel:+201001395275">+20 100 139 5275</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>© <span id="y">2026</span> Aya Ahmed Suliman. Cairo, Egypt.</footer>
+</div>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>
