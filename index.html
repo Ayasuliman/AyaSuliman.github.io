@@ -181,13 +181,13 @@ footer{background:#18191d;border-top:1px solid var(--rule);padding:80px 0 30px;o
   .marquee div{animation:none}
   .rv{opacity:1;transform:none;transition:none}
 }
-/* giraffe companion */
+/* companion */
 .hero-art{position:relative;min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
 .gf-home{width:240px;height:240px}
 .hero{position:relative}
 .giraffe{position:absolute;left:0;top:0;width:240px;height:240px;z-index:5;pointer-events:none;will-change:transform;transform-origin:50% 92%;opacity:0;transition:opacity .4s}
 .giraffe.ready{opacity:1}
-.giraffe svg{display:block;width:100%;height:100%;overflow:visible}
+.svg{display:block;width:100%;height:100%;overflow:visible}
 .giraffe.docked{position:absolute;left:50%;top:auto;bottom:34px;margin-left:-120px}
 .art-hint{text-align:center;color:var(--subtle);margin-top:8px}
 @media (hover:none),(pointer:coarse){.art-hint{display:none}}
@@ -431,7 +431,7 @@ footer{background:#18191d;border-top:1px solid var(--rule);padding:80px 0 30px;o
   </div>
 </footer>
 
-<!-- Giraffe companion: floats above the page, never blocks clicks -->
+<!-- companion: floats above the page, never blocks clicks -->
 <div id="giraffe" class="giraffe" aria-hidden="false">
   <svg viewBox="0 0 240 240" width="240" height="240" overflow="visible">
     <defs>
@@ -540,7 +540,7 @@ c.addEventListener('click',function(){
   (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){c.textContent='Copied ✓'}).catch(function(){c.textContent=t});
   setTimeout(function(){c.textContent='Copy email'},2200);
 });
-// ---------- Giraffe companion ----------
+// ---------- companion ----------
 (function(){
   var wrap=document.getElementById('giraffe'), homeEl=document.querySelector('.hero-art'), hero=document.querySelector('.hero');
   if(!wrap||!homeEl||!hero)return;
@@ -552,7 +552,7 @@ c.addEventListener('click',function(){
   var fineQ=matchMedia('(hover:hover) and (pointer:fine)'),
       calmQ=matchMedia('(prefers-reduced-motion: reduce)');
 
-  // ---- geometry (local SVG units, giraffe faces right) ----
+  // ---- geometry (local SVG units, faces right) ----
   var W=240, BASE={x:98,y:150}, LEGTOP=166, NECK_MIN=72, NECK_MAX=94;
 
   // ---- state ----
