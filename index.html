@@ -73,6 +73,15 @@ strong{color:var(--ink);font-weight:600}
 .hero h1 .acc{color:var(--accent)}
 .hero .sub{margin:22px 0 30px;max-width:46ch;color:var(--muted)}
 .hero-art{justify-self:center;width:min(100%,340px)}
+.hero-art svg{width:100%;height:auto;overflow:visible}
+#neck{transform-box:view-box;transform-origin:155px 204px;animation:sway 4.5s ease-in-out infinite}
+#head{transform-box:view-box;transform-origin:150px 80px;animation:tilt 4.5s ease-in-out infinite}
+#eye{transform-box:fill-box;transform-origin:center;animation:blink 5s infinite}
+@keyframes sway{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(9deg)}}
+@keyframes tilt{0%,100%{transform:rotate(4deg)}50%{transform:rotate(-6deg)}}
+@keyframes blink{0%,94%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+.hero-art.follow #neck,.hero-art.follow #head{animation:none;transition:transform .35s cubic-bezier(.3,1.4,.5,1)}
+.art-hint{text-align:center;color:var(--subtle);margin-top:6px}
 
 /* marquee */
 .marquee{border-block:1px solid var(--rule);background:var(--surface);overflow:hidden;white-space:nowrap}
@@ -165,7 +174,7 @@ footer{background:#18191d;border-top:1px solid var(--rule);padding:80px 0 30px;o
 @media (max-width:720px){
   .wrap{padding:0 16px}
   .hero{grid-template-columns:1fr;min-height:auto;padding:120px 0 70px}
-  .hero-art{justify-self:center}
+  .hero-art{width:220px;justify-self:start}
   .skills,.work{grid-template-columns:1fr}
   .swot{grid-template-columns:1fr}
   .swot::before,.swot::after{display:none}
@@ -178,20 +187,10 @@ footer{background:#18191d;border-top:1px solid var(--rule);padding:80px 0 30px;o
 @media (max-width:420px){.nav ul li:first-child{display:none}.notes{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .marquee div{animation:none}
+  .marquee div,#neck,#head,#eye{animation:none}
+  .art-hint{display:none}
   .rv{opacity:1;transform:none;transition:none}
 }
-/* companion */
-.hero-art{position:relative;min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
-.gf-home{width:240px;height:240px}
-.hero{position:relative}
-.giraffe{position:absolute;left:0;top:0;width:240px;height:240px;z-index:5;pointer-events:none;will-change:transform;transform-origin:50% 92%;opacity:0;transition:opacity .4s}
-.giraffe.ready{opacity:1}
-.svg{display:block;width:100%;height:100%;overflow:visible}
-.giraffe.docked{position:absolute;left:50%;top:auto;bottom:34px;margin-left:-120px}
-.art-hint{text-align:center;color:var(--subtle);margin-top:8px}
-@media (hover:none),(pointer:coarse){.art-hint{display:none}}
-@media (max-width:900px){.giraffe{width:190px;height:190px}.giraffe.docked{margin-left:-95px}.gf-home{width:190px;height:190px}}
 </style>
 </head>
 <body>
@@ -240,9 +239,63 @@ footer{background:#18191d;border-top:1px solid var(--rule);padding:80px 0 30px;o
       <p class="sub">I’m Aya, a UI/UX designer in Cairo. I design websites, mobile apps and SaaS dashboards for clients in Saudi Arabia and the UAE.</p>
       <a class="tlink mono" href="#work">See the work ↓</a>
     </div>
-    <div class="hero-art">
-      <div class="gf-home" aria-hidden="true"></div>
-      <p class="mono art-hint">Move your cursor around here.</p>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 320 330" fill="none">
+        <!-- ground shadow -->
+        <ellipse cx="190" cy="316" rx="92" ry="7" fill="#000" opacity=".35"/>
+        <!-- tail -->
+        <path d="M252 196 q20 14 14 46" stroke="#E2AE62" stroke-width="5" stroke-linecap="round"/>
+        <path d="M262 236 q8 6 2 16 q-8 -2 -6 -14z" fill="#8A5530"/>
+        <!-- back legs -->
+        <rect x="214" y="226" width="15" height="84" rx="7" fill="#D39A4E"/>
+        <rect x="238" y="226" width="15" height="84" rx="7" fill="#E2AE62"/>
+        <!-- front legs -->
+        <rect x="136" y="226" width="15" height="84" rx="7" fill="#D39A4E"/>
+        <rect x="160" y="226" width="15" height="84" rx="7" fill="#E2AE62"/>
+        <!-- hooves -->
+        <g fill="#3A2A20"><rect x="136" y="302" width="15" height="9" rx="3"/><rect x="160" y="302" width="15" height="9" rx="3"/><rect x="214" y="302" width="15" height="9" rx="3"/><rect x="238" y="302" width="15" height="9" rx="3"/></g>
+        <!-- body -->
+        <rect x="124" y="176" width="136" height="66" rx="32" fill="#E2AE62"/>
+        <g fill="#B5723A" opacity=".9">
+          <path d="M150 190 q12 -6 20 4 q-2 12 -16 12 q-10 -4 -4 -16z"/>
+          <path d="M188 186 q14 -4 18 8 q-4 10 -16 8 q-8 -6 -2 -16z"/>
+          <path d="M224 192 q12 0 14 10 q-6 10 -16 6 q-6 -8 2 -16z"/>
+          <path d="M172 214 q12 -4 16 6 q-4 10 -14 8 q-8 -4 -2 -14z"/>
+          <path d="M210 216 q10 -2 12 8 q-6 8 -14 4 q-4 -6 2 -12z"/>
+        </g>
+        <!-- neck + head (moves) -->
+        <g id="neck">
+          <path d="M134 204 L144 84 Q156 76 170 86 L176 204 Z" fill="#E2AE62"/>
+          <!-- mane -->
+          <path d="M146 86 L138 184" stroke="#8A5530" stroke-width="6" stroke-linecap="round" stroke-dasharray="7 5"/>
+          <g fill="#B5723A" opacity=".9">
+            <path d="M152 110 q10 -4 13 5 q-3 8 -12 6 q-6 -4 -1 -11z"/>
+            <path d="M150 140 q11 -3 14 6 q-4 9 -13 6 q-6 -5 -1 -12z"/>
+            <path d="M154 170 q10 -3 13 6 q-3 8 -12 6 q-6 -5 -1 -12z"/>
+          </g>
+          <g id="head">
+            <!-- horns (ossicones) -->
+            <path d="M150 50 L146 28 M166 48 L168 26" stroke="#B5723A" stroke-width="5" stroke-linecap="round"/>
+            <circle cx="146" cy="26" r="5.5" fill="#8A5530"/><circle cx="168" cy="24" r="5.5" fill="#8A5530"/>
+            <!-- ear -->
+            <ellipse cx="136" cy="56" rx="13" ry="6" transform="rotate(-24 136 56)" fill="#D39A4E"/>
+            <!-- head + muzzle -->
+            <ellipse cx="170" cy="66" rx="34" ry="21" transform="rotate(10 170 66)" fill="#E2AE62"/>
+            <ellipse cx="196" cy="76" rx="17" ry="14" fill="#F2D3A0"/>
+            <circle cx="200" cy="72" r="2.2" fill="#3A2A20"/>
+            <path d="M188 86 q8 4 16 -1" stroke="#3A2A20" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="186" cy="66" r="0" fill="none"/>
+            <!-- eye -->
+            <g id="eye">
+              <ellipse id="sclera" cx="163" cy="59" rx="7.5" ry="8" fill="#FFFDF7" stroke="#8A5530" stroke-width="1.2"/>
+              <g id="pupil"><circle cx="163" cy="59" r="4" fill="#1B1B22"/><circle cx="164.6" cy="57.4" r="1.4" fill="#fff"/></g>
+            </g>
+            <path d="M155 50 q8 -5 16 0" stroke="#8A5530" stroke-width="1.6" stroke-linecap="round"/>
+            <ellipse cx="174" cy="74" rx="6" ry="3.5" fill="#F0A6A0" opacity=".55"/>
+          </g>
+        </g>
+      </svg>
+      <p class="mono art-hint">Move your cursor ↔</p>
     </div>
   </div>
 
@@ -431,98 +484,6 @@ footer{background:#18191d;border-top:1px solid var(--rule);padding:80px 0 30px;o
   </div>
 </footer>
 
-<!-- companion: floats above the page, never blocks clicks -->
-<div id="giraffe" class="giraffe" aria-hidden="false">
-  <svg viewBox="0 0 240 240" width="240" height="240" overflow="visible">
-    <defs>
-      <radialGradient id="gfSkin" cx="38%" cy="28%" r="80%">
-        <stop offset="0" stop-color="#FFE29A"/><stop offset=".45" stop-color="#F2B94A"/><stop offset="1" stop-color="#C47F22"/>
-      </radialGradient>
-      <radialGradient id="gfSkinHead" cx="35%" cy="30%" r="75%">
-        <stop offset="0" stop-color="#FFE7A8"/><stop offset=".5" stop-color="#F4BE52"/><stop offset="1" stop-color="#C98424"/>
-      </radialGradient>
-      <linearGradient id="gfNeckG" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0" stop-color="#CC8A2C"/><stop offset=".35" stop-color="#FAD27A"/><stop offset="1" stop-color="#C07B21"/>
-      </linearGradient>
-      <linearGradient id="gfLegNear" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0" stop-color="#F7CA68"/><stop offset="1" stop-color="#C8862A"/>
-      </linearGradient>
-      <linearGradient id="gfLegFar" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0" stop-color="#D79B44"/><stop offset="1" stop-color="#A86A1E"/>
-      </linearGradient>
-      <radialGradient id="gfSpot" cx="35%" cy="30%" r="80%">
-        <stop offset="0" stop-color="#B8733A"/><stop offset="1" stop-color="#7A421A"/>
-      </radialGradient>
-      <radialGradient id="gfMuzzle" cx="40%" cy="30%" r="80%">
-        <stop offset="0" stop-color="#FFF4DA"/><stop offset="1" stop-color="#E8C287"/>
-      </radialGradient>
-      <radialGradient id="gfHorn" cx="35%" cy="30%" r="70%">
-        <stop offset="0" stop-color="#A86A3A"/><stop offset="1" stop-color="#5E3214"/>
-      </radialGradient>
-    </defs>
-
-    <ellipse id="gfShadow" cx="120" cy="229" rx="58" ry="6" fill="#000" opacity=".35"/>
-
-    <g id="gfRoot">
-      <!-- tail -->
-      <g id="gfTail">
-        <path d="M168 148 q16 10 12 36" stroke="#D39A44" stroke-width="4" stroke-linecap="round" fill="none"/>
-        <ellipse cx="180" cy="188" rx="5" ry="8" fill="url(#gfHorn)"/>
-      </g>
-
-      <!-- far legs (darker, behind body) -->
-      <g id="gfLegFB"><rect x="133" y="160" width="13" height="64" rx="6.5" fill="url(#gfLegFar)"/><rect x="133" y="218" width="13" height="8" rx="3" fill="#3A2716"/></g>
-      <g id="gfLegFF"><rect x="104" y="160" width="13" height="64" rx="6.5" fill="url(#gfLegFar)"/><rect x="104" y="218" width="13" height="8" rx="3" fill="#3A2716"/></g>
-
-      <!-- body -->
-      <g id="gfBody">
-        <ellipse cx="122" cy="156" rx="54" ry="30" fill="url(#gfSkin)"/>
-        <g fill="url(#gfSpot)">
-          <path d="M92 146 q10 -8 20 0 q0 12 -12 13 q-11 -3 -8 -13z"/>
-          <path d="M122 136 q13 -5 19 5 q-3 11 -15 10 q-9 -5 -4 -15z"/>
-          <path d="M152 146 q11 -2 13 8 q-5 9 -14 6 q-6 -6 1 -14z"/>
-          <path d="M112 166 q11 -5 16 4 q-3 10 -13 9 q-9 -4 -3 -13z"/>
-          <path d="M140 168 q9 -3 12 5 q-4 8 -12 5 q-5 -4 0 -10z"/>
-        </g>
-        <ellipse cx="108" cy="140" rx="30" ry="9" fill="#fff" opacity=".14"/>
-      </g>
-
-      <!-- near legs -->
-      <g id="gfLegNF"><rect x="86" y="164" width="14" height="60" rx="7" fill="url(#gfLegNear)"/><rect x="86" y="218" width="14" height="8" rx="3" fill="#3A2716"/></g>
-      <g id="gfLegNB"><rect x="150" y="164" width="14" height="60" rx="7" fill="url(#gfLegNear)"/><rect x="150" y="218" width="14" height="8" rx="3" fill="#3A2716"/></g>
-
-      <!-- neck (drawn every frame) -->
-      <path id="gfNeck" fill="url(#gfNeckG)"/>
-      <path id="gfMane" fill="none" stroke="#8A4E22" stroke-width="5" stroke-linecap="round" stroke-dasharray="6 4"/>
-      <ellipse id="gfNS1" rx="6" ry="4.5" fill="url(#gfSpot)"/>
-      <ellipse id="gfNS2" rx="5.5" ry="4" fill="url(#gfSpot)"/>
-      <ellipse id="gfNS3" rx="4.5" ry="3.5" fill="url(#gfSpot)"/>
-
-      <!-- head (positioned + rotated every frame; drawn around 0,0 facing right) -->
-      <g id="gfHead">
-        <g id="gfEar">
-          <ellipse cx="-24" cy="-9" rx="12" ry="5.5" transform="rotate(-22 -24 -9)" fill="url(#gfSkinHead)"/>
-          <ellipse cx="-24" cy="-9" rx="6.5" ry="2.4" transform="rotate(-22 -24 -9)" fill="#F2A99C" opacity=".8"/>
-        </g>
-        <path d="M-6 -12 L-9 -30 M6 -13 L7 -31" stroke="#9C5E2E" stroke-width="4.5" stroke-linecap="round"/>
-        <circle cx="-9" cy="-31" r="4.6" fill="url(#gfHorn)"/>
-        <circle cx="7" cy="-32" r="4.6" fill="url(#gfHorn)"/>
-        <ellipse cx="2" cy="0" rx="22" ry="16.5" transform="rotate(12 2 0)" fill="url(#gfSkinHead)"/>
-        <ellipse cx="-6" cy="8" rx="5" ry="3.5" fill="url(#gfSpot)" opacity=".75"/>
-        <ellipse cx="21" cy="8" rx="13.5" ry="10.5" fill="url(#gfMuzzle)"/>
-        <circle cx="27" cy="4" r="1.9" fill="#4A2E18"/>
-        <path d="M14 14.5 q6 3.5 12 -1" stroke="#4A2E18" stroke-width="1.8" stroke-linecap="round" fill="none"/>
-        <ellipse cx="9" cy="5" rx="4.5" ry="2.6" fill="#F49A8F" opacity=".5"/>
-        <path d="M-9 -14.5 q6 -4.5 12 0" stroke="#8A4E22" stroke-width="1.6" stroke-linecap="round" fill="none"/>
-        <g id="gfEye">
-          <ellipse cx="-3" cy="-5" rx="6.4" ry="7" fill="#FFFDF6" stroke="#9C5E2E" stroke-width="1"/>
-          <g id="gfPupil"><circle cx="-3" cy="-5" r="3.6" fill="#1A1A22"/><circle cx="-1.6" cy="-6.6" r="1.3" fill="#fff"/></g>
-        </g>
-      </g>
-    </g>
-  </svg>
-</div>
-
 <script>
 document.getElementById('y').textContent=new Date().getFullYear();
 // corner marks on frames
@@ -533,6 +494,45 @@ if('IntersectionObserver' in window){
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
   els.forEach(function(e){io.observe(e)});
 }else{els.forEach(function(e){e.classList.add('in')})}
+// giraffe: neck follows the cursor across the hero, sways when idle
+(function(){
+  var art=document.querySelector('.hero-art'),
+      neck=document.getElementById('neck'),head=document.getElementById('head'),
+      sclera=document.getElementById('sclera'),pupil=document.getElementById('pupil');
+  if(!art||!neck)return;
+  var still=matchMedia('(prefers-reduced-motion: reduce)').matches,idle;
+  function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
+  function aim(x,y){
+    var r=art.getBoundingClientRect();
+    if(r.bottom<0||r.top>innerHeight)return; // hero off screen
+    var n=0,h=0;
+    if(!still){
+      var bx=r.left+r.width*.48,by=r.top+r.height*.62;
+      // neck leans left/right toward the cursor
+      n=clamp(Math.atan2(x-bx,by-y)*180/Math.PI*.55,-24,24);
+      // head tilts down when the cursor is below, up when above
+      var e=sclera.getBoundingClientRect(),ey=e.top+e.height/2;
+      var vy=clamp((y-ey)/(innerHeight*.6),-1,1);
+      h=-n*.5+(vy>0?vy*26:vy*12);
+      art.classList.add('follow');
+      neck.style.transform='rotate('+n+'deg)';
+      head.style.transform='rotate('+h+'deg)';
+    }
+    // pupils follow the cursor (rotated back into the head's own space)
+    var s=sclera.getBoundingClientRect(),
+        dx=x-(s.left+s.width/2),dy=y-(s.top+s.height/2),
+        d=Math.hypot(dx,dy)||1,m=Math.min(3.2,d/40),
+        t=-(n+h)*Math.PI/180,
+        px=(dx*Math.cos(t)-dy*Math.sin(t))/d*m,
+        py=(dx*Math.sin(t)+dy*Math.cos(t))/d*m;
+    pupil.setAttribute('transform','translate('+px.toFixed(2)+' '+py.toFixed(2)+')');
+    clearTimeout(idle);
+    idle=setTimeout(rest,2500);
+  }
+  function rest(){art.classList.remove('follow');neck.style.transform='';head.style.transform='';pupil.removeAttribute('transform')}
+  addEventListener('pointermove',function(e){aim(e.clientX,e.clientY)},{passive:true});
+  document.addEventListener('pointerleave',rest);
+})();
 // copy email
 var c=document.getElementById('copy');
 c.addEventListener('click',function(){
@@ -540,190 +540,6 @@ c.addEventListener('click',function(){
   (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){c.textContent='Copied ✓'}).catch(function(){c.textContent=t});
   setTimeout(function(){c.textContent='Copy email'},2200);
 });
-// ---------- companion ----------
-(function(){
-  var wrap=document.getElementById('giraffe'), homeEl=document.querySelector('.hero-art'), hero=document.querySelector('.hero');
-  if(!wrap||!homeEl||!hero)return;
-  var $=function(id){return document.getElementById(id)};
-  var P={root:$('gfRoot'),body:$('gfBody'),neck:$('gfNeck'),mane:$('gfMane'),ns:[$('gfNS1'),$('gfNS2'),$('gfNS3')],
-         head:$('gfHead'),ear:$('gfEar'),eye:$('gfEye'),pupil:$('gfPupil'),tail:$('gfTail'),shadow:$('gfShadow'),
-         legs:{nf:$('gfLegNF'),fb:$('gfLegFB'),ff:$('gfLegFF'),nb:$('gfLegNB')}};
-
-  var fineQ=matchMedia('(hover:hover) and (pointer:fine)'),
-      calmQ=matchMedia('(prefers-reduced-motion: reduce)');
-
-  // ---- geometry (local SVG units, faces right) ----
-  var W=240, BASE={x:98,y:150}, LEGTOP=166, NECK_MIN=72, NECK_MAX=94;
-
-  // ---- state ----
-  var mode=null, raf=0, last=0, t=0, off=[];
-  var S={x:{x:0,v:0},y:{x:0,v:0},face:{x:1,v:0},lean:{x:0,v:0},hop:{x:0,v:0},
-         hx:{x:120,v:0},hy:{x:62,v:0},ha:{x:0,v:0},px:{x:0,v:0},py:{x:0,v:0}};
-  var cur={x:innerWidth/2,y:innerHeight/2,has:false,inside:true}, moving=0, phase=0,
-      blinkAt=1.5, blinkT=-1, lastScroll=scrollY, tapLook=null;
-
-  function spring(o,target,k,z,dt){var a=k*(target-o.x)-2*z*Math.sqrt(k)*o.v;o.v+=a*dt;o.x+=o.v*dt}
-  function clamp(v,a,b){return v<a?a:v>b?b:v}
-  function scale(){return wrap.offsetWidth/W||1}
-  function on(el,ev,fn,opt){el.addEventListener(ev,fn,opt);off.push(function(){el.removeEventListener(ev,fn,opt)})}
-
-  // home spot = centre of the hero illustration area, in viewport coords
-  function home(s,hr){
-    var r=homeEl.getBoundingClientRect(),box=W*s;
-    return {x:r.left-hr.left+r.width/2-box/2,y:r.bottom-hr.top-box-34*s};
-  }
-
-  // ---- neck: tapered tube along a quadratic curve ----
-  function drawNeck(H,bend){
-    var B=BASE, C={x:B.x+(H.x-B.x)*.15+bend, y:B.y+(H.y-B.y)*.72};
-    var L=[],R=[],mane=[],n=14;
-    function pt(u){var a=1-u;return {x:a*a*B.x+2*a*u*C.x+u*u*H.x,y:a*a*B.y+2*a*u*C.y+u*u*H.y}}
-    function tan(u){return {x:2*(1-u)*(C.x-B.x)+2*u*(H.x-C.x),y:2*(1-u)*(C.y-B.y)+2*u*(H.y-C.y)}}
-    function nor(u){var d=tan(u),l=Math.hypot(d.x,d.y)||1;return {x:-d.y/l,y:d.x/l}}
-    for(var i=0;i<=n;i++){
-      var u=i/n,p=pt(u),q=nor(u),w=14-6*u;
-      L.push((p.x+q.x*w).toFixed(1)+' '+(p.y+q.y*w).toFixed(1));
-      R.unshift((p.x-q.x*w).toFixed(1)+' '+(p.y-q.y*w).toFixed(1));
-      if(u>.08&&u<.92)mane.push((p.x-q.x*(w-1.5)).toFixed(1)+' '+(p.y-q.y*(w-1.5)).toFixed(1));
-    }
-    P.neck.setAttribute('d','M'+L.join(' L')+' L'+R.join(' L')+'Z');
-    P.mane.setAttribute('d','M'+mane.join(' L'));
-    [.3,.55,.8].forEach(function(u,i){
-      var p=pt(u),q=nor(u),d=tan(u),a=Math.atan2(d.y,d.x)*180/Math.PI;
-      P.ns[i].setAttribute('transform','translate('+(p.x+q.x*2.5).toFixed(1)+' '+(p.y+q.y*2.5).toFixed(1)+') rotate('+a.toFixed(1)+')');
-    });
-  }
-
-  function setRot(el,a,cx,cy){el.setAttribute('transform','rotate('+a.toFixed(2)+' '+cx+' '+cy+')')}
-
-  // ---- one animation step ----
-  function step(dt){
-    t+=dt;
-    var s=scale(),box=W*s,follow=(mode==='follow');
-
-    // 1. where should the body go?
-    var tx,ty,f=S.face.x>=0?1:-1, hr=hero.getBoundingClientRect(),
-        mx=cur.x-hr.left, my=cur.y-hr.top;   // cursor in hero coords
-    if(follow){
-      var inHero=cur.has&&cur.inside&&mx>=0&&my>=0&&mx<=hr.width&&my<=hr.height, h=home(s,hr);
-      if(inHero){
-        var cx=S.x.x+box/2;
-        if(mx>cx+48*s)f=1; else if(mx<cx-48*s)f=-1;
-        // stand so the cursor sits just in front of / above the head
-        tx=mx-(f>0?196:44)*s; ty=my-36*s;
-      }else{tx=h.x;ty=h.y}
-      tx=clamp(tx,8,hr.width-box-8); ty=clamp(ty,8,hr.height-box-4);
-      spring(S.x,tx,38,.62,dt); spring(S.y,ty,38,.62,dt);
-    }else{f=1}
-    spring(S.face,f,70,.72,dt);
-
-    // 2. motion → walk cycle, lean, hop
-    var speed=follow?Math.hypot(S.x.v,S.y.v)/s:0;
-    moving+=(clamp(speed/420,0,1)-moving)*Math.min(1,dt*6);
-    phase+=dt*(5+speed*.018)*(.25+moving);
-    var bounce=-Math.abs(Math.sin(phase))*7*moving;
-    spring(S.lean,follow?clamp(S.x.v/s*.012,-9,9):0,60,.5,dt);
-    spring(S.hop,0,90,.35,dt);
-
-    // 3. what is she looking at (local, unflipped coords)?
-    var lx,ly;
-    if(follow&&cur.has){
-      lx=(mx-S.x.x)/s; ly=(my-S.y.x)/s-bounce-S.hop.x;
-      if(S.face.x<0)lx=W-lx;
-    }else if(tapLook){
-      var r=wrap.getBoundingClientRect();lx=(tapLook.x-r.left)/s;ly=(tapLook.y-r.top)/s;
-    }else{ // idle: gaze wanders around
-      lx=190+Math.sin(t*.55)*40; ly=40+Math.sin(t*.9)*30;
-    }
-
-    // 4. neck reaches toward the gaze point (stretchy, limited angle)
-    var dx=lx-BASE.x, dy=ly-BASE.y, ang=Math.atan2(dy,dx);
-    ang=clamp(ang,-2.0,-.95);
-    var len=clamp(Math.hypot(dx,dy)*.62,NECK_MIN,NECK_MAX)+Math.sin(t*1.4)*1.5;
-    spring(S.hx,BASE.x+Math.cos(ang)*len,95,.55,dt);
-    spring(S.hy,BASE.y+Math.sin(ang)*len,95,.55,dt);
-    var H={x:S.hx.x,y:S.hy.x+Math.sin(t*1.7)*1.2};
-    drawNeck(H,clamp(-S.hx.v*.05,-12,12)-4);
-
-    // 5. head turns to face the gaze point
-    var hAng=Math.atan2(ly-H.y,lx-H.x)*180/Math.PI;
-    spring(S.ha,clamp(hAng,-45,78)+Math.sin(t*1.3)*2,120,.5,dt);
-    P.head.setAttribute('transform','translate('+H.x.toFixed(1)+' '+H.y.toFixed(1)+') rotate('+S.ha.x.toFixed(2)+')');
-
-    // 6. pupils point at the gaze point (in head space)
-    var rad=S.ha.x*Math.PI/180, co=Math.cos(rad), si=Math.sin(rad),
-        ex=H.x+(-3*co+5*si), ey=H.y+(-3*si-5*co),
-        vx=lx-ex, vy=ly-ey, vl=Math.hypot(vx,vy)||1, m=Math.min(3,vl/25),
-        qx=(vx*co+vy*si)/vl*m, qy=(-vx*si+vy*co)/vl*m;
-    spring(S.px,qx,260,.7,dt); spring(S.py,qy,260,.7,dt);
-    P.pupil.setAttribute('transform','translate('+S.px.x.toFixed(2)+' '+S.py.x.toFixed(2)+')');
-
-    // 7. blink
-    if(blinkT<0&&t>blinkAt){blinkT=0}
-    var lid=1;
-    if(blinkT>=0){blinkT+=dt;lid=1-Math.sin(Math.min(1,blinkT/.16)*Math.PI)*.92;if(blinkT>.16){blinkT=-1;blinkAt=t+2+Math.random()*3.5}}
-    P.eye.setAttribute('transform','translate(-3 -5) scale(1 '+lid.toFixed(3)+') translate(3 5)');
-
-    // 8. ears, tail, legs, body bob
-    setRot(P.ear,Math.sin(t*2.3)*7+moving*10*Math.sin(phase*2),-14,-6);
-    setRot(P.tail,Math.sin(t*3.1)*14+clamp(S.lean.x*2,-14,14),168,148);
-    var sw=Math.sin(phase)*24*moving;
-    setRot(P.legs.nf,sw,93,LEGTOP); setRot(P.legs.fb,sw*.9,139,LEGTOP);
-    setRot(P.legs.ff,-sw*.9,110,LEGTOP); setRot(P.legs.nb,-sw,157,LEGTOP);
-    P.body.setAttribute('transform','translate(0 '+(Math.sin(t*2)*.8).toFixed(2)+')');
-    P.shadow.setAttribute('rx',(58+bounce*1.2).toFixed(1));
-
-    // 9. flip to face left/right (squash through the turn)
-    var fs=S.face.x;
-    P.root.setAttribute('transform','translate('+(120*(1-fs)).toFixed(2)+' 0) scale('+fs.toFixed(3)+' 1)');
-
-    // 10. place the whole giraffe
-    var y=(follow?S.y.x:0)+(bounce+S.hop.x)*s;
-    wrap.style.transform=(follow?'translate3d('+S.x.x.toFixed(1)+'px,'+y.toFixed(1)+'px,0)':'translate3d(0,'+((bounce+S.hop.x)*s).toFixed(1)+'px,0)')+' rotate('+S.lean.x.toFixed(2)+'deg)';
-  }
-
-  function loop(now){
-    var dt=Math.min(.033,((now-last)||16)/1000);last=now;
-    step(dt);
-    raf=requestAnimationFrame(loop);
-  }
-  function start(){if(!raf){last=performance.now();raf=requestAnimationFrame(loop)}}
-  function stop(){cancelAnimationFrame(raf);raf=0}
-
-  // ---- modes ----
-  function teardown(){stop();off.forEach(function(f){f()});off=[]}
-  function init(){
-    teardown();
-    var calm=calmQ.matches, fine=fineQ.matches&&!calm;
-    mode=fine?'follow':(calm?'static':'idle');
-    if(mode==='follow'){
-      hero.appendChild(wrap);wrap.classList.remove('docked');
-      var s=scale(),h=home(s,hero.getBoundingClientRect());S.x.x=h.x;S.y.x=h.y;S.x.v=S.y.v=0;
-      on(window,'pointermove',function(e){if(e.pointerType!=='mouse'&&e.pointerType!=='pen')return;cur.x=e.clientX;cur.y=e.clientY;cur.has=true;cur.inside=true},{passive:true});
-      on(document,'mouseout',function(e){if(!e.relatedTarget)cur.inside=false});
-      on(window,'scroll',function(){var d=scrollY-lastScroll;lastScroll=scrollY;S.hop.v-=clamp(Math.abs(d),0,60)*6},{passive:true});
-      on(window,'blur',function(){cur.inside=false});
-    }else{
-      homeEl.insertBefore(wrap,homeEl.firstChild);wrap.classList.add('docked');wrap.style.transform='';
-      if(mode==='idle'){
-        // touch: she glances at where you tap
-        on(window,'pointerdown',function(e){tapLook={x:e.clientX,y:e.clientY};clearTimeout(tapLook.t);var o=tapLook;setTimeout(function(){if(tapLook===o)tapLook=null},1800)},{passive:true});
-      }
-    }
-    var seen=true;
-    if('IntersectionObserver' in window){
-      var io=new IntersectionObserver(function(es){seen=es[0].isIntersecting;(seen&&!document.hidden&&mode!=='static')?start():stop()});
-      io.observe(hero);off.push(function(){io.disconnect()});
-    }
-    on(document,'visibilitychange',function(){(document.hidden||!seen)?stop():(mode!=='static'&&start())});
-    if(mode==='static'){step(0.016);for(var i=0;i<60;i++)step(1/60)}else start();
-    wrap.classList.add('ready');
-  }
-  [fineQ,calmQ].forEach(function(q){q.addEventListener?q.addEventListener('change',init):q.addListener(init)});
-  addEventListener('pagehide',teardown);
-  addEventListener('pageshow',function(e){if(e.persisted)init()});
-  init();
-})();
 </script>
 </body>
 </html>
