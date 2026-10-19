@@ -99,6 +99,53 @@ section{padding:110px 0}
 .skill svg{width:34px;height:34px;color:var(--ink);margin-bottom:22px}
 .skill p{font-size:.95rem}
 
+/* skills: animated icons (start when the card is revealed) */
+.skill svg.sk-ic{width:92px;height:92px;margin-bottom:24px;overflow:visible;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;--bad:#F0897A}
+.sk-ui .w{stroke-dasharray:3 3;stroke-width:1.2;opacity:.5}
+.sk-ui .f{stroke:none;fill:var(--accent);transform-box:fill-box;transform-origin:left center}
+.sk-ui .f.soft{opacity:.45}
+.sk-ui .f.dark{fill:currentColor;opacity:.85}
+.sk-flow .path{stroke-dasharray:4 4;opacity:.55}
+.sk-flow .node{fill:var(--accent);stroke:none}
+.sk-flow .node.end{fill:currentColor}
+.sk-flow .halo{stroke:var(--accent);stroke-width:1.5;opacity:0;transform-box:fill-box;transform-origin:center}
+.sk-flow .dot{fill:var(--accent);stroke:none}
+.sk-audit .row{stroke-width:1.4}
+.sk-audit .bar{stroke-width:3;opacity:.35}
+.sk-audit .glass{fill:var(--accent);fill-opacity:.12;stroke:var(--accent);stroke-width:2.4}
+.sk-audit .handle{stroke:var(--accent);stroke-width:3}
+.sk-audit .row2{stroke:var(--accent)}
+.sk-audit .warn,.sk-audit .ok{opacity:0;transform-box:fill-box;transform-origin:center}
+.sk-audit .warn circle{fill:var(--bad);stroke:none}
+.sk-audit .ok circle{fill:var(--accent);stroke:none}
+.sk-audit .mark{stroke:var(--bg);stroke-width:1.8}
+@media (prefers-reduced-motion:no-preference){
+  .skill.in .sk-ui .f{animation:sk-build 6s cubic-bezier(.3,.7,.2,1) infinite}
+  .skill.in .sk-ui .d2{animation-delay:.35s}.skill.in .sk-ui .d3{animation-delay:.7s}
+  .skill.in .sk-ui .d4{animation-delay:1.05s}.skill.in .sk-ui .d5{animation-delay:1.4s}
+  @keyframes sk-build{0%,4%{transform:scaleX(0)}20%,80%{transform:scaleX(1)}92%,100%{transform:scaleX(0)}}
+
+  .skill.in .sk-flow .path{animation:sk-march 1.2s linear infinite}
+  @keyframes sk-march{to{stroke-dashoffset:-16}}
+  .skill.in .sk-flow .halo{animation:sk-pulse 2s ease-out infinite}
+  .skill.in .sk-flow .hB{animation-delay:1.7s}
+  .skill.in .sk-flow .hC{animation-duration:4s;animation-delay:3.9s}
+  .skill.in .sk-flow .hD{animation-duration:4s;animation-delay:1.9s}
+  @keyframes sk-pulse{0%{opacity:.7;transform:scale(1)}40%,100%{opacity:0;transform:scale(2.8)}}
+
+  .skill.in .sk-audit .lens{animation:sk-scan 8s ease-in-out infinite}
+  @keyframes sk-scan{0%,14%{transform:translateY(0)}32%,58%{transform:translateY(28px)}76%,90%{transform:translateY(56px)}100%{transform:translateY(0)}}
+  .skill.in .sk-audit .row2{animation:sk-row 8s linear infinite}
+  @keyframes sk-row{0%,30%{stroke:currentColor}34%,50%{stroke:var(--bad)}56%,96%{stroke:var(--accent)}100%{stroke:currentColor}}
+  .skill.in .sk-audit .row2g{animation:sk-shake 8s linear infinite}
+  @keyframes sk-shake{0%,33%,43%,100%{transform:translateX(0)}35%,39%{transform:translateX(-2px)}37%,41%{transform:translateX(2px)}}
+  .skill.in .sk-audit .warn{animation:sk-warn 8s ease-out infinite}
+  @keyframes sk-warn{0%,33%{opacity:0;transform:scale(.4)}37%,50%{opacity:1;transform:scale(1)}54%,100%{opacity:0;transform:scale(.4)}}
+  .skill.in .sk-audit .ok{animation:sk-ok 8s ease-out infinite}
+  @keyframes sk-ok{0%,54%{opacity:0;transform:scale(.4)}60%,94%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.4)}}
+}
+@media (prefers-reduced-motion:reduce){.sk-flow .dot{display:none}.sk-audit .ok{opacity:1}}
+
 /* about row */
 .about{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
 .about-left{display:grid;gap:16px}
@@ -191,6 +238,33 @@ footer{background:#18191d;border-top:1px solid var(--rule);padding:80px 0 30px;o
   .art-hint{display:none}
   .rv{opacity:1;transform:none;transition:none}
 }
+
+/* per-section cursors (swap a section's cursor by changing which --cur-* it uses) */
+:root{
+  --cur-pin:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M16 30.5C16 30.5 5.5 19.5 5.5 12a10.5 10.5 0 1 1 21 0c0 7.5-10.5 18.5-10.5 18.5Z' fill='%23F4F4F6' stroke='%23111216' stroke-width='1.6'/%3E%3Ccircle cx='16' cy='12' r='3.6' fill='%23111216'/%3E%3C/svg%3E") 16 30,auto;
+  --cur-pin-link:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M16 30.5C16 30.5 5.5 19.5 5.5 12a10.5 10.5 0 1 1 21 0c0 7.5-10.5 18.5-10.5 18.5Z' fill='%239FD8CB' stroke='%23111216' stroke-width='1.6'/%3E%3Ccircle cx='16' cy='12' r='3.6' fill='%23111216'/%3E%3C/svg%3E") 16 30,pointer;
+  --cur-hand:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32' stroke-linejoin='round'%3E%3Cg fill='%23111216' stroke='%23111216' stroke-width='3.4'%3E%3Crect x='9' y='6' width='4.2' height='15' rx='2.1'/%3E%3Crect x='13.4' y='3' width='4.2' height='17' rx='2.1'/%3E%3Crect x='17.8' y='5' width='4.2' height='16' rx='2.1'/%3E%3Crect x='22.2' y='9' width='4.2' height='13' rx='2.1'/%3E%3Cpath d='M9 15H26.4V22C26.4 27 22.6 30.2 17.6 30.2C14 30.2 11.4 28.6 9.6 25.8L4.6 18.2A2.1 2.1 0 0 1 8 15.9L9 17.2Z'/%3E%3C/g%3E%3Cg fill='%23F4F4F6' stroke='none'%3E%3Crect x='9' y='6' width='4.2' height='15' rx='2.1'/%3E%3Crect x='13.4' y='3' width='4.2' height='17' rx='2.1'/%3E%3Crect x='17.8' y='5' width='4.2' height='16' rx='2.1'/%3E%3Crect x='22.2' y='9' width='4.2' height='13' rx='2.1'/%3E%3Cpath d='M9 15H26.4V22C26.4 27 22.6 30.2 17.6 30.2C14 30.2 11.4 28.6 9.6 25.8L4.6 18.2A2.1 2.1 0 0 1 8 15.9L9 17.2Z'/%3E%3C/g%3E%3Cpath d='M13.2 9v8M17.6 6.5v9M22 9.5v7' stroke='%23111216' stroke-width='1' fill='none' stroke-linecap='round' opacity='.0'/%3E%3C/svg%3E") 16 16,auto;
+  --cur-hand-link:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32' stroke-linejoin='round'%3E%3Cg fill='%23111216' stroke='%23111216' stroke-width='3.4'%3E%3Crect x='9' y='6' width='4.2' height='15' rx='2.1'/%3E%3Crect x='13.4' y='3' width='4.2' height='17' rx='2.1'/%3E%3Crect x='17.8' y='5' width='4.2' height='16' rx='2.1'/%3E%3Crect x='22.2' y='9' width='4.2' height='13' rx='2.1'/%3E%3Cpath d='M9 15H26.4V22C26.4 27 22.6 30.2 17.6 30.2C14 30.2 11.4 28.6 9.6 25.8L4.6 18.2A2.1 2.1 0 0 1 8 15.9L9 17.2Z'/%3E%3C/g%3E%3Cg fill='%239FD8CB' stroke='none'%3E%3Crect x='9' y='6' width='4.2' height='15' rx='2.1'/%3E%3Crect x='13.4' y='3' width='4.2' height='17' rx='2.1'/%3E%3Crect x='17.8' y='5' width='4.2' height='16' rx='2.1'/%3E%3Crect x='22.2' y='9' width='4.2' height='13' rx='2.1'/%3E%3Cpath d='M9 15H26.4V22C26.4 27 22.6 30.2 17.6 30.2C14 30.2 11.4 28.6 9.6 25.8L4.6 18.2A2.1 2.1 0 0 1 8 15.9L9 17.2Z'/%3E%3C/g%3E%3Cpath d='M13.2 9v8M17.6 6.5v9M22 9.5v7' stroke='%23111216' stroke-width='1' fill='none' stroke-linecap='round' opacity='.0'/%3E%3C/svg%3E") 16 16,pointer;
+  --cur-pen:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round'%3E%3Cg stroke='%23111216' stroke-width='1.5' fill='none'%3E%3Cpath d='M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a1 1 0 0 1 0-1.414l5.586-5.586a1 1 0 0 1 1.414 0l1.586 1.586a1 1 0 0 1 0 1.414z' fill='%23F4F4F6'/%3E%3Cpath d='m18 13-1.375-6.874a1 1 0 0 0-.746-.776L3.235 2.028a1 1 0 0 0-1.207 1.207L5.35 15.879a1 1 0 0 0 .776.746L13 18' fill='%23F4F4F6'/%3E%3Cpath d='m2.3 2.3 7.286 7.286'/%3E%3Ccircle cx='11' cy='11' r='2' fill='%239FD8CB'/%3E%3C/g%3E%3C/svg%3E") 3 3,auto;
+  --cur-pen-link:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round'%3E%3Cg stroke='%23111216' stroke-width='1.5' fill='none'%3E%3Cpath d='M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a1 1 0 0 1 0-1.414l5.586-5.586a1 1 0 0 1 1.414 0l1.586 1.586a1 1 0 0 1 0 1.414z' fill='%239FD8CB'/%3E%3Cpath d='m18 13-1.375-6.874a1 1 0 0 0-.746-.776L3.235 2.028a1 1 0 0 0-1.207 1.207L5.35 15.879a1 1 0 0 0 .776.746L13 18' fill='%239FD8CB'/%3E%3Cpath d='m2.3 2.3 7.286 7.286'/%3E%3Ccircle cx='11' cy='11' r='2' fill='%23F4F4F6'/%3E%3C/g%3E%3C/svg%3E") 3 3,pointer;
+  --cur-erp:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32' stroke-linejoin='round'%3E%3Cg fill='%23111216' stroke='%23111216' stroke-width='3.4'%3E%3Crect x='13' y='2' width='6' height='28' rx='1.8' transform='rotate(0 16 16)'/%3E%3Crect x='13' y='2' width='6' height='28' rx='1.8' transform='rotate(45 16 16)'/%3E%3Crect x='13' y='2' width='6' height='28' rx='1.8' transform='rotate(90 16 16)'/%3E%3Crect x='13' y='2' width='6' height='28' rx='1.8' transform='rotate(135 16 16)'/%3E%3Ccircle cx='16' cy='16' r='10'/%3E%3C/g%3E%3Cg fill='%23F4F4F6'%3E%3Crect x='13' y='2' width='6' height='28' rx='1.8' transform='rotate(0 16 16)'/%3E%3Crect x='13' y='2' width='6' height='28' rx='1.8' transform='rotate(45 16 16)'/%3E%3Crect x='13' y='2' width='6' height='28' rx='1.8' transform='rotate(90 16 16)'/%3E%3Crect x='13' y='2' width='6' height='28' rx='1.8' transform='rotate(135 16 16)'/%3E%3Ccircle cx='16' cy='16' r='10'/%3E%3C/g%3E%3Ccircle cx='16' cy='16' r='5' fill='%23111216'/%3E%3Ccircle cx='16' cy='16' r='2.4' fill='%239FD8CB'/%3E%3C/svg%3E") 16 16,auto;
+  --cur-erp-link:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32' stroke-linejoin='round'%3E%3Cg fill='%23111216' stroke='%23111216' stroke-width='3.4'%3E%3Crect x='13' y='2' width='6' height='28' rx='1.8' transform='rotate(0 16 16)'/%3E%3Crect x='13' y='2' width='6' height='28' rx='1.8' transform='rotate(45 16 16)'/%3E%3Crect x='13' y='2' width='6' height='28' rx='1.8' transform='rotate(90 16 16)'/%3E%3Crect x='13' y='2' width='6' height='28' rx='1.8' transform='rotate(135 16 16)'/%3E%3Ccircle cx='16' cy='16' r='10'/%3E%3C/g%3E%3Cg fill='%239FD8CB'%3E%3Crect x='13' y='2' width='6' height='28' rx='1.8' transform='rotate(0 16 16)'/%3E%3Crect x='13' y='2' width='6' height='28' rx='1.8' transform='rotate(45 16 16)'/%3E%3Crect x='13' y='2' width='6' height='28' rx='1.8' transform='rotate(90 16 16)'/%3E%3Crect x='13' y='2' width='6' height='28' rx='1.8' transform='rotate(135 16 16)'/%3E%3Ccircle cx='16' cy='16' r='10'/%3E%3C/g%3E%3Ccircle cx='16' cy='16' r='5' fill='%23111216'/%3E%3Ccircle cx='16' cy='16' r='2.4' fill='%23F4F4F6'/%3E%3C/svg%3E") 16 16,pointer;
+  --cur-brush:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32' stroke-linecap='round' stroke-linejoin='round'%3E%3Cg transform='rotate(45 16 16)' stroke='%23111216' stroke-width='1.4'%3E%3Crect x='14.2' y='1' width='3.6' height='13' rx='1.8' fill='%23F4F4F6'/%3E%3Crect x='12.8' y='14' width='6.4' height='5' rx='1' fill='%23F4F4F6'/%3E%3Cpath d='M12.8 19H19.2C19.2 23.5 17.8 27 16 31C14.2 27 12.8 23.5 12.8 19Z' fill='%239FD8CB'/%3E%3C/g%3E%3C/svg%3E") 5 27,auto;
+  --cur-brush-link:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32' stroke-linecap='round' stroke-linejoin='round'%3E%3Cg transform='rotate(45 16 16)' stroke='%23111216' stroke-width='1.4'%3E%3Crect x='14.2' y='1' width='3.6' height='13' rx='1.8' fill='%239FD8CB'/%3E%3Crect x='12.8' y='14' width='6.4' height='5' rx='1' fill='%239FD8CB'/%3E%3Cpath d='M12.8 19H19.2C19.2 23.5 17.8 27 16 31C14.2 27 12.8 23.5 12.8 19Z' fill='%23F4F4F6'/%3E%3C/g%3E%3C/svg%3E") 5 27,pointer;
+  --cur-glasses:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32' stroke-linecap='round' stroke-linejoin='round'%3E%3Cg fill='none' stroke='%23111216' stroke-width='4.6'%3E%3Ccircle cx='9' cy='18' r='6'/%3E%3Ccircle cx='23' cy='18' r='6'/%3E%3Cpath d='M15 17c.6-1.2 1.4-1.2 2 0M3.2 16.5L1.5 12.5M28.8 16.5l1.7-4'/%3E%3C/g%3E%3Cg fill='%239FD8CB' fill-opacity='.35' stroke='%23F4F4F6' stroke-width='2.2'%3E%3Ccircle cx='9' cy='18' r='6'/%3E%3Ccircle cx='23' cy='18' r='6'/%3E%3Cpath d='M15 17c.6-1.2 1.4-1.2 2 0M3.2 16.5L1.5 12.5M28.8 16.5l1.7-4'/%3E%3C/g%3E%3C/svg%3E") 16 18,auto;
+  --cur-glasses-link:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32' stroke-linecap='round' stroke-linejoin='round'%3E%3Cg fill='none' stroke='%23111216' stroke-width='4.6'%3E%3Ccircle cx='9' cy='18' r='6'/%3E%3Ccircle cx='23' cy='18' r='6'/%3E%3Cpath d='M15 17c.6-1.2 1.4-1.2 2 0M3.2 16.5L1.5 12.5M28.8 16.5l1.7-4'/%3E%3C/g%3E%3Cg fill='%23F4F4F6' fill-opacity='.35' stroke='%239FD8CB' stroke-width='2.2'%3E%3Ccircle cx='9' cy='18' r='6'/%3E%3Ccircle cx='23' cy='18' r='6'/%3E%3Cpath d='M15 17c.6-1.2 1.4-1.2 2 0M3.2 16.5L1.5 12.5M28.8 16.5l1.7-4'/%3E%3C/g%3E%3C/svg%3E") 16 18,pointer;
+  --cur-fav:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32' stroke-linecap='round' stroke-linejoin='round'%3E%3Cg stroke='%23111216' stroke-width='1.4'%3E%3Cpath d='M11 4v5M21 4v5' stroke-width='2'/%3E%3Ccircle cx='11' cy='3.5' r='2' fill='%23111216'/%3E%3Ccircle cx='21' cy='3.5' r='2' fill='%23111216'/%3E%3Cellipse cx='6' cy='12' rx='4' ry='2.2' transform='rotate(-25 6 12)' fill='%23F4F4F6'/%3E%3Cellipse cx='26' cy='12' rx='4' ry='2.2' transform='rotate(25 26 12)' fill='%23F4F4F6'/%3E%3Crect x='8' y='7' width='16' height='13' rx='6.5' fill='%23F4F4F6'/%3E%3Crect x='10.5' y='15' width='11' height='14' rx='5.5' fill='%239FD8CB'/%3E%3C/g%3E%3Ccircle cx='14' cy='25' r='1' fill='%23111216'/%3E%3Ccircle cx='18' cy='25' r='1' fill='%23111216'/%3E%3Ccircle cx='13' cy='13' r='1.3' fill='%23111216'/%3E%3Ccircle cx='19' cy='13' r='1.3' fill='%23111216'/%3E%3C/svg%3E") 16 16,auto;
+  --cur-fav-link:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32' stroke-linecap='round' stroke-linejoin='round'%3E%3Cg stroke='%23111216' stroke-width='1.4'%3E%3Cpath d='M11 4v5M21 4v5' stroke-width='2'/%3E%3Ccircle cx='11' cy='3.5' r='2' fill='%23111216'/%3E%3Ccircle cx='21' cy='3.5' r='2' fill='%23111216'/%3E%3Cellipse cx='6' cy='12' rx='4' ry='2.2' transform='rotate(-25 6 12)' fill='%239FD8CB'/%3E%3Cellipse cx='26' cy='12' rx='4' ry='2.2' transform='rotate(25 26 12)' fill='%239FD8CB'/%3E%3Crect x='8' y='7' width='16' height='13' rx='6.5' fill='%239FD8CB'/%3E%3Crect x='10.5' y='15' width='11' height='14' rx='5.5' fill='%23F4F4F6'/%3E%3C/g%3E%3Ccircle cx='14' cy='25' r='1' fill='%23111216'/%3E%3Ccircle cx='18' cy='25' r='1' fill='%23111216'/%3E%3Ccircle cx='13' cy='13' r='1.3' fill='%23111216'/%3E%3Ccircle cx='19' cy='13' r='1.3' fill='%23111216'/%3E%3C/svg%3E") 16 16,pointer;
+  --cur:var(--cur-pin);--cur-link:var(--cur-pin-link);
+}
+.hero,.marquee{--cur:var(--cur-hand);--cur-link:var(--cur-hand-link)}
+#about .sec-title,#about .skills{--cur:var(--cur-pen);--cur-link:var(--cur-pen-link)}
+#about .about{--cur:var(--cur-erp);--cur-link:var(--cur-erp-link)}
+#work{--cur:var(--cur-brush);--cur-link:var(--cur-brush-link)}
+.swot-sec{--cur:var(--cur-glasses);--cur-link:var(--cur-glasses-link)}
+#contact{--cur:var(--cur-fav);--cur-link:var(--cur-fav-link)}
+html,body *{cursor:var(--cur)}
+body a,body button,body summary,body label,body [role="button"],body .btn,body .tlink,body .case{cursor:var(--cur-link)}
 </style>
 </head>
 <body>
@@ -313,15 +387,15 @@ footer{background:#18191d;border-top:1px solid var(--rule);padding:80px 0 30px;o
     </div>
     <div class="skills">
       <div class="frame skill rv">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="1.5"/><path d="M3 8h18M8 21h8"/></svg>
+        <svg class="sk-ic sk-ui" viewBox="0 0 120 120" aria-hidden="true"><rect x="22" y="8" width="76" height="104" rx="3"/><rect class="w" x="30" y="18" width="60" height="9" rx="1.5"/><rect class="f dark d1" x="30" y="18" width="60" height="9" rx="1.5"/><rect class="w" x="30" y="33" width="60" height="32" rx="2"/><rect class="f d2" x="30" y="33" width="60" height="32" rx="2"/><rect class="w" x="30" y="71" width="28" height="17" rx="2"/><rect class="f soft d3" x="30" y="71" width="28" height="17" rx="2"/><rect class="w" x="62" y="71" width="28" height="17" rx="2"/><rect class="f soft d4" x="62" y="71" width="28" height="17" rx="2"/><rect class="w" x="30" y="94" width="60" height="10" rx="1.5"/><rect class="f dark d5" x="30" y="94" width="60" height="10" rx="1.5"/></svg>
         <p><strong>End-to-end UI design</strong> is where I live. Moodboard, wireframes, high-fidelity responsive UI, then a clean hand-off to developers.</p>
       </div>
       <div class="frame skill rv">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="9" y="2.5" width="6" height="5" rx="1"/><rect x="2.5" y="16.5" width="6" height="5" rx="1"/><rect x="15.5" y="16.5" width="6" height="5" rx="1"/><path d="M12 7.5v4M5.5 16.5v-3h13v3"/></svg>
+        <svg class="sk-ic sk-flow" viewBox="0 0 120 120" aria-hidden="true"><path class="path" d="M18 60H56"/><path class="path" d="M56 60L98 26"/><path class="path" d="M56 60L98 94"/><circle class="halo hA" cx="18" cy="60" r="6"/><circle class="halo hB" cx="56" cy="60" r="6"/><circle class="halo hC" cx="98" cy="26" r="6"/><circle class="halo hD" cx="98" cy="94" r="6"/><circle class="node" cx="18" cy="60" r="6"/><circle class="node" cx="56" cy="60" r="6"/><circle class="node end" cx="98" cy="26" r="6"/><circle class="node end" cx="98" cy="94" r="6"/><circle class="dot" r="3.5"><animateMotion dur="4s" repeatCount="indefinite" path="M18 60H56L98 26"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.08;.88;1" dur="4s" repeatCount="indefinite"/></circle><circle class="dot" r="3.5" opacity="0"><animateMotion dur="4s" begin="2s" repeatCount="indefinite" path="M18 60H56L98 94"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.08;.88;1" dur="4s" begin="2s" repeatCount="indefinite"/></circle></svg>
         <p><strong>Flows and information architecture</strong> come before pixels. I map who does what, so big portals with many roles stay easy to move through.</p>
       </div>
       <div class="frame skill rv">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4M8 11h6M11 8v6"/></svg>
+        <svg class="sk-ic sk-audit" viewBox="0 0 120 120" aria-hidden="true"><g><rect class="row" x="12" y="18" width="78" height="22" rx="3"/><line class="bar" x1="44" y1="29" x2="74" y2="29"/><circle cx="27" cy="29" r="5" opacity=".35"/></g><g class="row2g"><rect class="row row2" x="12" y="46" width="78" height="22" rx="3"/><line class="bar" x1="44" y1="57" x2="74" y2="57"/><circle cx="27" cy="57" r="5" opacity=".35"/><g class="warn"><circle cx="27" cy="57" r="6.5"/><path class="mark" d="M27 54V57.5M27 59.8V59.9"/></g><g class="ok"><circle cx="27" cy="57" r="6.5"/><path class="mark" d="M24 57.2L26.4 59.6L30.4 54.8"/></g></g><g><rect class="row" x="12" y="74" width="78" height="22" rx="3"/><line class="bar" x1="44" y1="85" x2="74" y2="85"/><circle cx="27" cy="85" r="5" opacity=".35"/></g><g class="lens"><circle class="glass" cx="84" cy="29" r="11"/><line class="handle" x1="92" y1="37" x2="102" y2="47"/></g></svg>
         <p><strong>UX audits that find the friction.</strong> I look for the spots where users hesitate or give up, then redesign them, especially on mobile.</p>
       </div>
     </div>
@@ -329,13 +403,14 @@ footer{background:#18191d;border-top:1px solid var(--rule);padding:80px 0 30px;o
     <div class="about">
       <div class="about-left">
         <div class="frame now rv">
-          <h3>I’m currently a <strong>UI/UX Designer</strong> at <span class="acc">Prime Point.</span></h3>
+          <h3>I’m currently a <strong>Senior UI/UX Designer</strong> at <span class="acc">Primex ERP Systems.</span></h3>
           <a class="tlink mono" href="https://behance.net/ayasuliman">See my Behance →</a>
         </div>
         <div class="frame snap rv">
           <span class="chip mono">Career snapshot</span>
           <p>6+ years designing <strong>websites, mobile apps</strong> and <strong>SaaS products</strong> for the Gulf market.</p>
           <ul class="roles mono">
+            <li><span>Senior UI/UX Designer / Primex ERP Systems / ’26</span></li>
             <li><span>UI/UX Designer / Prime Point / ’24</span></li>
             <li><span>UI/UX Designer / Twentytoo / ’23</span></li>
             <li><span>UI/UX Designer / Prime Point / ’20</span></li>
@@ -468,6 +543,7 @@ footer{background:#18191d;border-top:1px solid var(--rule);padding:80px 0 30px;o
           <button class="btn mono" id="copy" type="button">Copy email</button>
           <a class="btn line mono" href="mailto:ayasuliman201020@gmail.com">Email me</a>
           <a class="btn line mono" href="https://linkedin.com/in/aya-suliman">LinkedIn ↗</a>
+          <a class="btn line mono" href="https://behance.net/ayasuliman">Behance ↗</a>
         </div>
       </div>
       <div class="fcol">
