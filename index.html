@@ -83,6 +83,8 @@ strong{color:var(--ink);font-weight:600}
 .hero-art.follow #neck,.hero-art.follow #head{animation:none;transition:transform .35s cubic-bezier(.3,1.4,.5,1)}
 .art-hint{text-align:center;color:var(--subtle);margin-top:6px}
 
+@media (hover:none){.art-hint{display:none}}
+
 /* marquee */
 .marquee{border-block:1px solid var(--rule);background:var(--surface);overflow:hidden;white-space:nowrap}
 .marquee div{display:inline-block;padding:12px 0;color:var(--accent);animation:run 40s linear infinite}
@@ -197,7 +199,7 @@ section{padding:110px 0}
 
 /* contact + footer */
 footer{background:#18191d;border-top:1px solid var(--rule);padding:80px 0 30px;overflow:hidden}
-.ftop{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:48px;border-bottom:1px solid var(--rule)}
+.ftop{display:grid;grid-template-columns:2.2fr 1fr 1fr;gap:40px;padding-bottom:48px;border-bottom:1px solid var(--rule)}
 .ftop h2{font-size:clamp(2rem,4.2vw,2.6rem);font-weight:700;letter-spacing:-.01em;margin:14px 0 12px}
 .ftop p{color:var(--muted);margin-bottom:24px}
 .frow{display:flex;gap:10px;flex-wrap:wrap}
@@ -205,6 +207,9 @@ footer{background:#18191d;border-top:1px solid var(--rule);padding:80px 0 30px;o
 .fcol ul{list-style:none;display:grid;gap:10px}
 .fcol a{color:var(--body);transition:color .2s}.fcol a:hover{color:var(--accent)}
 .mega{font:700 clamp(7rem,29vw,24rem)/.9 var(--sans);letter-spacing:-.03em;text-align:center;color:transparent;-webkit-text-stroke:2px var(--ink);margin:40px 0 20px;user-select:none}
+.frow .btn{padding:12px 16px}
+.mega{display:flex;justify-content:center;margin:56px 0 28px;font-size:0;-webkit-text-stroke:0;user-select:none}
+.mega svg{width:min(100%,880px);height:auto}
 .fbot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--subtle)}
 .fbot a:hover{color:var(--accent)}
 
@@ -220,8 +225,9 @@ footer{background:#18191d;border-top:1px solid var(--rule);padding:80px 0 30px;o
 }
 @media (max-width:720px){
   .wrap{padding:0 16px}
-  .hero{grid-template-columns:1fr;min-height:auto;padding:120px 0 70px}
-  .hero-art{width:220px;justify-self:start}
+  .hero{grid-template-columns:1fr;min-height:auto;gap:28px;padding:112px 16px 56px}
+  .hero-art{width:min(220px,62vw);justify-self:center}
+  .hero .sub{margin:18px 0 24px}
   .skills,.work{grid-template-columns:1fr}
   .swot{grid-template-columns:1fr}
   .swot::before,.swot::after{display:none}
@@ -257,7 +263,7 @@ footer{background:#18191d;border-top:1px solid var(--rule);padding:80px 0 30px;o
   --cur-fav-link:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32' stroke-linecap='round' stroke-linejoin='round'%3E%3Cg stroke='%23111216' stroke-width='1.4'%3E%3Cpath d='M11 4v5M21 4v5' stroke-width='2'/%3E%3Ccircle cx='11' cy='3.5' r='2' fill='%23111216'/%3E%3Ccircle cx='21' cy='3.5' r='2' fill='%23111216'/%3E%3Cellipse cx='6' cy='12' rx='4' ry='2.2' transform='rotate(-25 6 12)' fill='%239FD8CB'/%3E%3Cellipse cx='26' cy='12' rx='4' ry='2.2' transform='rotate(25 26 12)' fill='%239FD8CB'/%3E%3Crect x='8' y='7' width='16' height='13' rx='6.5' fill='%239FD8CB'/%3E%3Crect x='10.5' y='15' width='11' height='14' rx='5.5' fill='%23F4F4F6'/%3E%3C/g%3E%3Ccircle cx='14' cy='25' r='1' fill='%23111216'/%3E%3Ccircle cx='18' cy='25' r='1' fill='%23111216'/%3E%3Ccircle cx='13' cy='13' r='1.3' fill='%23111216'/%3E%3Ccircle cx='19' cy='13' r='1.3' fill='%23111216'/%3E%3C/svg%3E") 16 16,pointer;
   --cur:var(--cur-pin);--cur-link:var(--cur-pin-link);
 }
-.hero,.marquee{--cur:var(--cur-hand);--cur-link:var(--cur-hand-link)}
+.nav,.hero,.marquee{--cur:var(--cur-hand);--cur-link:var(--cur-hand-link)}
 #about .sec-title,#about .skills{--cur:var(--cur-pen);--cur-link:var(--cur-pen-link)}
 #about .about{--cur:var(--cur-erp);--cur-link:var(--cur-erp-link)}
 #work{--cur:var(--cur-brush);--cur-link:var(--cur-brush-link)}
@@ -555,7 +561,24 @@ body a,body button,body summary,body label,body [role="button"],body .btn,body .
         <ul><li><a href="https://behance.net/ayasuliman">Behance</a></li><li><a href="https://linkedin.com/in/aya-suliman">LinkedIn</a></li><li><a href="mailto:ayasuliman201020@gmail.com">Email</a></li></ul>
       </div>
     </div>
-    <div class="mega" aria-hidden="true">AYA</div>
+    <div class="mega" aria-hidden="true"><svg viewBox="0 0 236 64" aria-hidden="true">
+  <rect width="64" height="64" rx="16" fill="#9FD8CB"/>
+  <g transform="translate(2 -2)">
+  <g stroke="#111216" stroke-linecap="round" fill="none">
+    <circle cx="27" cy="40" r="10.5" stroke-width="7"/>
+    <path d="M41 29.5V50.5" stroke-width="7"/>
+    <path d="M23.6 29 21.4 19.5M30.4 29 32.6 19.5" stroke-width="3.4"/>
+  </g>
+  <g fill="#111216"><circle cx="21" cy="18" r="3.6"/><circle cx="33" cy="18" r="3.6"/></g>
+  </g>
+  <!-- wordmark "aya." drawn as strokes, no font needed -->
+  <g stroke="#F4F4F6" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <circle cx="96" cy="40" r="10"/><path d="M109.5 30V50.5"/>
+    <path d="M122 30 131.5 49M141 30 128 59.5"/>
+    <circle cx="164" cy="40" r="10"/><path d="M177.5 30V50.5"/>
+  </g>
+  <circle cx="192" cy="47.5" r="4.5" fill="#9FD8CB"/>
+</svg></div>
     <div class="fbot mono"><span>© <span id="y">2026</span> Aya Suliman — Designed in Cairo, Egypt</span><a href="#top">Back to top ↑</a></div>
   </div>
 </footer>
