@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Aya Suliman | UI/UX Designer</title>
-<meta name="description" content="Portfolio of I’m Aya, a UI/UX designer based in Cairo. I craft websites, mobile apps, SaaS dashboards, and robust ERP systems for clients across the entire Gulf.">
+<meta name="description" content="Portfolio of Aya Suliman, UI/UX designer in Cairo. Websites, mobile apps and SaaS dashboards for clients in Saudi Arabia and the UAE.">
 <meta property="og:title" content="Aya Suliman | UI/UX Designer">
 <meta property="og:description" content="Websites, mobile apps and SaaS dashboards, from first sketch to developer hand-off.">
 <link rel="icon" href="favicon.ico" sizes="any">
@@ -74,13 +74,9 @@ strong{color:var(--ink);font-weight:600}
 .hero .sub{margin:22px 0 30px;max-width:46ch;color:var(--muted)}
 .hero-art{justify-self:center;width:min(100%,340px)}
 .hero-art svg{width:100%;height:auto;overflow:visible}
-#neck{transform-box:view-box;transform-origin:155px 204px;animation:sway 4.5s ease-in-out infinite}
-#head{transform-box:view-box;transform-origin:150px 80px;animation:tilt 4.5s ease-in-out infinite}
-#eye{transform-box:fill-box;transform-origin:center;animation:blink 5s infinite}
-@keyframes sway{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(9deg)}}
-@keyframes tilt{0%,100%{transform:rotate(4deg)}50%{transform:rotate(-6deg)}}
-@keyframes blink{0%,94%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
-.hero-art.follow #neck,.hero-art.follow #head{animation:none;transition:transform .35s cubic-bezier(.3,1.4,.5,1)}
+.hero-art{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.hero-art:focus-visible{outline:2px solid var(--accent);outline-offset:8px;border-radius:14px}
+#flowPath{filter:drop-shadow(0 0 8px rgba(159,216,203,.25))}
 .art-hint{text-align:center;color:var(--subtle);margin-top:6px}
 
 @media (hover:none){.art-hint{display:none}}
@@ -240,7 +236,7 @@ footer{background:#18191d;border-top:1px solid var(--rule);padding:80px 0 30px;o
 @media (max-width:420px){.nav ul li:first-child{display:none}.notes{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .marquee div,#neck,#head,#eye{animation:none}
+  .marquee div{animation:none}
   .art-hint{display:none}
   .rv{opacity:1;transform:none;transition:none}
 }
@@ -300,12 +296,12 @@ body a,body button,body summary,body label,body [role="button"],body .btn,body .
     <li class="dd">
       <a href="#work" aria-haspopup="true">Case Studies</a>
       <div class="dd-menu">
-        <a href="#work"><b>.01</b>Film Criticism Conference website</a>
-        <a href="#work"><b>.02</b>Schools system portal, UAE</a>
-        <a href="#work"><b>.03</b>Platone recruitment website audit</a>
-        <a href="#work"><b>.04</b>Platone mobile app redesign</a>
-        <a href="#work"><b>.05</b>TT mobile app component library</a>
-        <a href="#work"><b>.06</b>SaaS demo dashboard</a>
+        <a href="case-studies/film-criticism-conference.html"><b>.01</b>Film Criticism Conference website</a>
+        <a href="case-studies/schools-portal.html"><b>.02</b>Schools system portal, UAE</a>
+        <a href="case-studies/platone-website-audit.html"><b>.03</b>Platone recruitment website audit</a>
+        <a href="case-studies/platone-app-redesign.html"><b>.04</b>Platone mobile app redesign</a>
+        <a href="case-studies/tt-mobile-app.html"><b>.05</b>TT mobile app component library</a>
+        <a href="case-studies/saas-dashboard.html"><b>.06</b>SaaS demo dashboard</a>
       </div>
     </li>
     <li><a href="#contact">Contact</a></li>
@@ -316,66 +312,20 @@ body a,body button,body summary,body label,body [role="button"],body .btn,body .
   <div class="wrap hero" id="top">
     <div>
       <h1>Messy flows in.<br>Clear screens out.<br><span class="acc">Users</span> happy.</h1>
-      <p class="sub">I’m Aya, a UI/UX designer based in Cairo. I craft websites, mobile apps, SaaS dashboards, and robust ERP systems for clients across the entire Gulf.</p>
+      <p class="sub">I’m Aya, a UI/UX designer in Cairo. I design websites, mobile apps and SaaS dashboards for clients in Saudi Arabia and the UAE.</p>
       <a class="tlink mono" href="#work">See the work ↓</a>
     </div>
-    <div class="hero-art" aria-hidden="true">
-      <svg viewBox="0 0 320 330" fill="none">
-        <!-- ground shadow -->
-        <ellipse cx="190" cy="316" rx="92" ry="7" fill="#000" opacity=".35"/>
-        <!-- tail -->
-        <path d="M252 196 q20 14 14 46" stroke="#E2AE62" stroke-width="5" stroke-linecap="round"/>
-        <path d="M262 236 q8 6 2 16 q-8 -2 -6 -14z" fill="#8A5530"/>
-        <!-- back legs -->
-        <rect x="214" y="226" width="15" height="84" rx="7" fill="#D39A4E"/>
-        <rect x="238" y="226" width="15" height="84" rx="7" fill="#E2AE62"/>
-        <!-- front legs -->
-        <rect x="136" y="226" width="15" height="84" rx="7" fill="#D39A4E"/>
-        <rect x="160" y="226" width="15" height="84" rx="7" fill="#E2AE62"/>
-        <!-- hooves -->
-        <g fill="#3A2A20"><rect x="136" y="302" width="15" height="9" rx="3"/><rect x="160" y="302" width="15" height="9" rx="3"/><rect x="214" y="302" width="15" height="9" rx="3"/><rect x="238" y="302" width="15" height="9" rx="3"/></g>
-        <!-- body -->
-        <rect x="124" y="176" width="136" height="66" rx="32" fill="#E2AE62"/>
-        <g fill="#B5723A" opacity=".9">
-          <path d="M150 190 q12 -6 20 4 q-2 12 -16 12 q-10 -4 -4 -16z"/>
-          <path d="M188 186 q14 -4 18 8 q-4 10 -16 8 q-8 -6 -2 -16z"/>
-          <path d="M224 192 q12 0 14 10 q-6 10 -16 6 q-6 -8 2 -16z"/>
-          <path d="M172 214 q12 -4 16 6 q-4 10 -14 8 q-8 -4 -2 -14z"/>
-          <path d="M210 216 q10 -2 12 8 q-6 8 -14 4 q-4 -6 2 -12z"/>
-        </g>
-        <!-- neck + head (moves) -->
-        <g id="neck">
-          <path d="M134 204 L144 84 Q156 76 170 86 L176 204 Z" fill="#E2AE62"/>
-          <!-- mane -->
-          <path d="M146 86 L138 184" stroke="#8A5530" stroke-width="6" stroke-linecap="round" stroke-dasharray="7 5"/>
-          <g fill="#B5723A" opacity=".9">
-            <path d="M152 110 q10 -4 13 5 q-3 8 -12 6 q-6 -4 -1 -11z"/>
-            <path d="M150 140 q11 -3 14 6 q-4 9 -13 6 q-6 -5 -1 -12z"/>
-            <path d="M154 170 q10 -3 13 6 q-3 8 -12 6 q-6 -5 -1 -12z"/>
-          </g>
-          <g id="head">
-            <!-- horns (ossicones) -->
-            <path d="M150 50 L146 28 M166 48 L168 26" stroke="#B5723A" stroke-width="5" stroke-linecap="round"/>
-            <circle cx="146" cy="26" r="5.5" fill="#8A5530"/><circle cx="168" cy="24" r="5.5" fill="#8A5530"/>
-            <!-- ear -->
-            <ellipse cx="136" cy="56" rx="13" ry="6" transform="rotate(-24 136 56)" fill="#D39A4E"/>
-            <!-- head + muzzle -->
-            <ellipse cx="170" cy="66" rx="34" ry="21" transform="rotate(10 170 66)" fill="#E2AE62"/>
-            <ellipse cx="196" cy="76" rx="17" ry="14" fill="#F2D3A0"/>
-            <circle cx="200" cy="72" r="2.2" fill="#3A2A20"/>
-            <path d="M188 86 q8 4 16 -1" stroke="#3A2A20" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="186" cy="66" r="0" fill="none"/>
-            <!-- eye -->
-            <g id="eye">
-              <ellipse id="sclera" cx="163" cy="59" rx="7.5" ry="8" fill="#FFFDF7" stroke="#8A5530" stroke-width="1.2"/>
-              <g id="pupil"><circle cx="163" cy="59" r="4" fill="#1B1B22"/><circle cx="164.6" cy="57.4" r="1.4" fill="#fff"/></g>
-            </g>
-            <path d="M155 50 q8 -5 16 0" stroke="#8A5530" stroke-width="1.6" stroke-linecap="round"/>
-            <ellipse cx="174" cy="74" rx="6" ry="3.5" fill="#F0A6A0" opacity=".55"/>
-          </g>
-        </g>
+    <div class="hero-art" role="button" tabindex="0" aria-label="A messy flow. Press to untangle it.">
+      <svg viewBox="0 0 320 330" fill="none" aria-hidden="true">
+        <defs><pattern id="flowGrid" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.2" fill="#fff" opacity=".13"/></pattern></defs>
+        <rect x="0" y="10" width="320" height="310" rx="14" fill="url(#flowGrid)"/>
+        <path id="flowPath" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        <g id="nd0"><circle r="7" fill="#9FD8CB"/></g>
+        <g id="nd1"><rect x="-19" y="-15" width="38" height="30" rx="6" fill="#1c1d24" stroke="#9FD8CB" stroke-width="2"/><path d="M-11 -5h22M-11 3h14" stroke="#9FD8CB" stroke-width="2" stroke-linecap="round" opacity=".7"/></g>
+        <g id="nd2"><rect x="-19" y="-15" width="38" height="30" rx="6" fill="#1c1d24" stroke="#9FD8CB" stroke-width="2"/><path d="M-11 -6h22" stroke="#9FD8CB" stroke-width="2" stroke-linecap="round" opacity=".7"/><rect x="-11" y="2" width="22" height="7" rx="3.5" fill="#9FD8CB"/></g>
+        <g id="nd3"><circle r="16" fill="#9FD8CB"/><path d="M-7 0l5 5 9-10" stroke="#111216" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
       </svg>
-      <p class="mono art-hint">Move your cursor ↔</p>
+      <p class="mono art-hint" id="flowHint">Click to untangle it</p>
     </div>
   </div>
 
@@ -439,7 +389,7 @@ body a,body button,body summary,body label,body [role="button"],body .btn,body .
       <h2 id="work-h">Case studies</h2>
     </div>
     <div class="work">
-      <a class="frame case rv" href="https://behance.net/ayasuliman">
+      <a class="frame case rv" href="case-studies/film-criticism-conference.html">
         <div class="thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="10" y="10" width="180" height="100" rx="6" stroke="#3a3c46"/><rect x="24" y="26" width="80" height="10" rx="2" fill="#9FD8CB"/><rect x="24" y="44" width="120" height="5" rx="2" fill="#2c2e37"/><rect x="24" y="56" width="100" height="5" rx="2" fill="#2c2e37"/><rect x="130" y="70" width="46" height="28" rx="3" fill="#2c2e37"/><rect x="24" y="78" width="40" height="14" rx="2" stroke="#9FD8CB"/></svg></div>
         <div class="info">
           <div class="meta"><span class="chip mono">.01</span><span class="mono">Film Commission · KSA</span></div>
@@ -448,7 +398,7 @@ body a,body button,body summary,body label,body [role="button"],body .btn,body .
           <span class="tlink mono">Read case study →</span>
         </div>
       </a>
-      <a class="frame case rv" href="https://behance.net/ayasuliman">
+      <a class="frame case rv" href="case-studies/schools-portal.html">
         <div class="thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="10" y="10" width="180" height="100" rx="6" stroke="#3a3c46"/><rect x="10" y="10" width="40" height="100" fill="#1f2027"/><rect x="18" y="22" width="24" height="5" rx="2" fill="#9FD8CB"/><rect x="18" y="34" width="20" height="4" rx="2" fill="#2c2e37"/><rect x="18" y="44" width="22" height="4" rx="2" fill="#2c2e37"/><rect x="60" y="22" width="56" height="34" rx="3" fill="#2c2e37"/><rect x="122" y="22" width="56" height="34" rx="3" fill="#2c2e37"/><rect x="60" y="64" width="118" height="34" rx="3" stroke="#9FD8CB"/></svg></div>
         <div class="info">
           <div class="meta"><span class="chip mono">.02</span><span class="mono">Education · UAE</span></div>
@@ -457,7 +407,7 @@ body a,body button,body summary,body label,body [role="button"],body .btn,body .
           <span class="tlink mono">Read case study →</span>
         </div>
       </a>
-      <a class="frame case rv" href="https://behance.net/ayasuliman">
+      <a class="frame case rv" href="case-studies/platone-website-audit.html">
         <div class="thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="10" y="10" width="180" height="100" rx="6" stroke="#3a3c46"/><path d="M30 34h110M30 50h90M30 66h120" stroke="#2c2e37" stroke-width="5" stroke-linecap="round"/><circle cx="152" cy="80" r="18" stroke="#9FD8CB" stroke-width="2"/><path d="m165 93 12 12" stroke="#9FD8CB" stroke-width="2.5" stroke-linecap="round"/></svg></div>
         <div class="info">
           <div class="meta"><span class="chip mono">.03</span><span class="mono">Prime Point · KSA</span></div>
@@ -466,7 +416,7 @@ body a,body button,body summary,body label,body [role="button"],body .btn,body .
           <span class="tlink mono">Read case study →</span>
         </div>
       </a>
-      <a class="frame case rv" href="https://behance.net/ayasuliman">
+      <a class="frame case rv" href="case-studies/platone-app-redesign.html">
         <div class="thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="72" y="6" width="56" height="108" rx="10" stroke="#3a3c46"/><rect x="80" y="20" width="40" height="6" rx="2" fill="#9FD8CB"/><rect x="80" y="34" width="40" height="18" rx="3" fill="#2c2e37"/><rect x="80" y="58" width="40" height="18" rx="3" fill="#2c2e37"/><rect x="80" y="90" width="40" height="12" rx="3" stroke="#9FD8CB"/></svg></div>
         <div class="info">
           <div class="meta"><span class="chip mono">.04</span><span class="mono">Prime Point · KSA</span></div>
@@ -475,7 +425,7 @@ body a,body button,body summary,body label,body [role="button"],body .btn,body .
           <span class="tlink mono">Read case study →</span>
         </div>
       </a>
-      <a class="frame case rv" href="https://behance.net/ayasuliman">
+      <a class="frame case rv" href="case-studies/tt-mobile-app.html">
         <div class="thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="20" y="20" width="44" height="22" rx="11" fill="#9FD8CB"/><rect x="74" y="20" width="44" height="22" rx="11" stroke="#9FD8CB"/><rect x="128" y="20" width="52" height="22" rx="4" fill="#2c2e37"/><rect x="20" y="56" width="36" height="36" rx="6" fill="#2c2e37"/><rect x="66" y="56" width="36" height="36" rx="18" stroke="#3a3c46"/><rect x="112" y="62" width="68" height="8" rx="4" fill="#2c2e37"/><rect x="112" y="78" width="48" height="8" rx="4" fill="#2c2e37"/></svg></div>
         <div class="info">
           <div class="meta"><span class="chip mono">.05</span><span class="mono">Twentytoo</span></div>
@@ -484,7 +434,7 @@ body a,body button,body summary,body label,body [role="button"],body .btn,body .
           <span class="tlink mono">Read case study →</span>
         </div>
       </a>
-      <a class="frame case rv" href="https://behance.net/ayasuliman">
+      <a class="frame case rv" href="case-studies/saas-dashboard.html">
         <div class="thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="10" y="10" width="180" height="100" rx="6" stroke="#3a3c46"/><rect x="22" y="22" width="48" height="26" rx="3" fill="#2c2e37"/><rect x="76" y="22" width="48" height="26" rx="3" fill="#2c2e37"/><rect x="130" y="22" width="48" height="26" rx="3" fill="#2c2e37"/><path d="M24 94 L54 74 L84 82 L114 60 L144 68 L176 52" stroke="#9FD8CB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="info">
           <div class="meta"><span class="chip mono">.06</span><span class="mono">Twentytoo</span></div>
@@ -593,44 +543,49 @@ if('IntersectionObserver' in window){
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
   els.forEach(function(e){io.observe(e)});
 }else{els.forEach(function(e){e.classList.add('in')})}
-// giraffe: neck follows the cursor across the hero, sways when idle
+// hero art: a messy flow that untangles into a clear one (click or press Enter to toggle)
 (function(){
-  var art=document.querySelector('.hero-art'),
-      neck=document.getElementById('neck'),head=document.getElementById('head'),
-      sclera=document.getElementById('sclera'),pupil=document.getElementById('pupil');
-  if(!art||!neck)return;
-  var still=matchMedia('(prefers-reduced-motion: reduce)').matches,idle;
-  function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
-  function aim(x,y){
-    var r=art.getBoundingClientRect();
-    if(r.bottom<0||r.top>innerHeight)return; // hero off screen
-    var n=0,h=0;
-    if(!still){
-      var bx=r.left+r.width*.48,by=r.top+r.height*.62;
-      // neck leans left/right toward the cursor
-      n=clamp(Math.atan2(x-bx,by-y)*180/Math.PI*.55,-24,24);
-      // head tilts down when the cursor is below, up when above
-      var e=sclera.getBoundingClientRect(),ey=e.top+e.height/2;
-      var vy=clamp((y-ey)/(innerHeight*.6),-1,1);
-      h=-n*.5+(vy>0?vy*26:vy*12);
-      art.classList.add('follow');
-      neck.style.transform='rotate('+n+'deg)';
-      head.style.transform='rotate('+h+'deg)';
+  var art=document.querySelector('.hero-art'),path=document.getElementById('flowPath'),hint=document.getElementById('flowHint');
+  if(!art||!path)return;
+  var still=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var M=[[34,220],[250,300],[70,70],[290,210],[40,290],[200,40],[280,110],[60,160],[230,260],[110,300],[300,60],[30,100],[260,170],[90,230],[180,120],[140,290],[200,200]],
+      C=[[26,280],[56,280],[86,280],[118,280],[150,280],[150,250],[150,220],[150,190],[150,160],[180,160],[210,160],[240,160],[270,160],[270,130],[270,100],[270,70],[270,44]],
+      N=C.length,SPREAD=.6,
+      nodes=[[0,0],[4,28],[12,-34],[16,18]].map(function(n,i){return{el:document.getElementById('nd'+i),idx:n[0],rot:n[1]}});
+  function sm(x){x=Math.max(0,Math.min(1,x));return x*x*(3-2*x)}
+  function mix(a,b,t){return a+(b-a)*t}
+  function col(t){var a=[240,137,122],b=[159,216,203];return 'rgb('+a.map(function(v,i){return Math.round(mix(v,b[i],t))}).join(',')+')'}
+  var p=0,target=0,raf,kick;
+  function render(){
+    var P=[],loc=[],i;
+    for(i=0;i<N;i++){var k=sm(p*(1+SPREAD)-(i/(N-1))*SPREAD);loc.push(k);P.push([mix(M[i][0],C[i][0],k),mix(M[i][1],C[i][1],k)])}
+    var d='M'+P[0][0].toFixed(1)+' '+P[0][1].toFixed(1);
+    for(i=0;i<N-1;i++){ // smooth curve through all points (Catmull-Rom to Bezier)
+      var a=P[i-1]||P[i],b=P[i],c=P[i+1],e=P[i+2]||P[i+1];
+      d+=' C'+(b[0]+(c[0]-a[0])/6).toFixed(1)+' '+(b[1]+(c[1]-a[1])/6).toFixed(1)+' '+(c[0]-(e[0]-b[0])/6).toFixed(1)+' '+(c[1]-(e[1]-b[1])/6).toFixed(1)+' '+c[0].toFixed(1)+' '+c[1].toFixed(1);
     }
-    // pupils follow the cursor (rotated back into the head's own space)
-    var s=sclera.getBoundingClientRect(),
-        dx=x-(s.left+s.width/2),dy=y-(s.top+s.height/2),
-        d=Math.hypot(dx,dy)||1,m=Math.min(3.2,d/40),
-        t=-(n+h)*Math.PI/180,
-        px=(dx*Math.cos(t)-dy*Math.sin(t))/d*m,
-        py=(dx*Math.sin(t)+dy*Math.cos(t))/d*m;
-    pupil.setAttribute('transform','translate('+px.toFixed(2)+' '+py.toFixed(2)+')');
-    clearTimeout(idle);
-    idle=setTimeout(rest,2500);
+    path.setAttribute('d',d);path.setAttribute('stroke',col(sm(p)));
+    nodes.forEach(function(n){n.el.setAttribute('transform','translate('+P[n.idx][0].toFixed(1)+' '+P[n.idx][1].toFixed(1)+') rotate('+(n.rot*(1-loc[n.idx])).toFixed(1)+')')});
   }
-  function rest(){art.classList.remove('follow');neck.style.transform='';head.style.transform='';pupil.removeAttribute('transform')}
-  addEventListener('pointermove',function(e){aim(e.clientX,e.clientY)},{passive:true});
-  document.addEventListener('pointerleave',rest);
+  function label(){
+    if(hint)hint.textContent=target?'Click to tangle it again':'Click to untangle it';
+    art.setAttribute('aria-label',target?'A clear flow. Press to make it messy again.':'A messy flow. Press to untangle it.');
+  }
+  function go(to){
+    clearTimeout(kick);cancelAnimationFrame(raf);target=to;label();
+    if(still){p=to;render();return}
+    var from=p,t0=null,dur=1800*Math.abs(to-from);
+    (function step(ts){
+      if(t0===null)t0=ts;
+      var u=dur?Math.min(1,(ts-t0)/dur):1;
+      p=from+(to-from)*u;render();
+      if(u<1)raf=requestAnimationFrame(step);
+    })(performance.now());
+  }
+  art.addEventListener('click',function(){go(target?0:1)});
+  art.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go(target?0:1)}});
+  render();label();
+  if(still)go(1);else kick=setTimeout(function(){go(1)},900); // untangles by itself on load
 })();
 // copy email
 var c=document.getElementById('copy');
