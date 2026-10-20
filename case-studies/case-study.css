@@ -1,7 +1,7 @@
 :root{
-  --bg:#111216;--surface:#17181e;--card:#1c1d24;--rule:rgba(255,255,255,.08);--rule-2:rgba(255,255,255,.14);
-  --ink:#F4F4F6;--body:#C4C5C9;--muted:#A0A1A7;--subtle:#76777D;
-  --accent:#9FD8CB;--accent-2:#CFEDE6;--accent-dim:rgba(159,216,203,.12);
+  --bg:#F5F2E7;--surface:#EDE9DA;--card:#FBFAF4;--page:#FBFAF4;--rule:rgba(28,28,28,.12);--rule-2:rgba(28,28,28,.22);
+  --ink:#1C1C1C;--body:#3B3A36;--muted:#6F6C61;--subtle:#7F7C70;
+  --accent:#9FD8CB;--accent-2:#CFEDE6;--accent-ink:#2A7565;--accent-dim:rgba(159,216,203,.3);
   --note:#E6F2EE;--note-ink:#1F2A44;
   --sans:"Geist",system-ui,sans-serif;--mono:"Geist Mono",ui-monospace,monospace;--hand:"Caveat",cursive;
 }
@@ -114,3 +114,59 @@ footer{background:#18191d;border-top:1px solid var(--rule);padding:80px 0 30px;o
   .nav ul a{padding:7px 10px}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* ---- cream theme (shared by index + case pages) ---- */
+html{background:var(--page)}
+body{max-width:1240px;margin:0 auto;border-inline:1px solid var(--rule);background:var(--bg);color:var(--body)}
+.nav{background:var(--card);border:1px solid var(--rule-2);border-bottom:3px solid var(--accent);border-radius:8px;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:0 6px 18px rgba(60,50,20,.08)}
+.nav ul a:hover{background:rgba(28,28,28,.06)}
+.dd-menu{box-shadow:0 12px 28px rgba(60,50,20,.12)}
+footer{background:var(--surface);border-top:1px solid var(--rule-2)}
+h2{font-family:"Caveat Brush","Caveat",cursive;font-weight:400;letter-spacing:0;line-height:1.05;font-size:clamp(2.6rem,6vw,4.2rem)}
+.ftop h2{font-weight:400;font-size:clamp(2.6rem,5vw,3.6rem);letter-spacing:0}
+.cs-sec h2{font-size:clamp(1.9rem,3.5vw,2.6rem);font-weight:400}
+.sec-title{text-align:left}
+.sec-title .ico{display:none}
+.chip{background:var(--accent-dim);border-color:rgba(42,117,101,.35)}
+
+/* readable green for text on cream */
+.acc,
+.tlink:hover,
+.btn:hover,
+.btn.line:hover,
+.dd-menu a b,
+.hero .eyebrow,
+.hero h1 .acc,
+.marquee div,
+.sec-title .ico,
+.chip,
+.case .meta .chip,
+.fcol a:hover,
+.fbot a:hover{color:var(--accent-ink)}
+
+/* ---- theme toggle ---- */
+.theme-toggle{display:grid;place-items:center;flex:none;width:34px;height:34px;margin-left:6px;border:1px solid var(--rule-2);border-radius:6px;background:transparent;color:var(--ink);cursor:pointer;transition:background .2s}
+.theme-toggle:hover{background:var(--accent-dim)}
+.theme-toggle svg{width:18px;height:18px}
+.theme-toggle .sun{display:none}
+:root[data-theme="dark"] .theme-toggle .moon{display:none}
+:root[data-theme="dark"] .theme-toggle .sun{display:block}
+/* ---- dark mode (black + mint) ---- */
+:root[data-theme="dark"]{color-scheme:dark;--bg:#111216;--surface:#17181e;--card:#1c1d24;--page:#0B0C0F;--rule:rgba(255,255,255,.08);--rule-2:rgba(255,255,255,.14);--ink:#F4F4F6;--body:#C4C5C9;--muted:#A0A1A7;--subtle:#76777D;--accent:#9FD8CB;--accent-2:#CFEDE6;--accent-ink:#9FD8CB;--accent-dim:rgba(159,216,203,.12);--note:#E6F2EE;--note-ink:#1F2A44}
+:root[data-theme="dark"] .nav{background:rgba(23,24,30,.9);box-shadow:none}
+:root[data-theme="dark"] .nav ul a:hover{background:rgba(255,255,255,.06)}
+:root[data-theme="dark"] .dd-menu{box-shadow:none}
+:root[data-theme="dark"] .chip{border-color:var(--rule-2)}
+:root[data-theme="dark"] pattern circle{fill:#fff;opacity:.13}
+:root[data-theme="dark"] [fill="#9DB5AB"]{fill:#3a3c46}
+:root[data-theme="dark"] [stroke="#9DB5AB"]{stroke:#3a3c46}
+:root[data-theme="dark"] [fill="#B5C9C1"]{fill:#2c2e37}
+:root[data-theme="dark"] [stroke="#B5C9C1"]{stroke:#2c2e37}
+:root[data-theme="dark"] [fill="#C5D5CE"]{fill:#1f2027}
+:root[data-theme="dark"] [stroke="#C5D5CE"]{stroke:#1f2027}
+:root[data-theme="dark"] [fill="#FBFAF4"]{fill:#1c1d24}
+:root[data-theme="dark"] [stroke="#FBFAF4"]{stroke:#1c1d24}
+:root[data-theme="dark"] [fill="#1C1C1C"]{fill:#F4F4F6}
+:root[data-theme="dark"] [stroke="#1C1C1C"]{stroke:#F4F4F6}
+:root[data-theme="dark"] [fill="#3C9A83"]{fill:#9FD8CB}
+:root[data-theme="dark"] [stroke="#3C9A83"]{stroke:#9FD8CB}
