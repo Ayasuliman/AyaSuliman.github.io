@@ -12,17 +12,35 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
 <meta name="theme-color" content="#F5F2E7">
+
+<dialog id="csModal" class="cs-modal" aria-labelledby="csmTitle">
+  <div class="csm-card">
+    <button class="csm-x" type="button" aria-label="Close" data-close>×</button>
+    <div class="csm-thumb" id="csmThumb"></div>
+    <div class="csm-body">
+      <span class="mono csm-meta" id="csmMeta"></span>
+      <h2 id="csmTitle"></h2>
+      <p class="csm-sum" id="csmSum"></p>
+      <dl class="csm-facts" id="csmFacts"></dl>
+      <h3>The challenge</h3><p id="csmCh"></p>
+      <h3>What I did</h3><ul class="csm-did" id="csmDid"></ul>
+      <h3>Process</h3><ol class="csm-steps" id="csmSteps"></ol>
+      <div class="csm-galwrap" id="csmGalWrap" hidden><h3>Selected screens</h3><div class="csm-gal" id="csmGal"></div></div>
+      <div class="csm-actions"><button class="csm-btn" type="button" data-close>Close</button></div>
+    </div>
+  </div>
+</dialog>
 <script>try{if(localStorage.getItem('theme')==='dark')document.documentElement.dataset.theme='dark'}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Caveat:wght@500;600&family=Caveat+Brush&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&family=Space+Mono:wght@400;700&family=Instrument+Serif:ital@1&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#F5F2E7;--surface:#EDE9DA;--card:#FBFAF4;--page:#FBFAF4;--rule:rgba(28,28,28,.12);--rule-2:rgba(28,28,28,.22);
   --ink:#1C1C1C;--body:#3B3A36;--muted:#6F6C61;--subtle:#7F7C70;
   --accent:#9FD8CB;--accent-2:#CFEDE6;--accent-ink:#2A7565;--accent-dim:rgba(159,216,203,.3);
   --note:#E6F2EE;--note-ink:#1F2A44;
-  --sans:"Geist",system-ui,sans-serif;--mono:"Geist Mono",ui-monospace,monospace;--hand:"Caveat",cursive;
+  --sans:"DM Sans",system-ui,sans-serif;--head:"Space Grotesk","DM Sans",system-ui,sans-serif;--mono:"Space Mono",ui-monospace,monospace;--hand:"Caveat",cursive;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -35,7 +53,7 @@ img{display:block;max-width:100%}
 .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
 .mono{font:500 .72rem/1.5 var(--mono);letter-spacing:.08em;text-transform:uppercase}
 .acc{color:var(--accent)}
-h1,h2,h3{color:var(--ink);font-family:var(--sans)}
+h1,h2,h3{color:var(--ink);font-family:var(--head)}
 h2{font-size:clamp(1.9rem,4vw,2.5rem);font-weight:600;line-height:1.15;letter-spacing:.01em}
 strong{color:var(--ink);font-weight:600}
 
@@ -278,9 +296,9 @@ body{max-width:1240px;margin:0 auto;border-inline:1px solid var(--rule);backgrou
 .nav ul a:hover{background:rgba(28,28,28,.06)}
 .dd-menu{box-shadow:0 12px 28px rgba(60,50,20,.12)}
 footer{background:var(--surface);border-top:1px solid var(--rule-2)}
-h2{font-family:"Caveat Brush","Caveat",cursive;font-weight:400;letter-spacing:0;line-height:1.05;font-size:clamp(2.6rem,6vw,4.2rem)}
-.ftop h2{font-weight:400;font-size:clamp(2.6rem,5vw,3.6rem);letter-spacing:0}
-.cs-sec h2{font-size:clamp(1.9rem,3.5vw,2.6rem);font-weight:400}
+h2{font-family:var(--head);font-weight:700;letter-spacing:-.02em;line-height:1.08;font-size:clamp(2.2rem,5vw,3.4rem)}
+.ftop h2{font-weight:700;font-size:clamp(2.2rem,4.5vw,3.2rem);letter-spacing:-.02em}
+.cs-sec h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700}
 .sec-title{text-align:left}
 .sec-title .ico{display:none}
 .chip{background:var(--accent-dim);border-color:rgba(42,117,101,.35)}
@@ -393,6 +411,235 @@ h2{font-family:"Caveat Brush","Caveat",cursive;font-weight:400;letter-spacing:0;
 .hand-cursor.closed .th,.hand-cursor.point .th{transform:rotate(-6deg) scaleY(.6)}
 .hand-cursor.point .f1{transform:rotate(0)}
 .hand-cursor.closed svg{transform:scale(.9)}
+
+/* ---- vivid palette (light mode) ---- */
+:root:not([data-theme="dark"]){--accent:#0A8F66;--accent-ink:#0A8F66;--accent-2:#FF5E3A;--accent-dim:rgba(10,143,102,.12);--ink:#1B1740;--body:#2F2B55;--muted:#5F5A86;--subtle:#6E6A92}
+:root:not([data-theme="dark"]) .nav{border-bottom-color:#FF5E3A;background:#fff}
+:root:not([data-theme="dark"]) .chip{background:#FFE7A3;border-color:#17143A;color:#1B1740}
+:root:not([data-theme="dark"]) .tags li{color:#1B1740}
+:root:not([data-theme="dark"]) .tags li.st{background:#0A8F66;color:#fff}
+:root:not([data-theme="dark"]) .tags li:nth-child(2){background:#FFE7A3}
+:root:not([data-theme="dark"]) .tags li:nth-child(3){background:#FFD3E1}
+:root:not([data-theme="dark"]) .tags li:nth-child(4){background:#C9F1E3}
+:root:not([data-theme="dark"]) .tags li:nth-child(n+5){background:#D9EBFF}
+:root:not([data-theme="dark"]) footer{background:#0A8F66;border-top:3px solid #17143A;--ink:#fff;--body:#EDE8FF;--muted:#D9D2FF;--subtle:#C4BAFF;--rule:rgba(255,255,255,.22);--rule-2:rgba(255,255,255,.34);--accent:#FFC83D;--accent-ink:#FFC83D;--card:#077A57;--surface:#077A57}
+:root:not([data-theme="dark"]) footer svg [fill="#1C1C1C"],:root:not([data-theme="dark"]) footer svg [fill="#17143A"]{fill:#fff}
+:root:not([data-theme="dark"]) .shot{background:#FFF0C2;border-color:#17143A}
+
+:root:not([data-theme="dark"]) .hero h1 .acc{color:#0A8F66}
+:root:not([data-theme="dark"]) .hero{position:relative}
+:root:not([data-theme="dark"]) .hero::before{content:"";position:absolute;right:-6%;top:6%;width:560px;height:560px;max-width:70vw;background:radial-gradient(circle at 30% 35%,rgba(255,200,61,.55),transparent 60%),radial-gradient(circle at 70% 65%,rgba(255,143,184,.5),transparent 62%);filter:blur(28px);z-index:-1;pointer-events:none}
+:root:not([data-theme="dark"]) .hero-art [stroke="#3C9A83"]{stroke:#0A8F66}
+:root:not([data-theme="dark"]) .hero-art [fill="#3C9A83"]{fill:#0A8F66}
+:root:not([data-theme="dark"]) #flowPath{filter:drop-shadow(0 0 8px rgba(10,143,102,.28))}
+:root:not([data-theme="dark"]) .marquee{background:#0A8F66;border-block:2px solid #17143A}
+:root:not([data-theme="dark"]) .marquee div{color:#FFE9A8}
+:root:not([data-theme="dark"]) .case .thumb{border:2px solid #17143A;border-radius:10px}
+:root:not([data-theme="dark"]) .work .case:nth-of-type(1) .thumb{background:#FF8A6B}
+:root:not([data-theme="dark"]) .work .case:nth-of-type(2) .thumb{background:#FFC83D}
+:root:not([data-theme="dark"]) .work .case:nth-of-type(3) .thumb{background:#7FE0C0}
+:root:not([data-theme="dark"]) .work .case:nth-of-type(4) .thumb{background:#B4E36B}
+:root:not([data-theme="dark"]) .work .case:nth-of-type(5) .thumb{background:#FF9EC4}
+:root:not([data-theme="dark"]) .work .case:nth-of-type(6) .thumb{background:#6CC3FF}
+:root:not([data-theme="dark"]) .case .thumb svg [stroke="#9FD8CB"],:root:not([data-theme="dark"]) .case .thumb svg [stroke="#9DB5AB"],:root:not([data-theme="dark"]) .case .thumb svg [stroke="#B5C9C1"],:root:not([data-theme="dark"]) .case .thumb svg [stroke="#C5D5CE"]{stroke:#17143A}
+:root:not([data-theme="dark"]) .case .thumb svg [fill="#B5C9C1"],:root:not([data-theme="dark"]) .case .thumb svg [fill="#C5D5CE"],:root:not([data-theme="dark"]) .case .thumb svg [fill="#9DB5AB"]{fill:rgba(23,20,58,.2)}
+:root:not([data-theme="dark"]) .case .thumb svg [fill="#9FD8CB"]{fill:#17143A}
+:root:not([data-theme="dark"]) .skill:nth-of-type(1){background:#FFF0C2}
+:root:not([data-theme="dark"]) .skill:nth-of-type(2){background:#D5F5E8}
+:root:not([data-theme="dark"]) .skill:nth-of-type(3){background:#FFE0EA}
+:root:not([data-theme="dark"]) .skill{border:2px solid #17143A;box-shadow:6px 6px 0 #17143A}
+:root:not([data-theme="dark"]) .skill::before{color:#1B1740}
+:root:not([data-theme="dark"]) .skill>.c{background:#fff}
+:root:not([data-theme="dark"]) .skills{border-color:#17143A}
+:root:not([data-theme="dark"]) .theme-toggle{border-color:#17143A}
+
+:root:not([data-theme="dark"]) .note:nth-child(4n+1){background:#FFE08A}
+:root:not([data-theme="dark"]) .note:nth-child(4n+2){background:#FFC2D8}
+:root:not([data-theme="dark"]) .note:nth-child(4n+3){background:#BDEFDC}
+:root:not([data-theme="dark"]) .note:nth-child(4n+4){background:#C9E2FF}
+:root:not([data-theme="dark"]) .note{color:#1B1740}
+
+/* ---- round 3: hero w/o drawing, yellow strip, 3-up case cards ---- */
+.hero{grid-template-columns:1fr}
+.hero h1{font-size:clamp(3rem,8vw,6.2rem);max-width:none}
+.hero .role{display:inline-block;margin:18px 0 6px;font:700 clamp(1.3rem,3vw,2rem)/1.1 var(--head);letter-spacing:-.01em;color:var(--ink)}
+:root:not([data-theme="dark"]) .hero .role{background:#FFC83D;border:2px solid #17143A;border-radius:8px;padding:8px 16px;box-shadow:4px 4px 0 #17143A}
+:root[data-theme="dark"] .hero .role{background:var(--accent);color:#111216;border-radius:8px;padding:8px 16px}
+:root:not([data-theme="dark"]) .marquee{background:#FFC83D;border-block:2px solid #17143A}
+:root:not([data-theme="dark"]) .marquee div{color:#1B1740}
+.work{grid-template-columns:repeat(3,1fr);gap:30px 20px}
+.case .thumb{aspect-ratio:1.8}
+.case .info{padding-top:14px;gap:6px}
+.case h3{font-size:1.1rem}
+.case p{font-size:.92rem}
+.tags{gap:6px;margin-top:6px}
+.tags li{font-size:.62rem;padding:7px 9px}
+@media (max-width:1000px){.work{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.work{grid-template-columns:1fr}}
+
+/* ---- round 4: Martinique / Coral / Azalea / Powder Blue ---- */
+:root:not([data-theme="dark"]){--accent:#AFDAE2;--accent-2:#FE7649;--accent-ink:#26284B;--accent-dim:rgba(175,218,226,.45);--ink:#26284B;--body:#3A3D66;--muted:#5E6189;--subtle:#6C6F94}
+:root:not([data-theme="dark"]) .nav{border-bottom-color:#FE7649;background:#fff}
+:root:not([data-theme="dark"]) .theme-toggle{border-color:#26284B}
+:root:not([data-theme="dark"]) .chip{background:#FAD2D0;border-color:#26284B;color:#26284B}
+:root:not([data-theme="dark"]) .tags li.st{background:#AFDAE2;color:#26284B;border:1px solid #26284B}
+:root:not([data-theme="dark"]) .tags li:nth-child(2){background:#FAD2D0}
+:root:not([data-theme="dark"]) .tags li:nth-child(3){background:#FFD9CB}
+:root:not([data-theme="dark"]) .tags li:nth-child(4){background:#DDF0F4}
+:root:not([data-theme="dark"]) .tags li:nth-child(n+5){background:#FAD2D0}
+:root:not([data-theme="dark"]) footer{background:#AFDAE2;border-top:3px solid #26284B;--ink:#26284B;--body:#33365F;--muted:#454878;--subtle:#54577F;--rule:rgba(38,40,75,.25);--rule-2:rgba(38,40,75,.4);--accent:#FE7649;--accent-ink:#26284B;--card:#C6E4EA;--surface:#C6E4EA}
+:root:not([data-theme="dark"]) footer svg [fill="#1C1C1C"],:root:not([data-theme="dark"]) footer svg [fill="#17143A"],:root:not([data-theme="dark"]) footer svg [fill="#fff"]{fill:#26284B}
+:root:not([data-theme="dark"]) .shot{background:#E3F2F5;border-color:#26284B}
+
+:root:not([data-theme="dark"]) .hero h1 .acc{color:#26284B;background:linear-gradient(transparent 52%,#AFDAE2 52%);padding:0 .06em}
+:root:not([data-theme="dark"]) .hero::before{background:radial-gradient(circle at 30% 35%,rgba(175,218,226,.8),transparent 60%),radial-gradient(circle at 70% 65%,rgba(250,210,208,.8),transparent 62%)}
+:root:not([data-theme="dark"]) .hero .role{background:#AFDAE2;border:2px solid #26284B;box-shadow:4px 4px 0 #26284B;color:#26284B}
+:root:not([data-theme="dark"]) .marquee{background:#FE7649;border-block:2px solid #26284B}
+:root:not([data-theme="dark"]) .marquee div{color:#26284B}
+:root:not([data-theme="dark"]) .case .thumb{border-color:#26284B}
+:root:not([data-theme="dark"]) .work .case:nth-of-type(1) .thumb{background:#FE7649}
+:root:not([data-theme="dark"]) .work .case:nth-of-type(2) .thumb{background:#AFDAE2}
+:root:not([data-theme="dark"]) .work .case:nth-of-type(3) .thumb{background:#FAD2D0}
+:root:not([data-theme="dark"]) .work .case:nth-of-type(4) .thumb{background:#26284B}
+:root:not([data-theme="dark"]) .work .case:nth-of-type(5) .thumb{background:#FE7649}
+:root:not([data-theme="dark"]) .work .case:nth-of-type(6) .thumb{background:#AFDAE2}
+:root:not([data-theme="dark"]) .case .thumb svg [stroke="#9FD8CB"],:root:not([data-theme="dark"]) .case .thumb svg [stroke="#9DB5AB"],:root:not([data-theme="dark"]) .case .thumb svg [stroke="#B5C9C1"],:root:not([data-theme="dark"]) .case .thumb svg [stroke="#C5D5CE"]{stroke:#26284B}
+:root:not([data-theme="dark"]) .case .thumb svg [fill="#9FD8CB"]{fill:#26284B}
+:root:not([data-theme="dark"]) .case .thumb svg [fill="#B5C9C1"],:root:not([data-theme="dark"]) .case .thumb svg [fill="#C5D5CE"],:root:not([data-theme="dark"]) .case .thumb svg [fill="#9DB5AB"]{fill:rgba(38,40,75,.2)}
+:root:not([data-theme="dark"]) .work .case[data-slug="platone-app-redesign"] .thumb svg [stroke]{stroke:#AFDAE2}
+:root:not([data-theme="dark"]) .work .case[data-slug="platone-app-redesign"] .thumb svg [fill="#9FD8CB"]{fill:#FE7649}
+:root:not([data-theme="dark"]) .work .case[data-slug="platone-app-redesign"] .thumb svg [fill="#B5C9C1"],:root:not([data-theme="dark"]) .work .case[data-slug="platone-app-redesign"] .thumb svg [fill="#C5D5CE"],:root:not([data-theme="dark"]) .work .case[data-slug="platone-app-redesign"] .thumb svg [fill="#9DB5AB"]{fill:rgba(175,218,226,.28)}
+:root:not([data-theme="dark"]) .skill:nth-of-type(1){background:#FDE8E6}
+:root:not([data-theme="dark"]) .skill:nth-of-type(2){background:#DDF0F4}
+:root:not([data-theme="dark"]) .skill:nth-of-type(3){background:#FFE1D5}
+:root:not([data-theme="dark"]) .skill,:root:not([data-theme="dark"]) .skills{border-color:#26284B}
+:root:not([data-theme="dark"]) .skill{box-shadow:6px 6px 0 #26284B}
+:root:not([data-theme="dark"]) .skill::before{color:#26284B}
+:root:not([data-theme="dark"]) .skill::after{background:#26284B;color:#fff}
+:root:not([data-theme="dark"]) .skills-links path{stroke:#FE7649}
+:root:not([data-theme="dark"]) .skills-links marker circle{fill:#FE7649}
+:root:not([data-theme="dark"]) .note:nth-child(4n+1){background:#FFD0BE}
+:root:not([data-theme="dark"]) .note:nth-child(4n+2){background:#FAD2D0}
+:root:not([data-theme="dark"]) .note:nth-child(4n+3){background:#AFDAE2}
+:root:not([data-theme="dark"]) .note:nth-child(4n+4){background:#D6ECF0}
+:root:not([data-theme="dark"]) .note{color:#26284B}
+:root[data-theme="dark"]{--bg:#1C1E3E;--surface:#23264B;--card:#26284B;--page:#14152B;--accent:#AFDAE2;--accent-ink:#AFDAE2;--accent-2:#FE7649;--accent-dim:rgba(175,218,226,.14)}
+:root[data-theme="dark"] .hero .role{background:#AFDAE2;color:#26284B}
+:root[data-theme="dark"] .tags li.st{background:#AFDAE2;color:#26284B}
+
+/* logo in palette */
+:root:not([data-theme="dark"]) .logo svg [fill="#9FD8CB"],:root:not([data-theme="dark"]) .mega svg [fill="#9FD8CB"]{fill:#FE7649}
+:root:not([data-theme="dark"]) .logo svg [stroke="#111216"],:root:not([data-theme="dark"]) .mega svg [stroke="#111216"]{stroke:#26284B}
+:root:not([data-theme="dark"]) .logo svg [fill="#111216"],:root:not([data-theme="dark"]) .mega svg [fill="#111216"],:root:not([data-theme="dark"]) .mega svg [fill="#1C1C1C"]{fill:#26284B}
+:root:not([data-theme="dark"]) .logo svg [stroke="#1C1C1C"],:root:not([data-theme="dark"]) .mega svg [stroke="#1C1C1C"]{stroke:#26284B}
+
+/* ---- Hello section (floating skill pills) ---- */
+.hello{position:relative;display:grid;grid-template-columns:1fr minmax(0,1.5fr) 1fr;align-items:center;gap:24px;padding:96px 24px 110px}
+.hello-label{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:34px}
+.hello-label span{flex:0 1 150px;height:1px;background:var(--rule-2)}
+.hello-label em{font:italic 400 1.5rem/1 "Instrument Serif",Georgia,serif;color:var(--muted)}
+.hello-text{font:500 clamp(1.7rem,3.4vw,2.7rem)/1.35 var(--head);letter-spacing:-.02em;text-align:center;color:var(--ink)}
+.hello-text b{font-weight:500}
+.hello-text u{text-decoration:none;color:var(--subtle);opacity:.75}
+.hp-col{display:flex;flex-direction:column;gap:16px}
+.hp-l{align-items:flex-end}.hp-r{align-items:flex-start}
+.hp{display:inline-flex;align-items:center;gap:12px;padding:9px 20px 9px 10px;border-radius:999px;background:#fff;box-shadow:0 0 0 7px rgba(255,255,255,.55),0 12px 24px rgba(38,40,75,.12);font:500 1rem/1 var(--sans);color:var(--ink);white-space:nowrap;transform:rotate(var(--r))}
+.hp:nth-child(2){margin-right:34px}.hp-r .hp:nth-child(2){margin-right:0;margin-left:34px}
+.hp i{display:grid;place-items:center;width:34px;height:34px;border-radius:50%}
+.hp svg{width:18px;height:18px}
+@media (prefers-reduced-motion:no-preference){
+  .hp{animation:hpf 5s ease-in-out infinite}
+  .hp:nth-child(2){animation-delay:-1.6s}.hp:nth-child(3){animation-delay:-3.2s}
+  @keyframes hpf{50%{transform:rotate(var(--r)) translateY(-8px)}}
+}
+:root[data-theme="dark"] .hp{background:var(--card);box-shadow:0 0 0 7px rgba(255,255,255,.05),0 12px 24px rgba(0,0,0,.35)}
+@media (max-width:900px){
+  .hello{grid-template-columns:1fr;padding:72px 0 80px}
+  .hello-text{order:2}.hp-l{order:3}.hp-r{order:4}
+  .hp-col{flex-direction:row;flex-wrap:wrap;justify-content:center;align-items:center}
+  .hp:nth-child(n){margin:0}
+}
+
+/* ---- ERP wireframe in About ---- */
+.photo.erp{display:grid;place-items:center;padding:22px;min-height:420px}
+.erp-art{width:100%;height:auto;max-height:560px;--ew:#fff;--es:#26284B;--esb:#26284B}
+.erp-art .e-win,.erp-art .e-card,.erp-art .e-chip{fill:var(--ew);stroke:var(--es)}
+.erp-art .e-side{fill:var(--esb);stroke:var(--es)}
+:root:not([data-theme="dark"]) .photo.erp{background:#FDE8E6}
+:root[data-theme="dark"] .photo.erp{background:#23264B}
+:root[data-theme="dark"] .erp-art{--ew:#1C1E3E;--es:#AFDAE2;--esb:#14152B}
+@media (prefers-reduced-motion:no-preference){
+  .erp-art .bar{transform-box:fill-box;transform-origin:bottom;animation:ebar 1s cubic-bezier(.3,1.4,.5,1) both;animation-delay:var(--d)}
+  @keyframes ebar{from{transform:scaleY(.05)}}
+}
+:root[data-theme="dark"] .erp-art [fill="#26284B"]{fill:#AFDAE2}
+:root[data-theme="dark"] .erp-art [stroke="#26284B"]{stroke:#AFDAE2}
+:root[data-theme="dark"] .erp-art .e-side{fill:#14152B}
+:root[data-theme="dark"] .erp-art .kpi [fill="#26284B"]{fill:#26284B}
+:root[data-theme="dark"] .erp-art .kpi [stroke="#26284B"]{stroke:#26284B}
+
+/* ---- case cards as single framed blocks + popup ---- */
+#work .case{border:2px solid var(--rule-2);border-radius:14px;background:var(--card);overflow:hidden;position:relative;transition:transform .25s,box-shadow .25s}
+:root:not([data-theme="dark"]) #work .case{border-color:#26284B;background:#fff;box-shadow:5px 5px 0 #26284B}
+#work .case:hover{transform:translate(-3px,-3px)}
+:root:not([data-theme="dark"]) #work .case:hover{box-shadow:8px 8px 0 #26284B;background:#fff}
+#work .case .thumb{border:0!important;border-bottom:2px solid var(--rule-2)!important;border-radius:0!important;position:relative}
+:root:not([data-theme="dark"]) #work .case .thumb{border-bottom-color:#26284B!important}
+#work .case .info{padding:16px 18px 20px}
+.case-go{position:absolute;right:12px;bottom:12px;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#FE7649;color:#26284B;border:2px solid #26284B;transition:transform .25s}
+.case-go svg{width:18px;height:18px}
+.case:hover .case-go{transform:rotate(45deg) scale(1.08)}
+html.modal-open{overflow:hidden}
+.cs-modal{border:0;padding:0;background:transparent;max-width:none;max-height:none;width:100%;height:100%;overflow:hidden}
+.cs-modal:not([open]){display:none}
+.cs-modal[open]{display:grid;place-items:center;padding:20px}
+.cs-modal::backdrop{background:rgba(38,40,75,.55);backdrop-filter:blur(4px)}
+.csm-card{position:relative;width:min(760px,100%);max-height:calc(100vh - 40px);overflow:auto;background:var(--card);color:var(--body);border:2px solid #26284B;border-radius:18px;box-shadow:8px 8px 0 #26284B;animation:csin .28s cubic-bezier(.2,1.2,.4,1)}
+:root[data-theme="dark"] .csm-card{border-color:var(--rule-2);box-shadow:0 20px 50px rgba(0,0,0,.5)}
+@keyframes csin{from{opacity:0;transform:translateY(18px) scale(.97)}}
+.csm-thumb .thumb{position:relative;height:190px;aspect-ratio:auto;border:0;border-radius:0;display:grid;place-items:center;overflow:hidden}
+.csm-thumb .thumb svg{width:44%;height:auto}
+.csm-x{position:absolute;top:12px;right:12px;z-index:2;width:38px;height:38px;border-radius:50%;border:2px solid #26284B;background:#fff;color:#26284B;font:600 1.5rem/1 var(--sans);cursor:pointer}
+.csm-x:hover{background:#FAD2D0}
+.csm-body{padding:24px 28px 28px}
+.csm-meta{color:var(--muted)}
+.csm-body h2{font-size:clamp(1.5rem,3.4vw,2.1rem);margin:8px 0 10px;line-height:1.12}
+.csm-sum{color:var(--muted);margin-bottom:18px}
+.csm-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0 20px;margin-bottom:8px}
+.csm-facts div{border-top:1px solid var(--rule-2);padding:10px 0 12px}
+.csm-facts dt{color:var(--subtle);margin-bottom:3px}
+.csm-facts dd{color:var(--ink);margin:0}
+.csm-body h3{font-size:1.05rem;margin:20px 0 8px}
+.csm-did{list-style:none;display:grid;gap:8px;padding:0}
+.csm-did li{position:relative;padding-left:22px}
+.csm-did li::before{content:"";position:absolute;left:0;top:.7em;width:12px;height:2px;background:#FE7649}
+.csm-steps{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;padding:0;counter-reset:s}
+.csm-steps li{counter-increment:s;background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:12px 14px;display:grid;gap:4px;font-size:.92rem}
+.csm-steps li::before{content:"." counter(s,decimal-leading-zero);font:500 .75rem var(--mono);color:#FE7649}
+.csm-steps b{color:var(--ink)}.csm-steps span{color:var(--muted)}
+.csm-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.csm-btn{display:inline-block;padding:12px 20px;border:2px solid #26284B;border-radius:999px;background:#FE7649;color:#26284B;font:600 .95rem var(--sans);text-decoration:none;cursor:pointer;box-shadow:3px 3px 0 #26284B}
+.csm-btn.ghost{background:transparent;box-shadow:none;color:var(--ink);border-color:var(--rule-2)}
+:root[data-theme="dark"] .csm-btn{border-color:var(--rule-2);box-shadow:none}
+:root[data-theme="dark"] .csm-x{background:var(--surface);color:var(--ink);border-color:var(--rule-2)}
+@media (prefers-reduced-motion:reduce){.csm-card{animation:none}}
+.thumb-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.case-go{z-index:2}
+[hidden]{display:none!important}
+.csm-galwrap{margin-top:6px}
+.csm-gal{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.csm-gal img{width:100%;height:auto;display:block;border:2px solid var(--rule-2);border-radius:10px}
+:root:not([data-theme="dark"]) .csm-gal img{border-color:#26284B}
+.csm-gal img:first-child{grid-column:1/-1}
+@media (max-width:560px){.csm-gal{grid-template-columns:1fr}}
+:root:not([data-theme="dark"]) .work .case[data-slug="hwadi-xp"] .thumb,.work .case[data-slug="hwadi-xp"] .thumb{background:#17181A}
+.work .case[data-slug="hwadi-xp"] .thumb-img{object-position:50% 52%}
+:root:not([data-theme="dark"]) .work .case[data-slug="film-criticism-conference"] .thumb{background:#FE7649}
+:root:not([data-theme="dark"]) .work .case[data-slug="schools-portal"] .thumb{background:#AFDAE2}
+:root:not([data-theme="dark"]) .work .case[data-slug="platone-website-audit"] .thumb{background:#FAD2D0}
+:root:not([data-theme="dark"]) .work .case[data-slug="platone-app-redesign"] .thumb{background:#26284B}
+:root:not([data-theme="dark"]) .work .case[data-slug="tt-mobile-app"] .thumb{background:#FE7649}
+:root:not([data-theme="dark"]) .work .case[data-slug="saas-dashboard"] .thumb{background:#AFDAE2}
 </style>
 </head>
 <body>
@@ -422,12 +669,13 @@ h2{font-family:"Caveat Brush","Caveat",cursive;font-weight:400;letter-spacing:0;
     <li class="dd">
       <a href="#work" aria-haspopup="true">Case Studies</a>
       <div class="dd-menu">
-        <a href="case-studies/film-criticism-conference.html"><b>.01</b>Film Criticism Conference website</a>
-        <a href="case-studies/schools-portal.html"><b>.02</b>Schools system portal, UAE</a>
-        <a href="case-studies/platone-website-audit.html"><b>.03</b>Platone recruitment website audit</a>
-        <a href="case-studies/platone-app-redesign.html"><b>.04</b>Platone mobile app redesign</a>
-        <a href="case-studies/tt-mobile-app.html"><b>.05</b>TT mobile app component library</a>
-        <a href="case-studies/saas-dashboard.html"><b>.06</b>SaaS demo dashboard</a>
+        <a href="#work" data-slug="hwadi-xp"><b>.01</b>Hwadi XP website</a>
+        <a href="#work" data-slug="film-criticism-conference"><b>.02</b>Film Criticism Conference website</a>
+        <a href="#work" data-slug="schools-portal"><b>.03</b>Schools system portal, UAE</a>
+        <a href="#work" data-slug="platone-website-audit"><b>.04</b>Platone recruitment website audit</a>
+        <a href="#work" data-slug="platone-app-redesign"><b>.05</b>Platone mobile app redesign</a>
+        <a href="#work" data-slug="tt-mobile-app"><b>.06</b>TT mobile app component library</a>
+        <a href="#work" data-slug="saas-dashboard"><b>.07</b>SaaS demo dashboard</a>
       </div>
     </li>
     <li><a href="#contact">Contact</a></li>
@@ -437,31 +685,14 @@ h2{font-family:"Caveat Brush","Caveat",cursive;font-weight:400;letter-spacing:0;
 <main id="main">
   <div class="wrap hero" id="top">
     <div>
-      <span class="mono eyebrow">UI/UX Designer · Cairo, Egypt</span>
-      <h1>Aya<br><span class="acc">Suliman</span></h1>
+      <span class="mono eyebrow">Cairo, Egypt</span>
+      <h1>Aya <span class="acc">Suliman</span></h1>
+      <p class="role">UI/UX Designer</p>
       <p class="sub">I’m a UI/UX designer with 6+ years of experience designing websites, mobile apps and SaaS dashboards for clients in Saudi Arabia and the UAE. I turn complex workflows into simple, intuitive interfaces, from research and wireframes to polished UI and developer hand-off.</p>
       <a class="tlink mono" href="#work">See the work ↓</a>
     </div>
-    <div class="hero-art" role="button" tabindex="0" aria-label="A messy flow. Press to untangle it.">
-      <svg viewBox="0 0 320 330" fill="none" aria-hidden="true">
-        <defs><pattern id="flowGrid" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.2" fill="#000" opacity=".12"/></pattern></defs>
-        <rect x="0" y="10" width="320" height="310" rx="14" fill="url(#flowGrid)"/>
-        <path id="flowPath" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-        <g id="nd0"><circle r="7" fill="#3C9A83"/></g>
-        <g id="nd1"><rect x="-19" y="-15" width="38" height="30" rx="6" fill="#FBFAF4" stroke="#3C9A83" stroke-width="2"/><path d="M-11 -5h22M-11 3h14" stroke="#3C9A83" stroke-width="2" stroke-linecap="round" opacity=".7"/></g>
-        <g id="nd2"><rect x="-19" y="-15" width="38" height="30" rx="6" fill="#FBFAF4" stroke="#3C9A83" stroke-width="2"/><path d="M-11 -6h22" stroke="#3C9A83" stroke-width="2" stroke-linecap="round" opacity=".7"/><rect x="-11" y="2" width="22" height="7" rx="3.5" fill="#3C9A83"/></g>
-        <g id="nd3"><circle r="16" fill="#3C9A83"/><path d="M-7 0l5 5 9-10" stroke="#111216" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
-      </svg>
-      <p class="mono art-hint" id="flowHint">Click to untangle it</p>
-    </div>
   </div>
 
-  <div class="marquee mono" aria-hidden="true"><div>
-    <span>UI Design</span>·<span>UX Research</span>·<span>Information Architecture</span>·<span>Prototyping</span>·<span>Design Systems</span>·<span>Usability Testing</span>·
-    <span>UI Design</span>·<span>UX Research</span>·<span>Information Architecture</span>·<span>Prototyping</span>·<span>Design Systems</span>·<span>Usability Testing</span>·
-    <span>UI Design</span>·<span>UX Research</span>·<span>Information Architecture</span>·<span>Prototyping</span>·<span>Design Systems</span>·<span>Usability Testing</span>·
-    <span>UI Design</span>·<span>UX Research</span>·<span>Information Architecture</span>·<span>Prototyping</span>·<span>Design Systems</span>·<span>Usability Testing</span>·
-  </div></div>
 
   <section id="about" class="wrap" aria-labelledby="skills-h">
     <div class="sec-title rv">
@@ -502,11 +733,27 @@ h2{font-family:"Caveat Brush","Caveat",cursive;font-weight:400;letter-spacing:0;
           <a class="tlink mono" href="https://linkedin.com/in/aya-suliman">View LinkedIn →</a>
         </div>
       </div>
-      <div class="frame photo rv">
-        <div class="fallback" aria-hidden="true">AS</div>
-        <!-- Add Aya's photo as aya.jpg next to this file -->
-        <img src="aya.jpg" alt="Aya Suliman" onerror="this.remove()">
-        <svg class="swirl" viewBox="0 0 400 500" preserveAspectRatio="none" fill="none" aria-hidden="true"><path d="M-10 60 C 120 20, 60 160, 10 200 S 40 360, -10 420" stroke="#3C9A83" stroke-width="2" opacity=".7"/></svg>
+      <div class="frame photo erp rv">
+        <svg class="erp-art" viewBox="0 0 400 500" role="img" aria-label="Colorful wireframe of an ERP dashboard">
+          <rect x="10" y="12" width="380" height="476" rx="16" class="e-win" stroke-width="2.5"/>
+          <path d="M10 28a16 16 0 0 1 16-16h348a16 16 0 0 1 16 16v20H10z" fill="#AFDAE2" stroke="#26284B" stroke-width="2.5"/>
+          <circle cx="32" cy="30" r="5" fill="#FE7649" stroke="#26284B" stroke-width="1.5"/><circle cx="48" cy="30" r="5" fill="#FAD2D0" stroke="#26284B" stroke-width="1.5"/><circle cx="64" cy="30" r="5" fill="#fff" stroke="#26284B" stroke-width="1.5"/>
+          <rect x="120" y="22" width="150" height="16" rx="8" fill="#fff" stroke="#26284B" stroke-width="1.5"/><rect x="132" y="28" width="60" height="4" rx="2" fill="#26284B" opacity=".35"/>
+          <path d="M10 48h92v424a16 16 0 0 1-16 16H26a16 16 0 0 1-16-16z" class="e-side" stroke-width="2.5"/>
+          <rect x="18" y="65" width="70" height="30" rx="8" fill="#FE7649" opacity=".95"/><rect x="26" y="71" width="14" height="14" rx="4" fill="#fff" stroke="#26284B" stroke-width="1.5"/><rect x="46" y="75" width="28" height="6" rx="3" fill="#fff" opacity="1"/><rect x="26" y="109" width="14" height="14" rx="4" fill="#AFDAE2" stroke="#26284B" stroke-width="1.5"/><rect x="46" y="113" width="34" height="6" rx="3" fill="#AFDAE2" opacity=".8"/><rect x="26" y="147" width="14" height="14" rx="4" fill="#FAD2D0" stroke="#26284B" stroke-width="1.5"/><rect x="46" y="151" width="28" height="6" rx="3" fill="#AFDAE2" opacity=".8"/><rect x="26" y="185" width="14" height="14" rx="4" fill="#AFDAE2" stroke="#26284B" stroke-width="1.5"/><rect x="46" y="189" width="34" height="6" rx="3" fill="#AFDAE2" opacity=".8"/><rect x="26" y="223" width="14" height="14" rx="4" fill="#FE7649" stroke="#26284B" stroke-width="1.5"/><rect x="46" y="227" width="28" height="6" rx="3" fill="#AFDAE2" opacity=".8"/><rect x="26" y="261" width="14" height="14" rx="4" fill="#FAD2D0" stroke="#26284B" stroke-width="1.5"/><rect x="46" y="265" width="34" height="6" rx="3" fill="#AFDAE2" opacity=".8"/>
+          <rect x="108" y="60" width="110" height="12" rx="6" fill="#26284B"/><rect x="108" y="80" width="170" height="6" rx="3" fill="#26284B" opacity=".3"/>
+          <rect x="324" y="58" width="58" height="26" rx="13" fill="#FE7649" stroke="#26284B" stroke-width="2"/><rect x="338" y="68" width="30" height="6" rx="3" fill="#fff"/>
+          <rect x="108" y="98" width="52" height="16" rx="8" fill="#FAD2D0" stroke="#26284B" stroke-width="1.5"/><rect x="166" y="98" width="52" height="16" rx="8" fill="#fff" class="e-chip" stroke-width="1.5"/><rect x="224" y="98" width="52" height="16" rx="8" fill="#fff" class="e-chip" stroke-width="1.5"/>
+          <g class="kpi"><rect x="108" y="126" width="84" height="64" rx="10" fill="#FE7649" stroke="#26284B" stroke-width="2"/><rect x="118" y="136" width="40" height="5" rx="2.5" fill="#26284B" opacity=".5"/><rect x="118" y="150" width="46" height="14" rx="4" fill="#26284B"/><polyline points="118,182 130,175 142,179 154,170 166,173 180,166" fill="none" stroke="#26284B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="203" y="126" width="84" height="64" rx="10" fill="#AFDAE2" stroke="#26284B" stroke-width="2"/><rect x="213" y="136" width="32" height="5" rx="2.5" fill="#26284B" opacity=".5"/><rect x="213" y="150" width="46" height="14" rx="4" fill="#26284B"/><polyline points="213,182 225,175 237,179 249,170 261,173 275,166" fill="none" stroke="#26284B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="298" y="126" width="84" height="64" rx="10" fill="#FAD2D0" stroke="#26284B" stroke-width="2"/><rect x="308" y="136" width="46" height="5" rx="2.5" fill="#26284B" opacity=".5"/><rect x="308" y="150" width="46" height="14" rx="4" fill="#26284B"/><polyline points="308,182 320,175 332,179 344,170 356,173 370,166" fill="none" stroke="#26284B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
+          <rect x="108" y="204" width="274" height="128" rx="10" class="e-card" stroke-width="2"/>
+          <rect x="120" y="214" width="70" height="7" rx="3.5" fill="#26284B" opacity=".6"/>
+          <path d="M120 316h250" stroke="#26284B" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+          <rect class="bar o" style="--d:0.0s" x="124" y="264" width="22" height="52" rx="4" fill="#FE7649"/><rect class="bar o" style="--d:0.1s" x="156" y="238" width="22" height="78" rx="4" fill="#AFDAE2"/><rect class="bar o" style="--d:0.2s" x="188" y="276" width="22" height="40" rx="4" fill="#FAD2D0"/><rect class="bar o" style="--d:0.2s" x="220" y="220" width="22" height="96" rx="4" fill="#26284B"/><rect class="bar o" style="--d:0.3s" x="252" y="250" width="22" height="66" rx="4" fill="#FE7649"/><rect class="bar o" style="--d:0.4s" x="284" y="228" width="22" height="88" rx="4" fill="#AFDAE2"/><rect class="bar o" style="--d:0.5s" x="316" y="258" width="22" height="58" rx="4" fill="#FAD2D0"/><rect class="bar o" style="--d:0.6s" x="348" y="212" width="22" height="104" rx="4" fill="#FE7649"/>
+          <rect x="108" y="346" width="274" height="132" rx="10" class="e-card" stroke-width="2"/>
+          <path d="M108 356a10 10 0 0 1 10-10h254a10 10 0 0 1 10 10v22H108z" fill="#FAD2D0" stroke="#26284B" stroke-width="2"/>
+          <rect x="120" y="358" width="50" height="6" rx="3" fill="#26284B" opacity=".7"/><rect x="214" y="358" width="40" height="6" rx="3" fill="#26284B" opacity=".7"/><rect x="326" y="358" width="36" height="6" rx="3" fill="#26284B" opacity=".7"/>
+          <rect x="120" y="396" width="70" height="6" rx="3" fill="#26284B" opacity=".45"/><rect x="214" y="396" width="46" height="6" rx="3" fill="#26284B" opacity=".3"/><rect x="326" y="393" width="42" height="12" rx="6" fill="#FE7649" stroke="#26284B" stroke-width="1.5"/><rect x="120" y="416" width="83" height="6" rx="3" fill="#26284B" opacity=".45"/><rect x="214" y="416" width="46" height="6" rx="3" fill="#26284B" opacity=".3"/><rect x="326" y="413" width="42" height="12" rx="6" fill="#AFDAE2" stroke="#26284B" stroke-width="1.5"/><rect x="120" y="436" width="96" height="6" rx="3" fill="#26284B" opacity=".45"/><rect x="214" y="436" width="46" height="6" rx="3" fill="#26284B" opacity=".3"/><rect x="326" y="433" width="42" height="12" rx="6" fill="#FAD2D0" stroke="#26284B" stroke-width="1.5"/><rect x="120" y="456" width="79" height="6" rx="3" fill="#26284B" opacity=".45"/><rect x="214" y="456" width="46" height="6" rx="3" fill="#26284B" opacity=".3"/><rect x="326" y="453" width="42" height="12" rx="6" fill="#26284B" stroke="#26284B" stroke-width="1.5"/>
+        </svg>
       </div>
     </div>
   </section>
@@ -517,60 +764,70 @@ h2{font-family:"Caveat Brush","Caveat",cursive;font-weight:400;letter-spacing:0;
       <h2 id="work-h">Case studies</h2>
     </div>
     <div class="work">
-      <a class="frame case rv" href="case-studies/film-criticism-conference.html">
-        <div class="thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="10" y="10" width="180" height="100" rx="6" stroke="#9DB5AB"/><rect x="24" y="26" width="80" height="10" rx="2" fill="#9FD8CB"/><rect x="24" y="44" width="120" height="5" rx="2" fill="#B5C9C1"/><rect x="24" y="56" width="100" height="5" rx="2" fill="#B5C9C1"/><rect x="130" y="70" width="46" height="28" rx="3" fill="#B5C9C1"/><rect x="24" y="78" width="40" height="14" rx="2" stroke="#9FD8CB"/></svg></div>
+      <a class="frame case rv" href="#work" data-slug="hwadi-xp" role="button">
+        <div class="thumb" style="--tb:#17181A"><svg viewBox="0 0 200 120" fill="none"><rect x="30" y="14" width="140" height="92" rx="8" stroke="#9DB5AB"/><rect x="42" y="28" width="52" height="8" rx="2" fill="#9FD8CB"/><rect x="42" y="44" width="52" height="5" rx="2" fill="#B5C9C1"/><rect x="104" y="28" width="56" height="64" rx="10" fill="#B5C9C1"/><rect x="42" y="66" width="36" height="24" rx="8" stroke="#9FD8CB"/></svg><img class="thumb-img" src="images/hwadi-xp.jpg" alt="Hwadi XP website design mockup" loading="lazy" onerror="var e=['png','webp','jpeg'],i=+(this.dataset.i||0);if(i<e.length){this.dataset.i=i+1;this.src=this.src.replace(/\.[a-z]+$/,'.'+e[i])}else this.remove()"><span class="case-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
         <div class="info">
-          <div class="meta"><span class="chip mono">.01</span><span class="mono">Film Commission · KSA</span></div>
+          <div class="meta"><span class="chip mono">.01</span><span class="mono">Hwadi Company · KSA</span></div>
+          <h3>Hwadi XP</h3>
+          <p>Website design for an events and culture company: live shows, festivals, exhibitions and sports.</p>
+          <ul class="tags"><li class="st">Website</li><li>UI design</li><li>Events</li></ul>
+          <span class="tlink mono">Read case study →</span>
+        </div>
+      </a>
+      <a class="frame case rv" href="#work" data-slug="film-criticism-conference" role="button">
+        <div class="thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="10" y="10" width="180" height="100" rx="6" stroke="#9DB5AB"/><rect x="24" y="26" width="80" height="10" rx="2" fill="#9FD8CB"/><rect x="24" y="44" width="120" height="5" rx="2" fill="#B5C9C1"/><rect x="24" y="56" width="100" height="5" rx="2" fill="#B5C9C1"/><rect x="130" y="70" width="46" height="28" rx="3" fill="#B5C9C1"/><rect x="24" y="78" width="40" height="14" rx="2" stroke="#9FD8CB"/></svg><img class="thumb-img" src="images/film-criticism-conference.jpg" alt="" loading="lazy" onerror="var e=['png','webp','jpeg'],i=+(this.dataset.i||0);if(i<e.length){this.dataset.i=i+1;this.src=this.src.replace(/\.[a-z]+$/,'.'+e[i])}else this.remove()"><span class="case-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
+        <div class="info">
+          <div class="meta"><span class="chip mono">.02</span><span class="mono">Film Commission · KSA</span></div>
           <h3>Designing a conference website for film critics</h3>
           <p>Responsive, high-fidelity UI for the Film Criticism Conference, from moodboard to hand-off.</p>
           <ul class="tags"><li class="st">Website</li><li>Responsive UI</li><li>Moodboard</li><li>Hand-off</li></ul>
           <span class="tlink mono">Read case study →</span>
         </div>
       </a>
-      <a class="frame case rv" href="case-studies/schools-portal.html">
-        <div class="thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="10" y="10" width="180" height="100" rx="6" stroke="#9DB5AB"/><rect x="10" y="10" width="40" height="100" fill="#C5D5CE"/><rect x="18" y="22" width="24" height="5" rx="2" fill="#9FD8CB"/><rect x="18" y="34" width="20" height="4" rx="2" fill="#B5C9C1"/><rect x="18" y="44" width="22" height="4" rx="2" fill="#B5C9C1"/><rect x="60" y="22" width="56" height="34" rx="3" fill="#B5C9C1"/><rect x="122" y="22" width="56" height="34" rx="3" fill="#B5C9C1"/><rect x="60" y="64" width="118" height="34" rx="3" stroke="#9FD8CB"/></svg></div>
+      <a class="frame case rv" href="#work" data-slug="schools-portal" role="button">
+        <div class="thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="10" y="10" width="180" height="100" rx="6" stroke="#9DB5AB"/><rect x="10" y="10" width="40" height="100" fill="#C5D5CE"/><rect x="18" y="22" width="24" height="5" rx="2" fill="#9FD8CB"/><rect x="18" y="34" width="20" height="4" rx="2" fill="#B5C9C1"/><rect x="18" y="44" width="22" height="4" rx="2" fill="#B5C9C1"/><rect x="60" y="22" width="56" height="34" rx="3" fill="#B5C9C1"/><rect x="122" y="22" width="56" height="34" rx="3" fill="#B5C9C1"/><rect x="60" y="64" width="118" height="34" rx="3" stroke="#9FD8CB"/></svg><img class="thumb-img" src="images/schools-portal.jpg" alt="" loading="lazy" onerror="var e=['png','webp','jpeg'],i=+(this.dataset.i||0);if(i<e.length){this.dataset.i=i+1;this.src=this.src.replace(/\.[a-z]+$/,'.'+e[i])}else this.remove()"><span class="case-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
         <div class="info">
-          <div class="meta"><span class="chip mono">.02</span><span class="mono">Education · UAE</span></div>
+          <div class="meta"><span class="chip mono">.03</span><span class="mono">Education · UAE</span></div>
           <h3>Turning a complicated school system into a simple portal</h3>
           <p>User flows, information architecture and full UI for students and staff.</p>
           <ul class="tags"><li class="st">Portal</li><li>UX strategy</li><li>Info architecture</li><li>Wireframes</li></ul>
           <span class="tlink mono">Read case study →</span>
         </div>
       </a>
-      <a class="frame case rv" href="case-studies/platone-website-audit.html">
-        <div class="thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="10" y="10" width="180" height="100" rx="6" stroke="#9DB5AB"/><path d="M30 34h110M30 50h90M30 66h120" stroke="#B5C9C1" stroke-width="5" stroke-linecap="round"/><circle cx="152" cy="80" r="18" stroke="#9FD8CB" stroke-width="2"/><path d="m165 93 12 12" stroke="#9FD8CB" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+      <a class="frame case rv" href="#work" data-slug="platone-website-audit" role="button">
+        <div class="thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="10" y="10" width="180" height="100" rx="6" stroke="#9DB5AB"/><path d="M30 34h110M30 50h90M30 66h120" stroke="#B5C9C1" stroke-width="5" stroke-linecap="round"/><circle cx="152" cy="80" r="18" stroke="#9FD8CB" stroke-width="2"/><path d="m165 93 12 12" stroke="#9FD8CB" stroke-width="2.5" stroke-linecap="round"/></svg><img class="thumb-img" src="images/platone-website-audit.jpg" alt="" loading="lazy" onerror="var e=['png','webp','jpeg'],i=+(this.dataset.i||0);if(i<e.length){this.dataset.i=i+1;this.src=this.src.replace(/\.[a-z]+$/,'.'+e[i])}else this.remove()"><span class="case-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
         <div class="info">
-          <div class="meta"><span class="chip mono">.03</span><span class="mono">Prime Point · KSA</span></div>
+          <div class="meta"><span class="chip mono">.04</span><span class="mono">Prime Point · KSA</span></div>
           <h3>Auditing a recruitment website to smooth the hiring funnel</h3>
           <p>A full UX audit of Platone to find and fix the friction points for job seekers.</p>
           <ul class="tags"><li class="st">UX audit</li><li>Website</li><li>Recruitment</li></ul>
           <span class="tlink mono">Read case study →</span>
         </div>
       </a>
-      <a class="frame case rv" href="case-studies/platone-app-redesign.html">
-        <div class="thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="72" y="6" width="56" height="108" rx="10" stroke="#9DB5AB"/><rect x="80" y="20" width="40" height="6" rx="2" fill="#9FD8CB"/><rect x="80" y="34" width="40" height="18" rx="3" fill="#B5C9C1"/><rect x="80" y="58" width="40" height="18" rx="3" fill="#B5C9C1"/><rect x="80" y="90" width="40" height="12" rx="3" stroke="#9FD8CB"/></svg></div>
+      <a class="frame case rv" href="#work" data-slug="platone-app-redesign" role="button">
+        <div class="thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="72" y="6" width="56" height="108" rx="10" stroke="#9DB5AB"/><rect x="80" y="20" width="40" height="6" rx="2" fill="#9FD8CB"/><rect x="80" y="34" width="40" height="18" rx="3" fill="#B5C9C1"/><rect x="80" y="58" width="40" height="18" rx="3" fill="#B5C9C1"/><rect x="80" y="90" width="40" height="12" rx="3" stroke="#9FD8CB"/></svg><img class="thumb-img" src="images/platone-app-redesign.jpg" alt="" loading="lazy" onerror="var e=['png','webp','jpeg'],i=+(this.dataset.i||0);if(i<e.length){this.dataset.i=i+1;this.src=this.src.replace(/\.[a-z]+$/,'.'+e[i])}else this.remove()"><span class="case-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
         <div class="info">
-          <div class="meta"><span class="chip mono">.04</span><span class="mono">Prime Point · KSA</span></div>
+          <div class="meta"><span class="chip mono">.05</span><span class="mono">Prime Point · KSA</span></div>
           <h3>Finding where users get stuck in a recruitment app</h3>
           <p>Navigation analysis and a mobile redesign of the Platone app for smaller screens.</p>
           <ul class="tags"><li class="st">Mobile app</li><li>Redesign</li><li>UX</li></ul>
           <span class="tlink mono">Read case study →</span>
         </div>
       </a>
-      <a class="frame case rv" href="case-studies/tt-mobile-app.html">
-        <div class="thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="20" y="20" width="44" height="22" rx="11" fill="#9FD8CB"/><rect x="74" y="20" width="44" height="22" rx="11" stroke="#9FD8CB"/><rect x="128" y="20" width="52" height="22" rx="4" fill="#B5C9C1"/><rect x="20" y="56" width="36" height="36" rx="6" fill="#B5C9C1"/><rect x="66" y="56" width="36" height="36" rx="18" stroke="#9DB5AB"/><rect x="112" y="62" width="68" height="8" rx="4" fill="#B5C9C1"/><rect x="112" y="78" width="48" height="8" rx="4" fill="#B5C9C1"/></svg></div>
+      <a class="frame case rv" href="#work" data-slug="tt-mobile-app" role="button">
+        <div class="thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="20" y="20" width="44" height="22" rx="11" fill="#9FD8CB"/><rect x="74" y="20" width="44" height="22" rx="11" stroke="#9FD8CB"/><rect x="128" y="20" width="52" height="22" rx="4" fill="#B5C9C1"/><rect x="20" y="56" width="36" height="36" rx="6" fill="#B5C9C1"/><rect x="66" y="56" width="36" height="36" rx="18" stroke="#9DB5AB"/><rect x="112" y="62" width="68" height="8" rx="4" fill="#B5C9C1"/><rect x="112" y="78" width="48" height="8" rx="4" fill="#B5C9C1"/></svg><img class="thumb-img" src="images/tt-mobile-app.jpg" alt="" loading="lazy" onerror="var e=['png','webp','jpeg'],i=+(this.dataset.i||0);if(i<e.length){this.dataset.i=i+1;this.src=this.src.replace(/\.[a-z]+$/,'.'+e[i])}else this.remove()"><span class="case-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
         <div class="info">
-          <div class="meta"><span class="chip mono">.05</span><span class="mono">Twentytoo</span></div>
+          <div class="meta"><span class="chip mono">.06</span><span class="mono">Twentytoo</span></div>
           <h3>Building the component library for the TT mobile app</h3>
           <p>Reusable UI elements, interactive prototypes and brand identity applied across every screen.</p>
           <ul class="tags"><li class="st">Mobile app</li><li>Components</li><li>Prototype</li></ul>
           <span class="tlink mono">Read case study →</span>
         </div>
       </a>
-      <a class="frame case rv" href="case-studies/saas-dashboard.html">
-        <div class="thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="10" y="10" width="180" height="100" rx="6" stroke="#9DB5AB"/><rect x="22" y="22" width="48" height="26" rx="3" fill="#B5C9C1"/><rect x="76" y="22" width="48" height="26" rx="3" fill="#B5C9C1"/><rect x="130" y="22" width="48" height="26" rx="3" fill="#B5C9C1"/><path d="M24 94 L54 74 L84 82 L114 60 L144 68 L176 52" stroke="#9FD8CB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <a class="frame case rv" href="#work" data-slug="saas-dashboard" role="button">
+        <div class="thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="10" y="10" width="180" height="100" rx="6" stroke="#9DB5AB"/><rect x="22" y="22" width="48" height="26" rx="3" fill="#B5C9C1"/><rect x="76" y="22" width="48" height="26" rx="3" fill="#B5C9C1"/><rect x="130" y="22" width="48" height="26" rx="3" fill="#B5C9C1"/><path d="M24 94 L54 74 L84 82 L114 60 L144 68 L176 52" stroke="#9FD8CB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><img class="thumb-img" src="images/saas-dashboard.jpg" alt="" loading="lazy" onerror="var e=['png','webp','jpeg'],i=+(this.dataset.i||0);if(i<e.length){this.dataset.i=i+1;this.src=this.src.replace(/\.[a-z]+$/,'.'+e[i])}else this.remove()"><span class="case-go" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></span></div>
         <div class="info">
-          <div class="meta"><span class="chip mono">.06</span><span class="mono">Twentytoo</span></div>
+          <div class="meta"><span class="chip mono">.07</span><span class="mono">Twentytoo</span></div>
           <h3>Making complex SaaS data easy to read</h3>
           <p>Data-driven dashboards and stakeholder demo prototypes for a SaaS product.</p>
           <ul class="tags"><li class="st">SaaS</li><li>Dashboards</li><li>Prototype</li></ul>
@@ -579,6 +836,13 @@ h2{font-family:"Caveat Brush","Caveat",cursive;font-weight:400;letter-spacing:0;
       </a>
     </div>
     <p class="also rv">Also freelance: Hwadi Projects website, Honey Tracker, Triple Mark, a BBQ ordering app and a math game.</p>
+  </section>
+
+  <section class="hello wrap" aria-labelledby="hello-h">
+    <div class="hello-label"><span></span><em>Hello!</em><span></span></div>
+    <div class="hp-col hp-l" aria-hidden="true"><span class="hp l" style="--r:-4deg"><i style="background:#FE7649;color:#fff"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg></i>UI design</span><span class="hp l" style="--r:3deg"><i style="background:#AFDAE2;color:#26284B"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.2-4.2"/></svg></i>UX research</span><span class="hp l" style="--r:-3deg"><i style="background:#26284B;color:#AFDAE2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 10v10"/></svg></i>Wireframes</span></div>
+    <p class="hello-text" id="hello-h">Turning complex workflows into <b>simple, intuitive</b> interfaces <u>people actually enjoy using.</u></p>
+    <div class="hp-col hp-r" aria-hidden="true"><span class="hp r" style="--r:3deg"><i style="background:#FAD2D0;color:#26284B"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4v16l5-4 3 6 3-1.5-3-6 6-.5z"/></svg></i>Prototyping</span><span class="hp r" style="--r:-4deg"><i style="background:#FE7649;color:#fff"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="3.5"/><rect x="13" y="4.5" width="7" height="7" rx="1.5"/><path d="M6 20h6l-3-6z"/><path d="M15 15h5v5h-5z"/></svg></i>Design systems</span><span class="hp r" style="--r:4deg"><i style="background:#AFDAE2;color:#26284B"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg></i>Usability testing</span></div>
   </section>
 
   <section class="swot-sec" aria-labelledby="swot-h">
@@ -701,7 +965,7 @@ if('IntersectionObserver' in window){
       nodes=[[0,0],[4,28],[12,-34],[16,18]].map(function(n,i){return{el:document.getElementById('nd'+i),idx:n[0],rot:n[1]}});
   function sm(x){x=Math.max(0,Math.min(1,x));return x*x*(3-2*x)}
   function mix(a,b,t){return a+(b-a)*t}
-  function col(t){var d=document.documentElement.dataset.theme==='dark',a=d?[240,137,122]:[122,120,111],b=d?[159,216,203]:[60,154,131];return 'rgb('+a.map(function(v,i){return Math.round(mix(v,b[i],t))}).join(',')+')'}
+  function col(t){var d=document.documentElement.dataset.theme==='dark',a=d?[240,137,122]:[255,94,58],b=d?[159,216,203]:[10,143,102];return 'rgb('+a.map(function(v,i){return Math.round(mix(v,b[i],t))}).join(',')+')'}
   var p=0,target=0,raf,kick;
   function render(){
     var P=[],loc=[],i;
@@ -749,7 +1013,7 @@ c.addEventListener('click',function(){
   var zones=[document.querySelector('.hero'),document.querySelector('.nav')].filter(Boolean);
   if(!zones.length||!matchMedia('(hover:hover) and (pointer:fine)').matches||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
   var el=document.createElement('div');el.className='hand-cursor';el.setAttribute('aria-hidden','true');
-  el.innerHTML='<svg class="hand" viewBox="0 0 48 52"><g stroke="#111216" stroke-width="2" stroke-linejoin="round" fill="#F4F4F6"><rect class="th" x="5" y="28" width="7" height="17" rx="3.5"/><rect class="fg f1" x="12.5" y="10" width="6.2" height="23" rx="3.1"/><rect class="fg f2" x="19.4" y="5" width="6.2" height="27" rx="3.1"/><rect class="fg f3" x="26.3" y="9" width="6.2" height="23" rx="3.1"/><rect class="fg f4" x="33.2" y="14" width="6.2" height="19" rx="3.1"/><rect x="10.5" y="26" width="30" height="20" rx="9"/></g><rect x="14" y="44" width="23" height="6" rx="2" fill="#9FD8CB" stroke="#111216" stroke-width="2"/></svg>';document.body.appendChild(el);
+  el.innerHTML='<svg class="hand" viewBox="0 0 48 52"><g stroke="#111216" stroke-width="2" stroke-linejoin="round" fill="#F4F4F6"><rect class="th" x="5" y="28" width="7" height="17" rx="3.5"/><rect class="fg f1" x="12.5" y="10" width="6.2" height="23" rx="3.1"/><rect class="fg f2" x="19.4" y="5" width="6.2" height="27" rx="3.1"/><rect class="fg f3" x="26.3" y="9" width="6.2" height="23" rx="3.1"/><rect class="fg f4" x="33.2" y="14" width="6.2" height="19" rx="3.1"/><rect x="10.5" y="26" width="30" height="20" rx="9"/></g><rect x="14" y="44" width="23" height="6" rx="2" fill="#FE7649" stroke="#111216" stroke-width="2"/></svg>';document.body.appendChild(el);
   var x=0,y=0,tx=0,ty=0,s=.4,on=false,raf=0;
   function hot(e){return e.target.closest&&e.target.closest('a,button,[role="button"],.btn,.tlink')}
   function loop(){
@@ -763,15 +1027,64 @@ c.addEventListener('click',function(){
       if(on)raf=requestAnimationFrame(f);
     })(performance.now());
   }
-  zones.forEach(function(z){
-    z.addEventListener('pointerenter',function(e){on=true;tx=x=e.clientX;ty=y=e.clientY;z.classList.add('hand-on');el.classList.add('show');loop()});
-    z.addEventListener('pointerleave',function(){on=false;z.classList.remove('hand-on');el.classList.remove('show','closed','point')});
-    z.addEventListener('pointermove',function(e){tx=e.clientX;ty=e.clientY;el.classList.toggle('point',!!hot(e)&&!el.classList.contains('closed'))});
+  var cur=null;
+  document.addEventListener('pointermove',function(e){
+    var z=e.target.closest&&e.target.closest('.hero,.nav');
+    if(z!==cur){
+      if(cur)cur.classList.remove('hand-on');
+      if(z){
+        if(!cur){on=true;tx=x=e.clientX;ty=y=e.clientY;el.classList.add('show');loop()}
+        z.classList.add('hand-on');
+      }else{on=false;el.classList.remove('show','closed','point')}
+      cur=z;
+    }
+    if(z){tx=e.clientX;ty=e.clientY;el.classList.toggle('point',!!hot(e)&&!el.classList.contains('closed'))}
   });
-  
-  
+  document.documentElement.addEventListener('pointerleave',function(){if(cur)cur.classList.remove('hand-on');cur=null;on=false;el.classList.remove('show','closed','point')});
   addEventListener('pointerdown',function(){if(on){el.classList.add('closed');el.classList.remove('point')}});
   addEventListener('pointerup',function(){el.classList.remove('closed')});
+})();
+</script>
+<script>
+// case study popup (the only way to read a case study)
+(function(){
+  var D={"hwadi-xp": {"num": "01", "title": "Designing the website for Hwadi XP, an events and culture company", "client": "Hwadi Company", "loc": "Saudi Arabia", "year": null, "role": "UI Designer", "type": "Website design", "summary": "Website design for Hwadi XP, a company that creates live shows, theatre productions, arts and cultural projects, festivals, exhibitions and sports events.", "challenge": "Show a wide range of live events and cultural projects in a clear, visual and memorable way.", "did": ["Designed the website UI, including Our Projects, About and Contact Us", "Used soft rounded shapes and bold event imagery, such as the Terhal Show, to tell each story", "Built clean layouts that keep the focus on the shows and projects"], "steps": [["Understand the brand", "Learning what Hwadi XP produces and who it is for."], ["Structure", "Organizing projects, history and contact into a simple flow."], ["UI design", "Rounded, image-led screens with a calm visual style."], ["Refine", "Polishing the details for a consistent feel."]]}, "film-criticism-conference": {"num": "02", "title": "Designing a conference website for film critics", "client": "Film Commission", "loc": "Saudi Arabia", "year": null, "role": "UI Designer", "type": "Website · Responsive UI", "summary": "A high-fidelity, responsive website for the Film Criticism Conference, designed through a structured process from moodboarding to final hand-off.", "challenge": "A conference website has to present an event clearly and credibly to critics and visitors, on any screen size.", "did": ["Built a moodboard to set the visual direction", "Designed the high-fidelity, responsive interface", "Prepared the final hand-off for development"], "steps": [["Moodboard", "Setting the look and feel before any screens."], ["UI design", "High-fidelity screens for the whole site."], ["Responsive layouts", "Making the design work across screen sizes."], ["Hand-off", "Delivering the design ready for development."]]}, "schools-portal": {"num": "03", "title": "Turning a complicated school system into a simple portal", "client": "Schools system portal", "loc": "UAE", "year": null, "role": "UX and UI Designer", "type": "Web portal · Information architecture", "summary": "User flows and architecture that streamline complex administrative tasks for students and staff, taken through the full design process from wireframes to the final UI.", "challenge": "Administrative tasks for students and staff were complex, and the portal needed a structure that made them simple to complete.", "did": ["Defined user flows and the information architecture (Arch Flow)", "Designed wireframes for every key task", "Delivered the high-fidelity, final UI"], "steps": [["User flows", "Mapping how students and staff complete each task."], ["Information architecture", "Structuring the portal around those flows."], ["Wireframes", "Low-fidelity layouts to test the structure."], ["High-fidelity UI", "The final, functional and user-centric interface."]]}, "platone-website-audit": {"num": "04", "title": "Auditing a recruitment website to smooth the hiring funnel", "client": "Prime Point (Platone)", "loc": "Saudi Arabia", "year": "2024", "role": "UX Designer", "type": "UX audit · Website", "summary": "A comprehensive UX audit of the Platone recruitment platform to find friction points and improve the experience for a smoother recruitment funnel.", "challenge": "Friction along the recruitment funnel was making it harder for job seekers to move through the platform.", "did": ["Performed a comprehensive UX audit of the platform", "Identified friction points across the experience", "Worked to optimize the overall recruitment experience"], "steps": [["Audit", "Reviewing the whole experience step by step."], ["Find friction", "Pinpointing where users hesitate or drop off."], ["Recommend", "Proposing fixes for each friction point."], ["Optimize", "Improving the funnel from start to finish."]]}, "platone-app-redesign": {"num": "05", "title": "Finding where users get stuck in a recruitment app", "client": "Prime Point (Platone)", "loc": "Saudi Arabia", "year": "2024", "role": "UX and UI Designer", "type": "Mobile app · Redesign", "summary": "An evaluation of the Platone mobile app to find navigation issues and the places where users get stuck, followed by a redesign for a smooth, modern experience on smaller screens.", "challenge": "Users ran into navigation issues and got stuck in the app, especially on smaller screens.", "did": ["Evaluated the app and analyzed user pain points", "Found navigation issues and dead ends", "Redesigned the mobile interface for better usability"], "steps": [["Evaluate", "Walking through the app as a user would."], ["Pain points", "Listing where navigation breaks down."], ["Redesign", "A cleaner interface and clearer navigation."], ["Refine", "Making sure it feels smooth on small screens."]]}, "tt-mobile-app": {"num": "06", "title": "Building the component library for the TT mobile app", "client": "Twentytoo", "loc": null, "year": "2023", "role": "UI Designer", "type": "Mobile app · Component library", "summary": "Responsible for the UI design of the TT mobile application: a library of reusable UI elements and interactive prototypes, with the brand identity applied across every screen.", "challenge": "The app needed a consistent, high-quality interface across all screens that stayed true to the brand.", "did": ["Developed a library of reusable UI components", "Built interactive prototypes", "Applied the brand identity across all screens, with clean layouts and intuitive navigation"], "steps": [["Components", "Reusable building blocks for every screen."], ["Prototypes", "Interactive flows to test the experience."], ["Brand identity", "Applying the visual identity consistently."], ["Clean layouts", "Intuitive navigation for mobile users."]]}, "saas-dashboard": {"num": "07", "title": "Making complex SaaS data easy to read", "client": "Twentytoo", "loc": null, "year": "2023", "role": "UI Designer", "type": "SaaS · Dashboards", "summary": "A high-fidelity UI for a SaaS demo: clean, data-driven dashboards and intuitive navigation that turn complex data sets into simple, visual components.", "challenge": "Complex data sets needed to feel simple and readable for end users in a product demo.", "did": ["Designed clean, data-driven dashboards", "Turned complex data sets into simple visual components", "Built interactive prototypes for stakeholder demos"], "steps": [["Simplify the data", "Deciding what users need to see first."], ["Dashboard UI", "Clean, data-driven screens."], ["Navigation", "Intuitive movement between views."], ["Demo prototype", "An interactive version for stakeholders."]]}},dlg=document.getElementById('csModal');
+  if(!dlg||!dlg.showModal)return;
+  var $=function(i){return document.getElementById(i)},esc=function(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML};
+  function gallery(slug,title){
+    var wrap=$('csmGalWrap'),g=$('csmGal');g.innerHTML='';wrap.hidden=true;
+    ['hero','1','2','3'].forEach(function(k){
+      var im=new Image(),ex=['jpg','png','webp','jpeg'],i=0;im.alt=title+' screen';im.loading='lazy';
+      im.onerror=function(){i++;if(i<ex.length)im.src='images/'+slug+'-'+k+'.'+ex[i];else im.remove()};
+      im.onload=function(){wrap.hidden=false};
+      im.src='images/'+slug+'-'+k+'.jpg';g.appendChild(im);
+    });
+  }
+  function open(slug){
+    var d=D[slug],card=document.querySelector('#work .case[data-slug="'+slug+'"]');if(!d||!card)return;
+    var src=card.querySelector('.thumb'),th=src.cloneNode(true);var go=th.querySelector('.case-go');if(go)go.remove();
+    th.style.background=getComputedStyle(src).backgroundColor;
+    var so=src.querySelectorAll('svg *'),co=th.querySelectorAll('svg *');
+    so.forEach(function(el,i){var cs=getComputedStyle(el),c=co[i];if(!c)return;c.style.fill=cs.fill;c.style.stroke=cs.stroke;c.style.opacity=cs.opacity});
+    $('csmThumb').innerHTML='';$('csmThumb').appendChild(th);
+    $('csmMeta').textContent='.'+d.num+'  ·  '+d.client+(d.loc?' · '+d.loc:'');
+    $('csmTitle').textContent=d.title;$('csmSum').textContent=d.summary;$('csmCh').textContent=d.challenge;
+    var f=[['Client',d.client],['Location',d.loc],['Year',d.year],['Role',d.role],['Type',d.type]].filter(function(x){return x[1]});
+    $('csmFacts').innerHTML=f.map(function(x){return '<div><dt class="mono">'+x[0]+'</dt><dd>'+esc(x[1])+'</dd></div>'}).join('');
+    $('csmDid').innerHTML=d.did.map(function(x){return '<li>'+esc(x)+'</li>'}).join('');
+    $('csmSteps').innerHTML=d.steps.map(function(s){return '<li><b>'+esc(s[0])+'</b><span>'+esc(s[1])+'</span></li>'}).join('');
+    gallery(slug,d.title);
+    dlg.showModal();document.documentElement.classList.add('modal-open');dlg.querySelector('.csm-card').scrollTop=0;
+  }
+  document.addEventListener('click',function(e){
+    var t=e.target.closest&&e.target.closest('[data-slug]');
+    if(t){e.preventDefault();open(t.getAttribute('data-slug'));return}
+    if(e.target===dlg||(e.target.closest&&e.target.closest('[data-close]')))dlg.close();
+  });
+  document.addEventListener('keydown',function(e){
+    if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('#work .case')){e.preventDefault();open(e.target.getAttribute('data-slug'))}
+  });
+  dlg.addEventListener('close',function(){document.documentElement.classList.remove('modal-open')});
 })();
 </script>
 </body>
