@@ -913,6 +913,16 @@ footer .wrap{position:relative}
 }
 .coffee svg path[fill="#fff"]{fill:#fff!important}.coffee svg ellipse[fill="#7A4A2B"]{fill:#7A4A2B!important}
 @media (max-width:640px){.coffee{width:56px;bottom:108px;right:16px}}
+
+/* mobile: glasses that ride the scroll */
+.glasses{display:none}
+@media (hover:none),(max-width:820px){
+  .glasses{display:block;position:fixed;right:6px;top:80px;width:52px;z-index:60;pointer-events:none;filter:drop-shadow(0 8px 10px rgba(38,40,75,.25));transition:opacity .25s}
+  .glasses svg{width:100%;height:auto;display:block}
+  .glasses::before{content:"";position:absolute;right:50%;top:-80px;bottom:calc(-100vh);width:0}
+  html.modal-open .glasses{opacity:0}
+  #gpup{transition:transform .15s ease-out}
+}
 </style>
 </head>
 <body>
@@ -1327,6 +1337,15 @@ function set(k){about.outerHTML=V[k];about=document.querySelector('.ab');[].forE
 about.dataset.orig=1;
 set('B');
 })();
+</script>
+<div class="glasses" id="glasses" aria-hidden="true"><svg viewBox="0 0 64 34" fill="none"><path d="M2 12 8 6M62 12 56 6" stroke="#111114" stroke-width="3.2" stroke-linecap="round"/><circle cx="17" cy="19" r="12" fill="#fff" stroke="#111114" stroke-width="3.2"/><circle cx="47" cy="19" r="12" fill="#fff" stroke="#111114" stroke-width="3.2"/><path d="M29 17c2-3 4-3 6 0" stroke="#111114" stroke-width="3.2" stroke-linecap="round"/><g id="gpup" fill="#111114"><circle cx="17" cy="19" r="4.6"/><circle cx="47" cy="19" r="4.6"/></g><path d="M9 14c2-3 5-4 8-4" stroke="#FE7649" stroke-width="2" stroke-linecap="round" opacity=".8"/></svg></div>
+<script>
+(function(){var g=document.getElementById('glasses'),pu=document.getElementById('gpup');if(!g)return;var last=window.scrollY,tick=false;
+function upd(){tick=false;var y=window.scrollY,h=document.documentElement.scrollHeight-window.innerHeight,pr=h>0?Math.min(1,Math.max(0,y/h)):0;
+g.style.top=(78+pr*(window.innerHeight-78-70))+'px';
+var d=y-last;last=y;var dy=d>0?2.4:d<0?-2.4:0;pu.style.transform='translateY('+dy+'px)';
+clearTimeout(upd.t);upd.t=setTimeout(function(){pu.style.transform='translateY(0)'},180)}
+window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(upd)}},{passive:true});window.addEventListener('resize',upd);upd()})();
 </script>
 </body>
 </html>
