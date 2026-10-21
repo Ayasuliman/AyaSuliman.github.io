@@ -901,6 +901,18 @@ html[data-skin][data-skin] .case.is-soon:hover{transform:none}
 .sg-t b{font:600 .82rem/1.1 var(--sans);position:relative;z-index:1}
 .sg-t::before{content:"";position:absolute;left:50%;top:18%;width:34%;height:46%;transform:translateX(-50%);border:1.5px solid rgba(255,255,255,.4);background:rgba(255,255,255,.14);border-radius:8px}
 .sg-b{position:absolute;top:7px;right:8px;font:500 .6rem/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;background:rgba(255,255,255,.22);border-radius:999px;padding:5px 8px}
+
+/* coffee cup */
+footer .wrap{position:relative}
+.coffee{position:absolute;right:clamp(24px,5vw,96px);bottom:100px;width:130px;color:var(--ink);z-index:2}
+.coffee svg{width:100%;height:auto;display:block}
+@media (prefers-reduced-motion:no-preference){
+  .coffee .steam path{stroke-dasharray:60;animation:steam 3.2s ease-in-out infinite}
+  .coffee .s2{animation-delay:-1s!important}.coffee .s3{animation-delay:-2s!important}
+  @keyframes steam{0%{stroke-dashoffset:60;opacity:0;transform:translateY(8px)}35%{opacity:1}100%{stroke-dashoffset:-60;opacity:0;transform:translateY(-10px)}}
+}
+.coffee svg path[fill="#fff"]{fill:#fff!important}.coffee svg ellipse[fill="#7A4A2B"]{fill:#7A4A2B!important}
+@media (max-width:640px){.coffee{width:56px;bottom:108px;right:16px}}
 </style>
 </head>
 <body>
@@ -1108,7 +1120,8 @@ html[data-skin][data-skin] .case.is-soon:hover{transform:none}
         <ul><li><a href="https://behance.net/ayasuliman">Behance</a></li><li><a href="https://linkedin.com/in/aya-suliman">LinkedIn</a></li><li><a href="mailto:ayasuliman201020@gmail.com">Email</a></li></ul>
       </div>
     </div>
-    <div class="mega" aria-hidden="true"><svg viewBox="0 0 236 64" aria-hidden="true">
+    <div class="coffee" aria-hidden="true"><svg viewBox="0 0 120 130" fill="none"><g class="steam" stroke="currentColor" stroke-width="4" stroke-linecap="round" opacity=".55"><path class="s1" d="M44 40c-8-8 8-14 0-24"/><path class="s2" d="M62 42c-8-9 8-16 0-28"/><path class="s3" d="M80 40c-8-8 8-14 0-24"/></g><ellipse cx="62" cy="116" rx="46" ry="8" fill="rgba(38,40,75,.14)"/><path d="M26 52h72v28c0 20-14 34-36 34S26 100 26 80Z" fill="#fff" stroke="#111114" stroke-width="4" stroke-linejoin="round"/><path d="M98 62h8c9 0 13 6 13 13s-5 14-14 14h-7" stroke="#111114" stroke-width="4" stroke-linecap="round"/><ellipse cx="62" cy="52" rx="36" ry="7" fill="#7A4A2B" stroke="#111114" stroke-width="4"/><path d="M40 78c0 8 4 14 10 18" stroke="#FE7649" stroke-width="5" stroke-linecap="round"/></svg></div>
+<div class="mega" aria-hidden="true"><svg viewBox="0 0 236 64" aria-hidden="true">
   <defs><linearGradient id="ltM" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8C6BFF"/><stop offset="1" stop-color="#5E86FF"/></linearGradient><linearGradient id="lhM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".3"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>
   <rect width="64" height="64" rx="16" fill="url(#ltM)"/>
   <rect width="64" height="64" rx="16" fill="url(#lhM)"/>
