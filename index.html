@@ -198,12 +198,6 @@ section{padding:110px 0}
 .case .tlink{margin-top:auto;padding-top:6px}
 .also{margin-top:26px;text-align:center;color:var(--muted);font-size:.95rem}
 
-/* swot */
-.swot-sec{background:var(--bg)}
-.swot-intro{text-align:center;font-size:clamp(1.3rem,2.4vw,1.6rem);font-weight:600;color:var(--ink);line-height:1.4;margin-bottom:56px}
-.swot{display:grid;grid-template-columns:1fr 1fr;position:relative}
-.swot::before{content:"";position:absolute;left:50%;top:0;bottom:0;border-left:1px dashed var(--rule-2)}
-.swot::after{content:"";position:absolute;top:50%;left:0;right:0;border-top:1px dashed var(--rule-2)}
 .quad{padding:22px 26px 48px}
 .quad>.mono{display:block;text-align:center;color:var(--muted);margin-bottom:20px;letter-spacing:.18em}
 .notes{display:grid;grid-template-columns:1fr 1fr;gap:14px}
@@ -245,8 +239,6 @@ footer{background:#18191d;border-top:1px solid var(--rule);padding:80px 0 30px;o
   .hero-art{width:min(220px,62vw);justify-self:center}
   .hero .sub{margin:18px 0 24px}
   .skills,.work{grid-template-columns:1fr}
-  .swot{grid-template-columns:1fr}
-  .swot::before,.swot::after{display:none}
   .quad{padding:20px 0 36px}
   .nav{width:calc(100% - 24px);justify-content:space-between}
   .nav .logo{margin-right:0}
@@ -283,7 +275,6 @@ footer{background:#18191d;border-top:1px solid var(--rule);padding:80px 0 30px;o
 #about .sec-title,#about .skills{--cur:var(--cur-pen);--cur-link:var(--cur-pen-link)}
 #about .about{--cur:var(--cur-erp);--cur-link:var(--cur-erp-link)}
 #work{--cur:var(--cur-brush);--cur-link:var(--cur-brush-link)}
-.swot-sec{--cur:var(--cur-glasses);--cur-link:var(--cur-glasses-link)}
 #contact{--cur:var(--cur-fav);--cur-link:var(--cur-fav-link)}
 html,body *{cursor:var(--cur)}
 body a,body button,body summary,body label,body [role="button"],body .btn,body .tlink,body .case{cursor:var(--cur-link)}
@@ -872,45 +863,6 @@ html.modal-open{overflow:hidden}
     <div class="hp-col hp-r" aria-hidden="true"><span class="hp r" style="--r:3deg"><i style="background:#FAD2D0;color:#26284B"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4v16l5-4 3 6 3-1.5-3-6 6-.5z"/></svg></i>Prototyping</span><span class="hp r" style="--r:-4deg"><i style="background:#FE7649;color:#fff"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="3.5"/><rect x="13" y="4.5" width="7" height="7" rx="1.5"/><path d="M6 20h6l-3-6z"/><path d="M15 15h5v5h-5z"/></svg></i>Design systems</span><span class="hp r" style="--r:4deg"><i style="background:#AFDAE2;color:#26284B"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg></i>Usability testing</span></div>
   </section>
 
-  <section class="swot-sec" aria-labelledby="swot-h">
-    <div class="wrap">
-      <p class="swot-intro rv" id="swot-h">Want the honest version?<br>Here’s a <span class="acc">SWOT</span> of my skill set.</p>
-      <div class="swot">
-        <div class="quad rv">
-          <span class="mono">Strengths</span>
-          <div class="notes">
-            <div class="note"><ul><li>ui design</li><li>wireframes</li><li>prototyping</li></ul></div>
-            <div class="note"><ul><li>information architecture</li><li>user flows</li></ul></div>
-            <div class="note"><ul><li>ux audits</li><li>usability testing</li></ul></div>
-            <div class="note"><ul><li>design systems</li><li>typography &amp; icons</li></ul></div>
-          </div>
-        </div>
-        <div class="quad rv">
-          <span class="mono">Weaknesses</span>
-          <div class="notes">
-            <div class="note">I zoom to 400% to check one alignment.<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/></svg></div>
-            <div class="note">my Figma files have more pages than my phone has apps</div>
-          </div>
-        </div>
-        <div class="quad rv">
-          <span class="mono">Opportunities</span>
-          <div class="notes">
-            <div class="note">open to full-time product roles</div>
-            <div class="note">open to freelance projects<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-            <div class="note">AI-assisted product design</div>
-          </div>
-        </div>
-        <div class="quad rv">
-          <span class="mono">Threats</span>
-          <div class="notes">
-            <div class="note">“can we just add one more button?”</div>
-            <div class="note">icons with no labels<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.5V14M12 17h.01"/></svg></div>
-            <div class="note">“final_final_v7.fig”</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 </main>
 
 <footer id="contact">
