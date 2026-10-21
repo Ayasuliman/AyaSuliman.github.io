@@ -895,6 +895,12 @@ html[data-skin][data-skin] .case.is-soon:hover{transform:none}
 .soon-badge i{width:7px;height:7px;border-radius:50%;background:#FE7649}
 .case.is-soon .tlink.soon-txt{opacity:.55}
 :root[data-theme="dark"] .soon-badge{background:rgba(20,20,26,.9);color:#fff}
+
+.soon-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;aspect-ratio:336/197;position:relative}
+.sg-t{border-radius:14px;position:relative;display:flex;align-items:flex-end;padding:9px 11px;color:#fff;overflow:hidden}
+.sg-t b{font:600 .82rem/1.1 var(--sans);position:relative;z-index:1}
+.sg-t::before{content:"";position:absolute;left:50%;top:18%;width:34%;height:46%;transform:translateX(-50%);border:1.5px solid rgba(255,255,255,.4);background:rgba(255,255,255,.14);border-radius:8px}
+.sg-b{position:absolute;top:7px;right:8px;font:500 .6rem/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;background:rgba(255,255,255,.22);border-radius:999px;padding:5px 8px}
 </style>
 </head>
 <body>
@@ -1057,44 +1063,13 @@ html[data-skin][data-skin] .case.is-soon:hover{transform:none}
           <span class="tlink mono">Read case study →</span>
         </div>
       </a>
-      <div class="frame case rv is-soon" aria-disabled="true">
-        <div class="thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="10" y="10" width="180" height="100" rx="6" stroke="#9DB5AB"/><path d="M30 34h110M30 50h90M30 66h120" stroke="#B5C9C1" stroke-width="5" stroke-linecap="round"/><circle cx="152" cy="80" r="18" stroke="#9FD8CB" stroke-width="2"/><path d="m165 93 12 12" stroke="#9FD8CB" stroke-width="2.5" stroke-linecap="round"/></svg><img class="thumb-img" src="images/platone-website-audit.jpg" alt="" loading="lazy" onerror="var e=['png','webp','jpeg'],i=+(this.dataset.i||0);if(i<e.length){this.dataset.i=i+1;this.src=this.src.replace(/\.[a-z]+$/,'.'+e[i])}else this.remove()"><span class="soon-badge mono"><i></i>Coming soon</span></div>
+      <div class="frame case rv is-soon cs-group" aria-disabled="true">
+        <div class="soon-grid"><div class="sg-t" style="background:linear-gradient(135deg,#2B2760,#4A55C9)"><span class="sg-b">Soon</span><b>Platone audit</b></div><div class="sg-t" style="background:linear-gradient(135deg,#FE7649,#F4A07A)"><span class="sg-b">Soon</span><b>Platone app</b></div><div class="sg-t" style="background:linear-gradient(135deg,#4A55C9,#8A63E0)"><span class="sg-b">Soon</span><b>TT mobile app</b></div><div class="sg-t" style="background:linear-gradient(135deg,#0F8F9E,#5CC7D1)"><span class="sg-b">Soon</span><b>SaaS dashboard</b></div></div>
         <div class="info">
-          <div class="meta"><span class="chip mono">.05</span><span class="mono">Prime Point · KSA</span></div>
-          <h3>Auditing a recruitment website to smooth the hiring funnel</h3>
-          <p>A full UX audit of Platone to find and fix the friction points for job seekers.</p>
-          <ul class="tags"><li class="st">UX audit</li><li>Website</li><li>Recruitment</li></ul>
-          <span class="tlink mono soon-txt">Case study in progress</span>
-        </div>
-      </div>
-      <div class="frame case rv is-soon" aria-disabled="true">
-        <div class="thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="72" y="6" width="56" height="108" rx="10" stroke="#9DB5AB"/><rect x="80" y="20" width="40" height="6" rx="2" fill="#9FD8CB"/><rect x="80" y="34" width="40" height="18" rx="3" fill="#B5C9C1"/><rect x="80" y="58" width="40" height="18" rx="3" fill="#B5C9C1"/><rect x="80" y="90" width="40" height="12" rx="3" stroke="#9FD8CB"/></svg><img class="thumb-img" src="images/platone-app-redesign.jpg" alt="" loading="lazy" onerror="var e=['png','webp','jpeg'],i=+(this.dataset.i||0);if(i<e.length){this.dataset.i=i+1;this.src=this.src.replace(/\.[a-z]+$/,'.'+e[i])}else this.remove()"><span class="soon-badge mono"><i></i>Coming soon</span></div>
-        <div class="info">
-          <div class="meta"><span class="chip mono">.06</span><span class="mono">Prime Point · KSA</span></div>
-          <h3>Finding where users get stuck in a recruitment app</h3>
-          <p>Navigation analysis and a mobile redesign of the Platone app for smaller screens.</p>
-          <ul class="tags"><li class="st">Mobile app</li><li>Redesign</li><li>UX</li></ul>
-          <span class="tlink mono soon-txt">Case study in progress</span>
-        </div>
-      </div>
-      <div class="frame case rv is-soon" aria-disabled="true">
-        <div class="thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="20" y="20" width="44" height="22" rx="11" fill="#9FD8CB"/><rect x="74" y="20" width="44" height="22" rx="11" stroke="#9FD8CB"/><rect x="128" y="20" width="52" height="22" rx="4" fill="#B5C9C1"/><rect x="20" y="56" width="36" height="36" rx="6" fill="#B5C9C1"/><rect x="66" y="56" width="36" height="36" rx="18" stroke="#9DB5AB"/><rect x="112" y="62" width="68" height="8" rx="4" fill="#B5C9C1"/><rect x="112" y="78" width="48" height="8" rx="4" fill="#B5C9C1"/></svg><img class="thumb-img" src="images/tt-mobile-app.jpg" alt="" loading="lazy" onerror="var e=['png','webp','jpeg'],i=+(this.dataset.i||0);if(i<e.length){this.dataset.i=i+1;this.src=this.src.replace(/\.[a-z]+$/,'.'+e[i])}else this.remove()"><span class="soon-badge mono"><i></i>Coming soon</span></div>
-        <div class="info">
-          <div class="meta"><span class="chip mono">.07</span><span class="mono">Twentytoo</span></div>
-          <h3>Building the component library for the TT mobile app</h3>
-          <p>Reusable UI elements, interactive prototypes and brand identity applied across every screen.</p>
-          <ul class="tags"><li class="st">Mobile app</li><li>Components</li><li>Prototype</li></ul>
-          <span class="tlink mono soon-txt">Case study in progress</span>
-        </div>
-      </div>
-      <div class="frame case rv is-soon" aria-disabled="true">
-        <div class="thumb"><svg viewBox="0 0 200 120" fill="none"><rect x="10" y="10" width="180" height="100" rx="6" stroke="#9DB5AB"/><rect x="22" y="22" width="48" height="26" rx="3" fill="#B5C9C1"/><rect x="76" y="22" width="48" height="26" rx="3" fill="#B5C9C1"/><rect x="130" y="22" width="48" height="26" rx="3" fill="#B5C9C1"/><path d="M24 94 L54 74 L84 82 L114 60 L144 68 L176 52" stroke="#9FD8CB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><img class="thumb-img" src="images/saas-dashboard.jpg" alt="" loading="lazy" onerror="var e=['png','webp','jpeg'],i=+(this.dataset.i||0);if(i<e.length){this.dataset.i=i+1;this.src=this.src.replace(/\.[a-z]+$/,'.'+e[i])}else this.remove()"><span class="soon-badge mono"><i></i>Coming soon</span></div>
-        <div class="info">
-          <div class="meta"><span class="chip mono">.08</span><span class="mono">Twentytoo</span></div>
-          <h3>Making complex SaaS data easy to read</h3>
-          <p>Data-driven dashboards and stakeholder demo prototypes for a SaaS product.</p>
-          <ul class="tags"><li class="st">SaaS</li><li>Dashboards</li><li>Prototype</li></ul>
-          <span class="tlink mono soon-txt">Case study in progress</span>
+          <div class="meta"><span class="chip mono">.05–.08</span><span class="mono">4 projects</span></div>
+          <h3>More case studies</h3>
+          <p>Four more projects are being written up: recruitment, mobile and SaaS work.</p>
+          <span class="tlink mono soon-txt">Coming soon</span>
         </div>
       </div>
     </div>
