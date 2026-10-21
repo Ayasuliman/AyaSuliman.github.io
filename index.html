@@ -392,6 +392,11 @@ h2{font-family:var(--head);font-weight:700;letter-spacing:-.02em;line-height:1.0
 .hand-cursor{position:fixed;left:0;top:0;width:40px;height:40px;z-index:70;pointer-events:none;opacity:0;transition:opacity .2s;will-change:transform}
 .hand-cursor.show{opacity:1}
 .hand-cursor svg{display:block;overflow:visible;filter:drop-shadow(0 4px 5px rgba(20,20,40,.3))}
+.hand-cursor svg{transition:transform .12s}
+.hand-cursor.tap svg{transform:translateY(3px) scale(.93)}
+.hand-cursor .rip{position:absolute;left:26.7px;top:3.3px;width:6px;height:6px;margin:-3px;border:2px solid #FE7649;border-radius:50%;opacity:0}
+.hand-cursor.tap .rip{animation:hrip .45s ease-out}
+@keyframes hrip{from{width:6px;height:6px;margin:-3px;opacity:.95}to{width:36px;height:36px;margin:-18px;opacity:0}}
 .hand-cursor .ic{transition:opacity .12s,transform .18s cubic-bezier(.3,1.5,.5,1);transform-origin:12px 14px}
 
 /* ---- vivid palette (light mode) ---- */
@@ -1146,7 +1151,7 @@ c.addEventListener('click',function(){
   var h='';['open','link','click'].forEach(function(s){
     h+='<g class="ic" data-s="'+s+'"><g transform="translate(24 0) scale(-1 1)"><g fill="#fff"><rect x="6" y="9" width="14" height="9"/>'+IC[s][0]+'<path d="'+PALM+'"/></g><g fill="none" stroke="#111114" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+IC[s][1]+'<path d="'+PALM+'"/></g></g></g>';
   });
-  el.innerHTML='<svg viewBox="0 0 24 24" width="40" height="40">'+h+'</svg>';document.body.appendChild(el);
+  el.innerHTML='<svg viewBox="0 0 24 24" width="40" height="40">'+h+'</svg><i class="rip"></i>';document.body.appendChild(el);
   var ics=el.querySelectorAll('.ic'),state='';
   function setState(s){if(s===state)return;state=s;[].forEach.call(ics,function(g){var on=g.dataset.s===s;g.style.opacity=on?1:0;g.style.transform=on?'scale(1)':'scale(.8)'})}
   setState('open');
@@ -1156,8 +1161,8 @@ c.addEventListener('click',function(){
     cancelAnimationFrame(raf);
     (function f(){
       var dx=tx-x;x+=dx*.35;y+=(ty-y)*.35;vx+=(dx-vx)*.25;rot+=(Math.max(-9,Math.min(9,vx*.3))-rot)*.15;
-      setState(down?'click':link?'link':'open');
-      el.style.transform='translate('+(x-20).toFixed(1)+'px,'+(y-(link?8:22)).toFixed(1)+'px) rotate('+rot.toFixed(1)+'deg)';
+      setState(down||link?'link':'open');
+      el.style.transform='translate('+(x-20).toFixed(1)+'px,'+(y-((down||link)?8:22)).toFixed(1)+'px) rotate('+rot.toFixed(1)+'deg)';
       if(on)raf=requestAnimationFrame(f);
     })();
   }
@@ -1176,8 +1181,8 @@ c.addEventListener('click',function(){
     if(z){tx=e.clientX;ty=e.clientY;link=!!hot(e)}
   });
   document.documentElement.addEventListener('pointerleave',leave);
-  addEventListener('pointerdown',function(){if(on)down=true});
-  addEventListener('pointerup',function(){down=false});
+  addEventListener('pointerdown',function(){if(on){down=true;el.classList.remove('tap');void el.offsetWidth;el.classList.add('tap')}});
+  addEventListener('pointerup',function(){down=false;el.classList.remove('tap')});
 })();
 </script>
 <script>
