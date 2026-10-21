@@ -879,6 +879,13 @@ html[data-skin][data-skin] .csm-btn::before{content:"";width:34px;height:34px;bo
 html[data-skin][data-skin] .csm-btn:hover{background:#fff;color:#14161a;transform:rotate(0) translateY(-3px)}
 html[data-skin][data-skin][data-theme="dark"] .csm-btn{background:var(--card);color:var(--ink);box-shadow:0 0 0 7px rgba(255,255,255,.05),0 12px 24px rgba(0,0,0,.35)}
 html[data-skin][data-skin] .csm-actions{margin-top:26px;padding-bottom:6px}
+
+/* bottom close button: same chip as the case-study tags */
+html[data-skin][data-skin] .csm-btn,html[data-skin][data-skin][data-theme="dark"] .csm-btn,:root[data-theme="dark"] html[data-skin][data-skin] .csm-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:999px;background:#111114;color:#fff;border:0;box-shadow:none;font:500 .74rem/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;transform:none;transition:background .2s}
+html[data-skin][data-skin] .csm-btn::before{display:none}
+html[data-skin][data-skin] .csm-btn:hover{background:#2a2a30;color:#fff;transform:none}
+html[data-skin][data-skin][data-theme="dark"] .csm-btn,:root[data-theme="dark"] html[data-skin][data-skin] .csm-btn{background:#F5F5F8;color:#111114}
+html[data-skin][data-skin][data-theme="dark"] .csm-btn:hover{background:#fff;color:#111114}
 </style>
 </head>
 <body>
