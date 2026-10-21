@@ -389,19 +389,10 @@ h2{font-family:var(--head);font-weight:700;letter-spacing:-.02em;line-height:1.0
 
 /* ---- hero: flexible hand cursor (opens, closes, points) ---- */
 .hero.hand-on,.hero.hand-on *,.nav.hand-on,.nav.hand-on *{cursor:none!important}
-.hand-cursor{position:fixed;left:0;top:0;width:44px;height:48px;z-index:70;pointer-events:none;opacity:0;transition:opacity .2s;will-change:transform;--s:.4}
+.hand-cursor{position:fixed;left:0;top:0;width:40px;height:40px;z-index:70;pointer-events:none;opacity:0;transition:opacity .2s;will-change:transform}
 .hand-cursor.show{opacity:1}
-.hand-cursor svg{width:100%;height:100%;overflow:visible;transform-origin:50% 60%;transition:transform .2s}
-.hand .fg,.hand .th{transform-box:fill-box;transform-origin:50% 100%;transition:transform .24s cubic-bezier(.3,1.5,.5,1)}
-.hand .f1{transform:rotate(calc(var(--s)*-15deg))}
-.hand .f2{transform:rotate(calc(var(--s)*-5deg))}
-.hand .f3{transform:rotate(calc(var(--s)*6deg))}
-.hand .f4{transform:rotate(calc(var(--s)*17deg))}
-.hand .th{transform:rotate(calc(-18deg + var(--s)*-38deg))}
-.hand-cursor.closed .fg,.hand-cursor.point .f2,.hand-cursor.point .f3,.hand-cursor.point .f4{transform:scaleY(.36)}
-.hand-cursor.closed .th,.hand-cursor.point .th{transform:rotate(-6deg) scaleY(.6)}
-.hand-cursor.point .f1{transform:rotate(0)}
-.hand-cursor.closed svg{transform:scale(.9)}
+.hand-cursor svg{display:block;overflow:visible;filter:drop-shadow(0 4px 5px rgba(20,20,40,.3))}
+.hand-cursor .ic{transition:opacity .12s,transform .18s cubic-bezier(.3,1.5,.5,1);transform-origin:12px 14px}
 
 /* ---- vivid palette (light mode) ---- */
 :root:not([data-theme="dark"]){--accent:#0A8F66;--accent-ink:#0A8F66;--accent-2:#FF5E3A;--accent-dim:rgba(10,143,102,.12);--ink:#1B1740;--body:#2F2B55;--muted:#5F5A86;--subtle:#6E6A92}
@@ -1141,26 +1132,37 @@ c.addEventListener('click',function(){
 });
 </script>
 <script>
-// hero: a hand cursor that opens while you move, relaxes when still, closes when you press, and points at links
+// hero + nav: Figma-style hand cursor (open hand, pointing over links, grabbing on press)
 (function(){
   var zones=[document.querySelector('.hero'),document.querySelector('.nav')].filter(Boolean);
   if(!zones.length||!matchMedia('(hover:hover) and (pointer:fine)').matches||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  var NS='http://www.w3.org/2000/svg',PALM='M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15';
+  var IC={
+    open:['<rect x="13.2" y="3" width="5.6" height="9" rx="2.8"/><rect x="9.2" y="1.2" width="5.6" height="10" rx="2.8"/><rect x="5.2" y="3" width="5.6" height="12" rx="2.8"/>','<path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/>'],
+    link:['<rect x="5.2" y="2.2" width="5.6" height="13" rx="2.8"/><rect x="9.2" y="6.5" width="5.6" height="6" rx="2.8"/><rect x="13.2" y="7.2" width="5.6" height="6" rx="2.8"/>','<path d="M18 11v-1a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V9a2 2 0 0 0-2-2a2 2 0 0 0-2 2v1"/><path d="M10 9.5V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v10"/>'],
+    click:['<rect x="13.2" y="6.5" width="5.6" height="6" rx="2.8"/><rect x="9.2" y="5.2" width="5.6" height="7" rx="2.8"/><rect x="5.2" y="6.5" width="5.6" height="8" rx="2.8"/>','<path d="M18 11.5V9a2 2 0 0 0-2-2a2 2 0 0 0-2 2v1.4"/><path d="M14 10V8a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 9.9V9a2 2 0 0 0-2-2a2 2 0 0 0-2 2v5"/>']
+  };
   var el=document.createElement('div');el.className='hand-cursor';el.setAttribute('aria-hidden','true');
-  el.innerHTML='<svg class="hand" viewBox="0 0 48 52"><g stroke="#111216" stroke-width="2" stroke-linejoin="round" fill="#F4F4F6"><rect class="th" x="5" y="28" width="7" height="17" rx="3.5"/><rect class="fg f1" x="12.5" y="10" width="6.2" height="23" rx="3.1"/><rect class="fg f2" x="19.4" y="5" width="6.2" height="27" rx="3.1"/><rect class="fg f3" x="26.3" y="9" width="6.2" height="23" rx="3.1"/><rect class="fg f4" x="33.2" y="14" width="6.2" height="19" rx="3.1"/><rect x="10.5" y="26" width="30" height="20" rx="9"/></g><rect x="14" y="44" width="23" height="6" rx="2" fill="#FE7649" stroke="#111216" stroke-width="2"/></svg>';document.body.appendChild(el);
-  var x=0,y=0,tx=0,ty=0,s=.4,on=false,raf=0;
+  var h='';['open','link','click'].forEach(function(s){
+    h+='<g class="ic" data-s="'+s+'"><g transform="translate(24 0) scale(-1 1)"><g fill="#fff"><rect x="6" y="9" width="14" height="9"/>'+IC[s][0]+'<path d="'+PALM+'"/></g><g fill="none" stroke="#111114" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+IC[s][1]+'<path d="'+PALM+'"/></g></g></g>';
+  });
+  el.innerHTML='<svg viewBox="0 0 24 24" width="40" height="40">'+h+'</svg>';document.body.appendChild(el);
+  var ics=el.querySelectorAll('.ic'),state='';
+  function setState(s){if(s===state)return;state=s;[].forEach.call(ics,function(g){var on=g.dataset.s===s;g.style.opacity=on?1:0;g.style.transform=on?'scale(1)':'scale(.8)'})}
+  setState('open');
+  var x=0,y=0,tx=0,ty=0,vx=0,rot=0,on=false,down=false,link=false,raf=0;
   function hot(e){return e.target.closest&&e.target.closest('a,button,[role="button"],.btn,.tlink')}
   function loop(){
     cancelAnimationFrame(raf);
-    (function f(now){
-      var dx=tx-x,dy=ty-y;x+=dx*.28;y+=dy*.28;
-      var sp=Math.min(1,Math.hypot(dx,dy)/40);
-      s+=((.32+Math.sin(now/420)*.07+sp*.68)-s)*.2;
-      el.style.setProperty('--s',s.toFixed(3));
-      el.style.transform='translate('+(x-22).toFixed(1)+'px,'+(y-12).toFixed(1)+'px) rotate('+Math.max(-16,Math.min(16,dx*.5)).toFixed(1)+'deg)';
+    (function f(){
+      var dx=tx-x;x+=dx*.35;y+=(ty-y)*.35;vx+=(dx-vx)*.25;rot+=(Math.max(-9,Math.min(9,vx*.3))-rot)*.15;
+      setState(down?'click':link?'link':'open');
+      el.style.transform='translate('+(x-20).toFixed(1)+'px,'+(y-(link?8:22)).toFixed(1)+'px) rotate('+rot.toFixed(1)+'deg)';
       if(on)raf=requestAnimationFrame(f);
-    })(performance.now());
+    })();
   }
   var cur=null;
+  function leave(){if(cur)cur.classList.remove('hand-on');cur=null;on=false;down=false;link=false;el.classList.remove('show')}
   document.addEventListener('pointermove',function(e){
     var z=e.target.closest&&e.target.closest('.hero,.nav');
     if(z!==cur){
@@ -1168,14 +1170,14 @@ c.addEventListener('click',function(){
       if(z){
         if(!cur){on=true;tx=x=e.clientX;ty=y=e.clientY;el.classList.add('show');loop()}
         z.classList.add('hand-on');
-      }else{on=false;el.classList.remove('show','closed','point')}
+      }else{on=false;down=false;link=false;el.classList.remove('show')}
       cur=z;
     }
-    if(z){tx=e.clientX;ty=e.clientY;el.classList.toggle('point',!!hot(e)&&!el.classList.contains('closed'))}
+    if(z){tx=e.clientX;ty=e.clientY;link=!!hot(e)}
   });
-  document.documentElement.addEventListener('pointerleave',function(){if(cur)cur.classList.remove('hand-on');cur=null;on=false;el.classList.remove('show','closed','point')});
-  addEventListener('pointerdown',function(){if(on){el.classList.add('closed');el.classList.remove('point')}});
-  addEventListener('pointerup',function(){el.classList.remove('closed')});
+  document.documentElement.addEventListener('pointerleave',leave);
+  addEventListener('pointerdown',function(){if(on)down=true});
+  addEventListener('pointerup',function(){down=false});
 })();
 </script>
 <script>
